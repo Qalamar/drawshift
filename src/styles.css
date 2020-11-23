@@ -1,0 +1,13 @@
+.polka {
+  background-color: #ffffff;
+
+  background-image: radial-gradient(#651fff 1.5px, transparent 1.5px),
+    radial-gradient(#651fff 1.5px, #ffffff 1.5px);
+  background-size: 46px 46px;
+  background-position: 0 0, 23px 23px;
+}
+
+.particles-js {
+  height: 384px;
+  margin-bottom: -384px;
+}
