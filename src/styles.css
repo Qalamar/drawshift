@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 .polka {
   background-color: #ffffff;
-s
-  background-image: radial-gradient(#651fff 1.5px, transparent 1.5px),
-    radial-gradient(#651fff 1.5px, #ffffff 1.5px);
+  background-image: radial-gradient(#651fff 1.5px, transparent 1.5px);
+  radial-gradient: (#651fff 1.5px, #ffffff 1.5px);
   background-size: 46px 46px;
   background-position: 0 0, 23px 23px;
 }
