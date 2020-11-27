@@ -1,9 +1,9 @@
 import React from "react";
 import FeatureIcon from "../../assets/icons/FeatureIcon";
 
-class Feature {
-  "text": string;
-  "icon": string;
+interface Feature {
+  text: string;
+  icon: string;
 }
 
 const ListItem = ({ text, icon }: Feature) => (
