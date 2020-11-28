@@ -1,55 +1,44 @@
-export const skinTones = ["brown", "light", "dark", "black", "red", "yellow"];
-type skinTone = typeof skinTones[number];
+export const skinTone = ["brown", "light", "dark", "black", "red", "yellow"];
+type skinTone = typeof skinTone[number];
 
-type body = "chest" | "breasts" | string | undefined;
-type accessory =
-  | "none"
-  | "roundGlasses"
-  | "tinyGlasses"
-  | "shades"
-  | string
-  | undefined;
-type hairColor =
-  | "blonde"
-  | "orange"
-  | "black"
-  | "white"
-  | "brown"
-  | "blue"
-  | "pink"
-  | string
-  | undefined;
-type hair =
-  | "none"
-  | "long"
-  | "bun"
-  | "short"
-  | "pixie"
-  | "balding"
-  | "buzz"
-  | "afro"
-  | "bob"
-  | string
-  | undefined;
-type clothingColor =
-  | "white"
-  | "blue"
-  | "black"
-  | "green"
-  | "red"
-  | string
-  | undefined;
-type clothing =
-  | "naked"
-  | "shirt"
-  | "dressShirt"
-  | "vneck"
-  | "tankTop"
-  | "dress"
-  | string
-  | undefined;
+export const body = ["chest", "breasts"];
+type body = typeof body[number];
+
+export const accessory = ["none", "roundGlasses", "tinyGlasses", "shades"];
+type accessory = typeof accessory[number];
+
+export const hairColor = [
+  "blonde",
+  "orange",
+  "black",
+  "white",
+  "brown",
+  "blue",
+  "pink",
+];
+type hairColor = typeof hairColor[number];
+
+export const hair = [
+  "none",
+  "long",
+  "bun",
+  "short",
+  "pixie",
+  "balding",
+  "buzz",
+  "afro",
+  "bob",
+];
+type hair = typeof hair[number];
+
+export const clothingColor = ["white", "blue", "black", "green", "red"];
+type clothingColor = typeof clothingColor[number];
+
+export const clothing = ["shirt", "dressShirt", "vneck", "dress"];
+type clothing = typeof clothing[number];
 
 export interface Avatar {
+  [x: string]: string;
   skinTone: skinTone;
   body: body;
   accessory: accessory;
