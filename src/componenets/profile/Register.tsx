@@ -6,18 +6,11 @@ import {
   Avatar,
   Modal,
   Parts,
-  skinTone,
-  body,
-  hair,
-  hairColor,
-  clothing,
-  clothingColor,
-  accessory,
-  eyes,
-  mouth,
-  facialHair,
-  hat,
-  hatColor,
+  bodyParts,
+  hairParts,
+  faceParts,
+  hatParts,
+  clothingParts,
 } from "./Model";
 import { styles } from "./Styles";
 import SelectButton from "../common/SelectButton";
@@ -62,35 +55,8 @@ const Register: React.FC<Modal> = ({ handleClose, show }) => {
 
   // Props to create buttons
 
-  const bodyParts = [
-    { property: "body", type: body },
-    { property: "accessory", type: accessory },
-    { property: "skinTone", type: skinTone },
-  ];
-
-  const hairParts = [
-    { property: "hair", type: hair },
-    { property: "hairColor", type: hairColor },
-  ];
-
-  const clothingParts = [
-    { property: "clothing", type: clothing },
-    { property: "clothingColor", type: clothingColor },
-  ];
-
-  const hatParts = [
-    { property: "hat", type: hat },
-    { property: "hatColor", type: hatColor },
-  ];
-
-  const faceParts = [
-    { property: "eyes", type: eyes },
-    { property: "mouth", type: mouth },
-    { property: "facialHair", type: facialHair },
-  ];
-
   const SimpleParts: React.FC<Parts> = ({ parts }) => (
-    <div className="justify-center my-8 px-12 grid grid-cols-3 gap-4">
+    <div className="justify-center my-6 px-12 grid grid-cols-3 gap-4">
       {parts.map((part: any) => (
         <Button
           key={part.property}
@@ -161,14 +127,13 @@ const Register: React.FC<Modal> = ({ handleClose, show }) => {
   );
 
   const Name = () => (
-    <div className="my-6 px-12">
+    <div className="my-2 px-12">
       <input
         placeholder="Nickname"
         required
         type="text"
-        className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-        id="firstName"
-        name="firstName"
+        className={styles.input}
+        id="name"
       />
     </div>
   );
@@ -187,9 +152,8 @@ const Register: React.FC<Modal> = ({ handleClose, show }) => {
           aria-labelledby="modal-headline"
         >
           <div className={styles.card}>
-            <h3 className={styles.title}>Choose your characteristics</h3>
-
-            <hr className="w-full my-8 border-gray-300" />
+            <h3 className={styles.title}>Customize your character</h3>
+            <hr className={styles.divider} />
             <div className="-mt-16 mb-8">
               <BigHead
                 accessory={Avatar.accessory}
