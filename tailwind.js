@@ -4,6 +4,20 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      animation: {
+        slideDown:
+          "slideDown 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both",
+      },
+      keyframes: {
+        slideDown: {
+          "0%": {
+            transform: "translateY(0)",
+          },
+          "100%": {
+            transform: "translateY(100px)",
+          },
+        },
+      },
       fontFamily: {
         sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
       },
