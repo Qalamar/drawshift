@@ -19,10 +19,6 @@ const Features = () => {
           </span>{" "}
           anywhere you want
         </h2>
-        <p className="text-base text-gray-700 md:text-lg px-20">
-          You can play <strong>Drawshift</strong> on mobile platforms (iOS,
-          Android) or in the browser and any touch devices.
-        </p>
       </div>
       {/* Features List */}
       <div className="max-w-lg space-y-3 sm:mx-auto lg:max-w-xl">

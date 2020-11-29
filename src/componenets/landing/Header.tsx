@@ -17,11 +17,11 @@ const Header: React.FC<Modal> = ({ handleOpen }) => {
           <path d="M0,0 C48.8902582,6.27314026 86.2235915,9.40971039 112,9.40971039 C137.776408,9.40971039 175.109742,6.27314026 224,0 L224,12.0441132 L0,12.0441132 L0,0 Z" />
         </svg>
       </div>
-      <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 md:py-40">
+      <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 md:py-52">
         <div className="relative max-w-2xl sm:mx-auto sm:max-w-xl md:max-w-2xl sm:text-center">
-          <h1 className="mb-6 font-sans text-3xl font-bold tracking-tight text-white sm:text-4xl sm:leading-none">
-            <span className="relative inline-block px-2">
-              <span className="relative text-teal-accent-400">Drawshift</span>
+          <h1 className="mb-6 font-sans text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl sm:leading-none">
+            <span className="relative inline-block pr-2">
+              <span className="relative text-teal-accent-400">Drawly</span>
               <div className="w-full h-3 -mt-3 bg-deep-purple-accent-200" />
             </span>
             is the game that
@@ -37,7 +37,7 @@ const Header: React.FC<Modal> = ({ handleOpen }) => {
           <div className="">
             <a
               onClick={handleOpen}
-              className="inline-flex items-center justify-center h-12 px-6 mb-12 font-semibold tracking-wide text-teal-900 transition duration-200 rounded shadow-md hover:text-deep-purple-900 bg-teal-accent-400 hover:bg-deep-purple-accent-100 focus:shadow-outline focus:outline-none"
+              className="inline-flex cursor-pointer items-center justify-center h-12 px-6 mb-12 font-semibold tracking-wide text-teal-900 transition duration-200 rounded shadow-md hover:text-deep-purple-900 bg-teal-accent-400 hover:bg-deep-purple-accent-100 focus:shadow-outline focus:outline-none"
             >
               Get started
             </a>

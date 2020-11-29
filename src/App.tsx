@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Features from "./componenets/landing/Features";
 import Footer from "./componenets/landing/Footer";
 import Header from "./componenets/landing/Header";
-import Register from "./componenets/profile/Register";
+import CreateAvatar from "./componenets/avatar/Avatar";
 import Video from "./componenets/landing/Video";
 import "./styles.css";
 
@@ -11,7 +11,7 @@ const App = () => {
 
   return (
     <div>
-      <Register show={isOpen} handleClose={() => setIsOpen(false)} />
+      <CreateAvatar show={isOpen} handleClose={() => setIsOpen(false)} />
       <Header handleOpen={() => setIsOpen(true)} />
       <Video />
       <Features />

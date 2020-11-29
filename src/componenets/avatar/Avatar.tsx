@@ -1,27 +1,29 @@
-import React, { useCallback, useEffect, useState } from "react";
 import { BigHead } from "@bigheads/core";
 import { motion } from "framer-motion";
 import { produce } from "immer";
+import LZString from "lz-string";
+import React, { useCallback, useEffect, useState } from "react";
+import Button from "../common/Button";
+import Input from "../common/Input";
+import SelectButton from "../common/SelectButton";
 import {
   Avatar,
+  bodyParts,
+  clothingParts,
+  faceParts,
+  hairParts,
+  hatParts,
   Modal,
   Parts,
-  bodyParts,
-  hairParts,
-  faceParts,
-  hatParts,
-  clothingParts,
-} from "./Model";
-import { styles } from "./Styles";
-import SelectButton from "../common/SelectButton";
-import Button from "../common/Button";
+} from "./AvatarProps";
+import { styles } from "./AvatarStyls";
 
 const variants = {
   open: { opacity: 1, y: 0 },
   closed: { opacity: 0, y: "-100%" },
 };
 
-const Register: React.FC<Modal> = ({ handleClose, show }) => {
+const CreateAvatar: React.FC<Modal> = ({ handleClose, show }) => {
   // Avatar props
   const [Avatar, setAvatar] = useState<Avatar>({
     skinTone: "light",
@@ -42,6 +44,7 @@ const Register: React.FC<Modal> = ({ handleClose, show }) => {
   const [Step, setStep] = useState(0);
   const incrementSteps = useCallback(() => setStep(Step + 1), [Step]);
   const decreaseSteps = useCallback(() => setStep(Step - 1), [Step]);
+  const [Name, setName] = useState("");
 
   // Changes button text depending on step number
   const [CancelButton, setCancelButton] = useState("Cancel");
@@ -53,10 +56,16 @@ const Register: React.FC<Modal> = ({ handleClose, show }) => {
     }
   }, [Step]);
 
+  // Player confirms his choices
+
+  const handleSubmit = () => {
+    localStorage.setItem("avatar", LZString.compress(JSON.stringify(Avatar)));
+    localStorage.setItem("name", Name);
+  };
   // Props to create buttons
 
   const SimpleParts: React.FC<Parts> = ({ parts }) => (
-    <div className="justify-center my-6 px-12 grid grid-cols-3 gap-4">
+    <div className="justify-center my-6 sm:px-3 md:px-12 grid grid-cols-3 gap-4">
       {parts.map((part: any) => (
         <Button
           key={part.property}
@@ -83,7 +92,7 @@ const Register: React.FC<Modal> = ({ handleClose, show }) => {
   );
 
   const ComplexParts: React.FC<Parts> = ({ parts }) => (
-    <div className="justify-center my-6 px-12 grid grid-cols-2 gap-4">
+    <div className="justify-center my-6 sm:px-3 md:px-12 grid grid-cols-2 gap-4">
       {parts.map((part: any) => (
         <div className="justify-center grid grid-cols-5 gap-0">
           <SelectButton
@@ -123,18 +132,6 @@ const Register: React.FC<Modal> = ({ handleClose, show }) => {
           />
         </div>
       ))}
-    </div>
-  );
-
-  const Name = () => (
-    <div className="my-2 px-12">
-      <input
-        placeholder="Nickname"
-        required
-        type="text"
-        className={styles.input}
-        id="name"
-      />
     </div>
   );
 
@@ -192,7 +189,11 @@ const Register: React.FC<Modal> = ({ handleClose, show }) => {
             {Step === 2 && (
               <>
                 <ComplexParts parts={hatParts} />
-                <Name />
+                <Input
+                  onChange={(e: any) => setName(e.target.value)}
+                  value={Name}
+                  placeholder="Nickname"
+                />
               </>
             )}
           </div>
@@ -220,7 +221,7 @@ const Register: React.FC<Modal> = ({ handleClose, show }) => {
             <Button
               text={NextButton}
               clickable={true}
-              onClick={() => (Step < 2 ? incrementSteps() : handleClose())}
+              onClick={() => (Step < 2 ? incrementSteps() : handleSubmit())}
             />
           </div>
         </div>
@@ -229,4 +230,4 @@ const Register: React.FC<Modal> = ({ handleClose, show }) => {
   );
 };
 
-export default Register;
+export default CreateAvatar;
