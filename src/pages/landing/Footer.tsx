@@ -1,7 +1,7 @@
 import React from "react";
-import Github from "../../assets/icons/Github";
+import Github from "../../assets/icons/GithubIcon";
 import InfoIcon from "../../assets/icons/InfoIcon";
-import Twitter from "../../assets/icons/Twitter";
+import Twitter from "../../assets/icons/TwitterIcon";
 import Divider from "../../assets/ui/Divider";
 
 const Footer = () => {

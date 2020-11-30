@@ -4,7 +4,6 @@ import Footer from "./pages/landing/Footer";
 import Header from "./pages/landing/Header";
 import CreateAvatar from "./pages/avatar/Avatar";
 import Video from "./pages/landing/Video";
-import "./styles.css";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
