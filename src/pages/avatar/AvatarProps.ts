@@ -1,6 +1,6 @@
-// Avatar possible props
 import { types } from "mobx-state-tree";
 
+// Avatar possible props
 const parts = {
   skinTone: ["brown", "light", "dark", "black", "red", "yellow"],
   body: ["chest", "breasts"],
@@ -26,6 +26,7 @@ const parts = {
   ],
 };
 
+// Grouping properties
 export const Basic = [
   {
     text: "Skin",
@@ -67,18 +68,20 @@ export const Colored = [
     property: "hat",
   },
   {
-    text: "< Color >",
+    text: "Color",
     property: "hairColor",
   },
   {
-    text: "< Color >",
+    text: "Color",
     property: "clothingColor",
   },
   {
-    text: "< Color >",
+    text: "Color",
     property: "hatColor",
   },
 ];
+
+// Interfaces
 
 export interface Modal {
   handleClose: any;
@@ -89,7 +92,7 @@ export interface Parts {
   parts: any[];
 }
 
-// Profile model
+// State managment
 
 const Avatar = types
   .model({

@@ -3,9 +3,10 @@ import { BigHead } from "@bigheads/core";
 import { motion } from "framer-motion";
 import { observer } from "mobx-react";
 import LZString from "lz-string";
-import Button from "../common/Button";
-import Input from "../common/Input";
-import Toast from "../common/Toast";
+import Button from "../../assets/components/Button";
+import Input from "../../assets/components/Input";
+import Toast from "../../assets/components/Toast";
+import MultiStep from "../../assets/components/MultiStep";
 import { Basic, Modal, Parts, store, Colored } from "./AvatarProps";
 import { styles } from "./AvatarStyles";
 
@@ -21,7 +22,7 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
   const decreaseSteps = useCallback(() => setStep(Step - 1), [Step]);
   const [toast, setToast] = useState(false);
 
-  // Changes button text depending on step number
+  // Button text depends on step number
   const [CancelButton, setCancelButton] = useState("Cancel");
   const [NextButton, setNextButton] = useState("Next");
   useEffect(() => {
@@ -31,7 +32,7 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
     }
   }, [Step]);
 
-  // Player confirms his choices
+  // Confirms and save choices for later use (Compressed with lz-string)
 
   const handleSubmit = () => {
     localStorage.setItem("avatar", LZString.compress(JSON.stringify(store)));
@@ -39,7 +40,7 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
     setToast(true);
   };
 
-  // Props to create buttons
+  // Avatar customization buttons
   const AvatarParts: React.FC<Parts> = ({ parts }) => (
     <div className="justify-center my-6 sm:px-3 md:px-12 grid grid-cols-3 gap-4">
       {parts.map((part: any) => (
@@ -111,21 +112,7 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
                 clickable={true}
                 onClick={() => (Step === 0 ? handleClose() : decreaseSteps())}
               />
-
-              <div className="col-span-3 ml-4 px-4 py-2 flex flex-row items-center justify-center">
-                {[...Array(3)].map((circle, stepIndex) => {
-                  return (
-                    <div
-                      key={stepIndex}
-                      className={`mx-2 w-3 h-3 rounded-full ${
-                        Step >= stepIndex
-                          ? "bg-deep-purple-accent-400"
-                          : "bg-gray-500 opacity-25 "
-                      } ${Step === stepIndex && "shadow-outline"}`}
-                    ></div>
-                  );
-                })}
-              </div>
+              <MultiStep steps={3} progress={Step} />
               <Button
                 text={NextButton}
                 clickable={true}

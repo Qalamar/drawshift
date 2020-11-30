@@ -1,5 +1,5 @@
 import React from "react";
-import FeatureIcon from "../../assets/icons/FeatureIcon";
+import FeatureIcon from "../icons/FeatureIcon";
 
 interface Feature {
   text: string;

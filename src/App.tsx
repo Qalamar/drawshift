@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Features from "./componenets/landing/Features";
-import Footer from "./componenets/landing/Footer";
-import Header from "./componenets/landing/Header";
-import CreateAvatar from "./componenets/avatar/Avatar";
-import Video from "./componenets/landing/Video";
+import Features from "./pages/landing/Features";
+import Footer from "./pages/landing/Footer";
+import Header from "./pages/landing/Header";
+import CreateAvatar from "./pages/avatar/Avatar";
+import Video from "./pages/landing/Video";
 import "./styles.css";
 
 const App = () => {

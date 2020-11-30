@@ -1,6 +1,6 @@
 import React from "react";
 import DottedBackground from "../../assets/ui/DottedBackground";
-import ListItem from "../common/ListItem";
+import ListItem from "../../assets/components/ListItem";
 
 const features = require("../../assets/data/features.json");
 
