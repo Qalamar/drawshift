@@ -1,51 +1,24 @@
+import React, { useCallback, useEffect, useState } from "react";
 import { BigHead } from "@bigheads/core";
 import { motion } from "framer-motion";
-import { produce } from "immer";
+import { observer } from "mobx-react";
 import LZString from "lz-string";
-import React, { useCallback, useEffect, useState } from "react";
 import Button from "../common/Button";
 import Input from "../common/Input";
-import SelectButton from "../common/SelectButton";
 import Toast from "../common/Toast";
-import {
-  Avatar,
-  bodyParts,
-  clothingParts,
-  faceParts,
-  hairParts,
-  hatParts,
-  Modal,
-  Parts,
-} from "./AvatarProps";
-import { styles } from "./AvatarStyls";
+import { Basic, Modal, Parts, store, Colored } from "./AvatarProps";
+import { styles } from "./AvatarStyles";
 
 const variants = {
   open: { opacity: 1, y: 0 },
   closed: { opacity: 0, y: "-100%" },
 };
 
-const CreateAvatar: React.FC<Modal> = ({ handleClose, show }) => {
-  // Avatar props
-  const [Avatar, setAvatar] = useState<Avatar>({
-    skinTone: "light",
-    eyes: "normal",
-    mouth: "open",
-    facialHair: "none",
-    body: "chest",
-    accessory: "none",
-    hairColor: "black",
-    hair: "short",
-    clothingColor: "white",
-    clothing: "shirt",
-    hat: "none",
-    hatColor: "white",
-  });
-
+const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
   // Handles Step proccessing during avatar creation
   const [Step, setStep] = useState(0);
   const incrementSteps = useCallback(() => setStep(Step + 1), [Step]);
   const decreaseSteps = useCallback(() => setStep(Step - 1), [Step]);
-  const [Name, setName] = useState("");
   const [toast, setToast] = useState(false);
 
   // Changes button text depending on step number
@@ -61,80 +34,20 @@ const CreateAvatar: React.FC<Modal> = ({ handleClose, show }) => {
   // Player confirms his choices
 
   const handleSubmit = () => {
-    localStorage.setItem("avatar", LZString.compress(JSON.stringify(Avatar)));
-    localStorage.setItem("name", Name);
+    localStorage.setItem("avatar", LZString.compress(JSON.stringify(store)));
     handleClose();
     setToast(true);
   };
-  // Props to create buttons
 
-  const SimpleParts: React.FC<Parts> = ({ parts }) => (
+  // Props to create buttons
+  const AvatarParts: React.FC<Parts> = ({ parts }) => (
     <div className="justify-center my-6 sm:px-3 md:px-12 grid grid-cols-3 gap-4">
       {parts.map((part: any) => (
         <Button
-          key={part.property}
           clickable={true}
-          text={part.property}
-          onClick={() =>
-            setAvatar(
-              produce((draft) => {
-                if (Avatar.hasOwnProperty(part.property)) {
-                  console.log(draft.part);
-                  console.log(Avatar.clothing);
-                  draft[part.property] =
-                    part.type[
-                      (part.type.indexOf(Avatar[part.property]) + 1) %
-                        part.type.length
-                    ];
-                }
-              })
-            )
-          }
+          text={part.text}
+          onClick={() => store.setProperty(part.property)}
         />
-      ))}
-    </div>
-  );
-
-  const ComplexParts: React.FC<Parts> = ({ parts }) => (
-    <div className="justify-center my-6 sm:px-3 md:px-12 grid grid-cols-2 gap-4">
-      {parts.map((part: any) => (
-        <div className="justify-center grid grid-cols-5 gap-0">
-          <SelectButton
-            direction="left"
-            onClick={() =>
-              setAvatar(
-                produce((draft) => {
-                  if (Avatar.hasOwnProperty(part.property)) {
-                    draft[part.property] =
-                      part.type[
-                        (part.type.indexOf(Avatar[part.property]) +
-                          part.type.length -
-                          1) %
-                          part.type.length
-                      ];
-                  }
-                })
-              )
-            }
-          />
-          <Button text={part.property} selection={true} />
-          <SelectButton
-            direction="right"
-            onClick={() =>
-              setAvatar(
-                produce((draft) => {
-                  if (Avatar.hasOwnProperty(part.property)) {
-                    draft[part.property] =
-                      part.type[
-                        (part.type.indexOf(Avatar[part.property]) + 1) %
-                          part.type.length
-                      ];
-                  }
-                })
-              )
-            }
-          />
-        </div>
       ))}
     </div>
   );
@@ -158,45 +71,35 @@ const CreateAvatar: React.FC<Modal> = ({ handleClose, show }) => {
               <hr className={styles.divider} />
               <div className="-mt-16 mb-8">
                 <BigHead
-                  accessory={Avatar.accessory}
-                  body={Avatar.body}
+                  skinTone={store.skinTone}
+                  accessory={store.accessory}
+                  body={store.body}
                   circleColor="blue"
-                  clothing={Avatar.clothing}
-                  clothingColor={Avatar.clothingColor}
+                  clothing={store.clothing}
+                  clothingColor={store.clothingColor}
                   eyebrows="angry"
-                  eyes={Avatar.eyes}
-                  facialHair={Avatar.facialHair}
+                  eyes={store.eyes}
                   graphic="none"
-                  hair={Avatar.hair}
-                  hairColor={Avatar.hairColor}
-                  hat={Avatar.hat}
-                  hatColor={Avatar.hatColor}
-                  lashes={false}
                   faceMask={false}
-                  lipColor="purple"
-                  mouth={Avatar.mouth}
-                  skinTone={Avatar.skinTone}
+                  facialHair={store.facialHair}
+                  hair={store.hair}
+                  hairColor={store.hairColor}
+                  hat={store.hat}
+                  hatColor={store.hatColor}
+                  lashes={false}
+                  lipColor="red"
+                  mask
+                  mouth={store.mouth}
                 />
               </div>
 
-              {Step === 0 && (
-                <>
-                  <ComplexParts parts={hairParts} />
-                  <SimpleParts parts={bodyParts} />
-                </>
-              )}
-              {Step === 1 && (
-                <>
-                  <ComplexParts parts={clothingParts} />
-                  <SimpleParts parts={faceParts} />
-                </>
-              )}
+              {Step === 0 && <AvatarParts parts={Basic} />}
+              {Step === 1 && <AvatarParts parts={Colored} />}
               {Step === 2 && (
                 <>
-                  <ComplexParts parts={hatParts} />
                   <Input
-                    onChange={(e: any) => setName(e.target.value)}
-                    value={Name}
+                    onChange={(e: any) => store.setName(e.target.value)}
+                    value={store.name}
                     placeholder="Nickname"
                   />
                 </>
@@ -241,6 +144,6 @@ const CreateAvatar: React.FC<Modal> = ({ handleClose, show }) => {
       )}
     </>
   );
-};
+});
 
 export default CreateAvatar;
