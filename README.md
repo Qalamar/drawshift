@@ -13,4 +13,3 @@ Drawy is multiplayer drawing game inspired by scribble where you can create or j
 ## Preview
 
 [Drawy](https://drawly.web.app/)
-To learn React, check out the [React documentation](https://reactjs.org/).
