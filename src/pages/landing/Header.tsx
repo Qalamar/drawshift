@@ -1,7 +1,7 @@
 import React from "react";
 import RoundDivider from "../../assets/ui/RoundDivider";
 
-interface Modal {
+interface props {
   handleOpen: any;
 }
 
@@ -18,7 +18,7 @@ const styles = {
     "inline-flex cursor-pointer items-center justify-center h-12 px-6 mb-12 font-semibold tracking-wide text-teal-900 transition duration-200 rounded shadow-md hover:text-deep-purple-900 bg-teal-accent-400 hover:bg-deep-purple-accent-100 focus:shadow-outline focus:outline-none",
 };
 
-const Header: React.FC<Modal> = ({ handleOpen }) => {
+const Header = ({ handleOpen }: props) => {
   return (
     <div className={styles.background}>
       <RoundDivider />
@@ -38,9 +38,9 @@ const Header: React.FC<Modal> = ({ handleOpen }) => {
             with your friends in a fun and chaotic drawing game.
           </p>
 
-          <a onClick={handleOpen} className={styles.button}>
+          <button onClick={handleOpen} className={styles.button}>
             Get started
-          </a>
+          </button>
         </div>
       </div>
     </div>

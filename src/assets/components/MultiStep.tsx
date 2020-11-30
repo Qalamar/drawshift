@@ -1,10 +1,10 @@
 import React from "react";
 
-interface MultiStep {
+interface props {
   steps: number;
   progress: number;
 }
-const MultiStep: React.FC<MultiStep> = ({ steps, progress }) => {
+const MultiStep = ({ steps, progress }: props) => {
   return (
     <div className="col-span-3 ml-4 px-4 py-2 flex flex-row items-center justify-center">
       {[...Array(steps)].map((circle, stepIndex) => {

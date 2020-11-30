@@ -1,11 +1,11 @@
 import React from "react";
 
-interface Input {
+interface props {
   value: any;
   placeholder?: string;
   onChange: any;
 }
-const Input: React.FC<Input> = ({ value, placeholder, onChange }) => {
+const Input = ({ value, placeholder, onChange }: props) => {
   return (
     <div className="mb-10 mt-14 sm:px-3 md:px-12">
       <input

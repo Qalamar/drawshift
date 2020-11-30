@@ -7,7 +7,7 @@ interface props {
   selection?: boolean;
 }
 
-const Button: React.FC<props> = ({ onClick, clickable, selection, text }) => {
+const Button = ({ onClick, clickable, selection, text }: props) => {
   return (
     <button
       onClick={onClick}

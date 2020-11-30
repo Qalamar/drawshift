@@ -6,6 +6,7 @@ const Mail = () => {
       <a
         href="mailto:contact@tariqhamrit.com"
         target="_blank"
+        rel="noreferrer"
         className="transition-colors duration-300 text-deep-purple-100 hover:text-teal-accent-400"
       >
         <svg

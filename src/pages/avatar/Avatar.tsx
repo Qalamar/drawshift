@@ -26,10 +26,8 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
   const [CancelButton, setCancelButton] = useState("Cancel");
   const [NextButton, setNextButton] = useState("Next");
   useEffect(() => {
-    {
-      Step === 0 ? setCancelButton("Cancel") : setCancelButton("Previous");
-      Step < 2 ? setNextButton("Next") : setNextButton("Confirm");
-    }
+    Step === 0 ? setCancelButton("Cancel") : setCancelButton("Previous");
+    Step < 2 ? setNextButton("Next") : setNextButton("Confirm");
   }, [Step]);
 
   // Confirms and save choices for later use (Compressed with lz-string)
@@ -45,6 +43,7 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
     <div className="justify-center my-6 sm:px-3 md:px-12 grid grid-cols-3 gap-4">
       {parts.map((part: any) => (
         <Button
+          key={part.property}
           clickable={true}
           text={part.text}
           onClick={() => store.setProperty(part.property)}

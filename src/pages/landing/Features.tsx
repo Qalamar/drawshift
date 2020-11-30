@@ -27,7 +27,11 @@ const Features = () => {
       {/* Features List */}
       <div className={styles.list}>
         {features.map((feature: { text: string; icon: string }) => (
-          <ListItem text={feature.text} icon={feature.icon} />
+          <ListItem
+            key={feature.text}
+            text={feature.text}
+            icon={feature.icon}
+          />
         ))}
       </div>
     </div>
