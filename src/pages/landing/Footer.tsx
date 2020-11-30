@@ -1,7 +1,7 @@
 import React from "react";
 import Github from "../../assets/icons/GithubIcon";
 import InfoIcon from "../../assets/icons/InfoIcon";
-import Twitter from "../../assets/icons/TwitterIcon";
+import Mail from "../../assets/icons/MailIcon";
 import Divider from "../../assets/ui/Divider";
 
 const Footer = () => {
@@ -10,7 +10,7 @@ const Footer = () => {
       <Divider />
       <div className="flex justify-center h-28 items-center mt-4 space-x-4 sm:mt-0">
         <Github />
-        <Twitter />
+        <Mail />
         <InfoIcon />
       </div>
     </div>

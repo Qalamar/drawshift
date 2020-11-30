@@ -7,7 +7,7 @@ interface Input {
 }
 const Input: React.FC<Input> = ({ value, placeholder, onChange }) => {
   return (
-    <div className="my-2 sm:px-3 md:px-12">
+    <div className="mb-10 mt-14 sm:px-3 md:px-12">
       <input
         onChange={onChange}
         value={value}
