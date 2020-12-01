@@ -1,11 +1,12 @@
 import { BigHead } from "@bigheads/core";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
+import RoomIcon from "../../assets/icons/RoomIcon";
 import Create from "../../components/lobby/LobbyCreate";
 import Login from "../../components/lobby/LobbyLogin";
+import { styles } from "../../components/lobby/LobbyStyles";
 import { avatar } from "../../utils/Store";
 
-const styles = {};
 const Lobby = () => {
   const [login, setLogin] = useState(false);
   const [create, setCreate] = useState(false);
@@ -16,18 +17,18 @@ const Lobby = () => {
     >
       <Login show={login} handleClose={() => setLogin(false)} />
       <Create show={create} handleClose={() => setCreate(false)} />
-      <div className=" w-screen h-screen justify-center items-center flex">
-        <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-          <div className="flex flex-col justify-between lg:flex-row">
-            <div className="mb-12 lg:max-w-lg lg:pr-5 lg:mb-0">
+      <div className={styles.root}>
+        <div className={styles.contentContainer}>
+          <div className={styles.content}>
+            <div className={styles.user}>
               <div className="max-w-xl mb-6 px-4">
-                <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
+                <h2 className={styles.welcomeText}>
                   Greetings{" "}
                   <span className="inline-block text-deep-purple-accent-400">
                     {avatar.name}!
                   </span>
                 </h2>
-                <p className="text-base text-gray-700 md:text-lg">
+                <p className={styles.normalText}>
                   <strong>Note:</strong> You might encounter occasional bugs,
                   please reach out to us with details if you face any.
                 </p>
@@ -63,29 +64,22 @@ const Lobby = () => {
                 </div>
               </div>
             </div>
-            <div className="px-5 pt-6 pb-5 text-center border border-gray-300 rounded lg:w-2/5">
+            <div className={styles.room}>
               <div className="mb-5 font-semibold">Get Started</div>
               <div className="flex justify-center w-full mb-3">
                 <button
                   onClick={() => setCreate(true)}
-                  className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                  className={styles.createButton}
                 >
                   <div className="flex items-center animate-pulse">
                     <div className="mr-3 font-semibold text-white">
                       Create a room
                     </div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
-                    </svg>
+                    <RoomIcon />
                   </div>
                 </button>
               </div>
-              <p className="max-w-md px-5 mb-3 text-xs text-gray-600 sm:text-sm md:mb-5">
+              <p className={styles.decriptionText}>
                 This will generate a room identifier that you can share with
                 whom you are playing with.
               </p>
@@ -96,7 +90,7 @@ const Lobby = () => {
               </div>
               <button
                 onClick={() => setLogin(true)}
-                className="inline-flex items-center justify-center w-full h-12 px-6 font-semibold transition duration-200 bg-white border border-gray-300 rounded md:w-auto hover:bg-gray-100 focus:shadow-outline focus:outline-none"
+                className={styles.joinButton}
               >
                 Join an existing one
               </button>
