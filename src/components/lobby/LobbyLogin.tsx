@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import React from "react";
-import { avatar } from "../../utils/Store";
+import React, { useState } from "react";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import { styles } from "./LobbyStyles";
@@ -16,6 +15,7 @@ interface props {
 }
 
 const Login = ({ handleClose, show }: props) => {
+  const [code, setCode] = useState("");
   return (
     <div className={` ${styles.popup} ${show ? "block" : "hidden"}`}>
       <div className="inset-0 transition-opacity" aria-hidden="true">
@@ -32,8 +32,8 @@ const Login = ({ handleClose, show }: props) => {
             <h3 className={styles.title}>Enter room code</h3>
             <hr className={styles.divider} />
             <Input
-              onChange={(e: any) => avatar.setName(e.target.value)}
-              value={avatar.name}
+              onChange={(e: any) => setCode(e.target.value)}
+              value={code}
               placeholder="4-character code"
             />
           </div>

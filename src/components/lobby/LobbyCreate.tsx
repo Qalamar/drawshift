@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
-import React from "react";
-import { avatar } from "../../utils/Store";
+import React, { useEffect } from "react";
 import Button from "../common/Button";
-import Input from "../common/Input";
 import { styles } from "./LobbyStyles";
+import { useDencrypt } from "use-dencrypt-effect";
 
 const variants = {
   open: { opacity: 1, y: 0 },
@@ -16,6 +15,10 @@ interface props {
 }
 
 const Create = ({ handleClose, show }: props) => {
+  const { result, dencrypt } = useDencrypt();
+  useEffect(() => {
+    dencrypt(Math.random().toString(16).substr(2, 4));
+  }, [show]);
   return (
     <div className={` ${styles.popup} ${show ? "block" : "hidden"}`}>
       <div className="inset-0 transition-opacity" aria-hidden="true">
@@ -32,7 +35,7 @@ const Create = ({ handleClose, show }: props) => {
             <h3 className={styles.title}>Share this code</h3>
             <hr className={styles.divider} />
             <div className="text-center text-5xl text-deep-purple-accent-400 font-bold p-4">
-              6Y5S
+              {result}
             </div>
           </div>
           <div className={styles.stepsContainer}>
@@ -42,7 +45,7 @@ const Create = ({ handleClose, show }: props) => {
               onClick={() => handleClose()}
             />
             <Button
-              text="Join"
+              text="Create"
               clickable={true}
               onClick={() => handleClose()}
             />
