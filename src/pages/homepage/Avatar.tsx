@@ -61,75 +61,73 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
   );
 
   return (
-    <>
-      <div className={` ${styles.popup} ${show ? "block" : "hidden"}`}>
-        <div className="inset-0 transition-opacity" aria-hidden="true">
-          <div className={styles.backdrop}></div>
-        </div>
-
-        <motion.div animate={show ? "open" : "closed"} variants={variants}>
-          <div
-            className={styles.cardContainer}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-headline"
-          >
-            <div className={styles.card}>
-              <h3 className={styles.title}>Customize your character</h3>
-              <hr className={styles.divider} />
-              <div className="-mt-16 mb-8">
-                <BigHead
-                  skinTone={avatar.skinTone}
-                  accessory={avatar.accessory}
-                  body={avatar.body}
-                  circleColor="blue"
-                  clothing={avatar.clothing}
-                  clothingColor={avatar.clothingColor}
-                  eyebrows="angry"
-                  eyes={avatar.eyes}
-                  graphic="none"
-                  faceMask={false}
-                  facialHair={avatar.facialHair}
-                  hair={avatar.hair}
-                  hairColor={avatar.hairColor}
-                  hat={avatar.hat}
-                  hatColor={avatar.hatColor}
-                  lashes={false}
-                  lipColor="red"
-                  mask
-                  mouth={avatar.mouth}
-                />
-              </div>
-
-              {Step === 0 && <AvatarParts parts={Basic} />}
-              {Step === 1 && <AvatarParts parts={Colored} />}
-              {Step === 2 && (
-                <>
-                  <Input
-                    onChange={(e: any) => avatar.setName(e.target.value)}
-                    value={avatar.name}
-                    placeholder="Nickname"
-                  />
-                </>
-              )}
-            </div>
-            <div className={styles.stepsContainer}>
-              <Button
-                text={CancelButton}
-                clickable={true}
-                onClick={() => (Step === 0 ? handleClose() : decreaseSteps())}
-              />
-              <MultiStep steps={3} progress={Step} />
-              <Button
-                text={NextButton}
-                clickable={true}
-                onClick={() => (Step < 2 ? incrementSteps() : handleSubmit())}
-              />
-            </div>
-          </div>
-        </motion.div>
+    <div className={` ${styles.popup} ${show ? "block" : "hidden"}`}>
+      <div className="inset-0 transition-opacity" aria-hidden="true">
+        <div className={styles.backdrop}></div>
       </div>
-    </>
+
+      <motion.div animate={show ? "open" : "closed"} variants={variants}>
+        <div
+          className={styles.cardContainer}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-headline"
+        >
+          <div className={styles.card}>
+            <h3 className={styles.title}>Customize your character</h3>
+            <hr className={styles.divider} />
+            <div className="-mt-16 mb-8">
+              <BigHead
+                skinTone={avatar.skinTone}
+                accessory={avatar.accessory}
+                body={avatar.body}
+                circleColor="blue"
+                clothing={avatar.clothing}
+                clothingColor={avatar.clothingColor}
+                eyebrows="angry"
+                eyes={avatar.eyes}
+                graphic="none"
+                faceMask={false}
+                facialHair={avatar.facialHair}
+                hair={avatar.hair}
+                hairColor={avatar.hairColor}
+                hat={avatar.hat}
+                hatColor={avatar.hatColor}
+                lashes={false}
+                lipColor="red"
+                mask
+                mouth={avatar.mouth}
+              />
+            </div>
+
+            {Step === 0 && <AvatarParts parts={Basic} />}
+            {Step === 1 && <AvatarParts parts={Colored} />}
+            {Step === 2 && (
+              <>
+                <Input
+                  onChange={(e: any) => avatar.setName(e.target.value)}
+                  value={avatar.name}
+                  placeholder="Nickname"
+                />
+              </>
+            )}
+          </div>
+          <div className={styles.stepsContainer}>
+            <Button
+              text={CancelButton}
+              clickable={true}
+              onClick={() => (Step === 0 ? handleClose() : decreaseSteps())}
+            />
+            <MultiStep steps={3} progress={Step} />
+            <Button
+              text={NextButton}
+              clickable={true}
+              onClick={() => (Step < 2 ? incrementSteps() : handleSubmit())}
+            />
+          </div>
+        </div>
+      </motion.div>
+    </div>
   );
 });
 

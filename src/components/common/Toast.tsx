@@ -11,7 +11,7 @@ const Toast = ({ shortText, longText, onClick }: props) => {
     <div className="bg-blue-900 fixed z-50 w-full">
       <motion.div
         animate={{ opacity: [0, 1], y: [-100, 0] }}
-        transition={{ duration: 1, delay: 0.5 }}
+        transition={{ duration: 1 }}
       >
         <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between flex-wrap">
