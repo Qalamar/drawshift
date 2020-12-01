@@ -2,7 +2,7 @@ import React from "react";
 import Github from "../../assets/icons/GithubIcon";
 import InfoIcon from "../../assets/icons/InfoIcon";
 import Mail from "../../assets/icons/MailIcon";
-import Divider from "../../assets/ui/Divider";
+import Divider from "../../components/Divider";
 
 const Footer = () => {
   return (

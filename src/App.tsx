@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Features from "./pages/landing/Features";
 import Footer from "./pages/landing/Footer";
 import Header from "./pages/landing/Header";
-import CreateAvatar from "./pages/avatar/Avatar";
+import CreateAvatar from "./pages/landing/Avatar";
 import Video from "./pages/landing/Video";
 
 const App = () => {

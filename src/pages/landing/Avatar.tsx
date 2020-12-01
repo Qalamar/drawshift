@@ -3,12 +3,18 @@ import { BigHead } from "@bigheads/core";
 import { motion } from "framer-motion";
 import { observer } from "mobx-react";
 import LZString from "lz-string";
-import Button from "../../assets/components/Button";
-import Input from "../../assets/components/Input";
-import Toast from "../../assets/components/Toast";
-import MultiStep from "../../assets/components/MultiStep";
-import { Basic, Modal, Parts, store, Colored } from "./AvatarProps";
-import { styles } from "./AvatarStyles";
+import Button from "../../components/common/Button";
+import Input from "../../components/common/Input";
+import Toast from "../../components/common/Toast";
+import MultiStep from "../../components/common/MultiStep";
+import {
+  Basic,
+  Modal,
+  Parts,
+  store,
+  Colored,
+} from "../../components/avatar/AvatarProps";
+import { styles } from "../../components/avatar/AvatarStyles";
 
 const variants = {
   open: { opacity: 1, y: 0 },
