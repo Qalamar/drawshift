@@ -1,5 +1,5 @@
 import React from "react";
-import RoundDivider from "../../assets/ui/RoundDivider";
+import RoundDivider from "../../components/common/RoundDivider";
 
 interface props {
   handleOpen: any;

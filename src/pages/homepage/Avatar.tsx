@@ -2,19 +2,19 @@ import React, { useCallback, useEffect, useState } from "react";
 import { BigHead } from "@bigheads/core";
 import { motion } from "framer-motion";
 import { observer } from "mobx-react";
+import { useHistory } from "react-router-dom";
 import LZString from "lz-string";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
-import Toast from "../../components/common/Toast";
 import MultiStep from "../../components/common/MultiStep";
 import {
   Basic,
   Modal,
   Parts,
-  store,
   Colored,
 } from "../../components/avatar/AvatarProps";
 import { styles } from "../../components/avatar/AvatarStyles";
+import { avatar, toast } from "../../utils/Store";
 
 const variants = {
   open: { opacity: 1, y: 0 },
@@ -22,11 +22,12 @@ const variants = {
 };
 
 const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
+  const history = useHistory();
+
   // Handles Step proccessing during avatar creation
   const [Step, setStep] = useState(0);
   const incrementSteps = useCallback(() => setStep(Step + 1), [Step]);
   const decreaseSteps = useCallback(() => setStep(Step - 1), [Step]);
-  const [toast, setToast] = useState(false);
 
   // Button text depends on step number
   const [CancelButton, setCancelButton] = useState("Cancel");
@@ -39,9 +40,10 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
   // Confirms and save choices for later use (Compressed with lz-string)
 
   const handleSubmit = () => {
-    localStorage.setItem("avatar", LZString.compress(JSON.stringify(store)));
+    localStorage.setItem("avatar", LZString.compress(JSON.stringify(avatar)));
     handleClose();
-    setToast(true);
+    toast.setVisible(true);
+    history.push("/lobby");
   };
 
   // Avatar customization buttons
@@ -52,7 +54,7 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
           key={part.property}
           clickable={true}
           text={part.text}
-          onClick={() => store.setProperty(part.property)}
+          onClick={() => avatar.setProperty(part.property)}
         />
       ))}
     </div>
@@ -77,25 +79,25 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
               <hr className={styles.divider} />
               <div className="-mt-16 mb-8">
                 <BigHead
-                  skinTone={store.skinTone}
-                  accessory={store.accessory}
-                  body={store.body}
+                  skinTone={avatar.skinTone}
+                  accessory={avatar.accessory}
+                  body={avatar.body}
                   circleColor="blue"
-                  clothing={store.clothing}
-                  clothingColor={store.clothingColor}
+                  clothing={avatar.clothing}
+                  clothingColor={avatar.clothingColor}
                   eyebrows="angry"
-                  eyes={store.eyes}
+                  eyes={avatar.eyes}
                   graphic="none"
                   faceMask={false}
-                  facialHair={store.facialHair}
-                  hair={store.hair}
-                  hairColor={store.hairColor}
-                  hat={store.hat}
-                  hatColor={store.hatColor}
+                  facialHair={avatar.facialHair}
+                  hair={avatar.hair}
+                  hairColor={avatar.hairColor}
+                  hat={avatar.hat}
+                  hatColor={avatar.hatColor}
                   lashes={false}
                   lipColor="red"
                   mask
-                  mouth={store.mouth}
+                  mouth={avatar.mouth}
                 />
               </div>
 
@@ -104,8 +106,8 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
               {Step === 2 && (
                 <>
                   <Input
-                    onChange={(e: any) => store.setName(e.target.value)}
-                    value={store.name}
+                    onChange={(e: any) => avatar.setName(e.target.value)}
+                    value={avatar.name}
                     placeholder="Nickname"
                   />
                 </>
@@ -127,13 +129,6 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
           </div>
         </motion.div>
       </div>
-      {toast && (
-        <Toast
-          shortText="Confirmation successful"
-          longText="Your choices have been saved."
-          onClick={() => setToast(false)}
-        />
-      )}
     </>
   );
 });
