@@ -17,7 +17,7 @@ export const Basic = [
     property: "eyes",
   },
   {
-    text: "Facial Hair",
+    text: "Facial",
     property: "facialHair",
   },
   {

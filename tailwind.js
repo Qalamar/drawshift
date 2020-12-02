@@ -325,6 +325,9 @@ module.exports = {
       height: {
         "1/2": "50%",
       },
+      width: {
+        wide: "364px",
+      },
       scale: {
         30: ".3",
       },

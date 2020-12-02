@@ -7,7 +7,7 @@ interface props {
 }
 const Input = ({ value, placeholder, onChange }: props) => {
   return (
-    <div className="mb-10 mt-14 sm:px-3 md:px-12">
+    <div className="mb-9 mt-14 sm:px-3">
       <input
         onChange={onChange}
         value={value}

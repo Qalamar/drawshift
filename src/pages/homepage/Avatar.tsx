@@ -33,8 +33,8 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
   const [CancelButton, setCancelButton] = useState("Cancel");
   const [NextButton, setNextButton] = useState("Next");
   useEffect(() => {
-    Step === 0 ? setCancelButton("Cancel") : setCancelButton("Previous");
-    Step < 2 ? setNextButton("Next") : setNextButton("Confirm");
+    Step === 0 ? setCancelButton("Cancel") : setCancelButton("Back");
+    Step < 2 ? setNextButton("Next") : setNextButton("Done");
   }, [Step]);
 
   // Confirms and save choices for later use (Compressed with lz-string)
@@ -48,7 +48,7 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
 
   // Avatar customization buttons
   const AvatarParts: React.FC<Parts> = ({ parts }) => (
-    <div className="justify-center my-6 sm:px-3 md:px-12 grid grid-cols-3 gap-4">
+    <div className="justify-center my-6 px-3 grid grid-cols-3 gap-3">
       {parts.map((part: any) => (
         <Button
           key={part.property}
@@ -76,7 +76,7 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
           <div className={styles.card}>
             <h3 className={styles.title}>Customize your character</h3>
             <hr className={styles.divider} />
-            <div className="-mt-16 mb-8">
+            <div className="-mt-16 mb-8 w-full">
               <BigHead
                 skinTone={avatar.skinTone}
                 accessory={avatar.accessory}
