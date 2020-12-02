@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import { styles } from "./LobbyStyles";
@@ -18,16 +18,11 @@ const Login = ({ handleClose, show }: props) => {
   const [code, setCode] = useState("");
   return (
     <div className={` ${styles.popup} ${show ? "block" : "hidden"}`}>
-      <div className="inset-0 transition-opacity" aria-hidden="true">
+      <div className="inset-0 transition-opacity">
         <div className={styles.backdrop}></div>
       </div>
       <motion.div animate={show ? "open" : "closed"} variants={variants}>
-        <div
-          className={styles.cardContainer}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-headline"
-        >
+        <div className={styles.cardContainer}>
           <div className={styles.card}>
             <h3 className={styles.title}>Enter room code</h3>
             <hr className={styles.divider} />

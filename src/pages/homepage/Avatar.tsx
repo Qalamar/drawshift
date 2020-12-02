@@ -1,8 +1,8 @@
+import React, { useCallback, useEffect, useState } from "react";
 import { BigHead } from "@bigheads/core";
 import { motion } from "framer-motion";
 import LZString from "lz-string";
 import { observer } from "mobx-react";
-import React, { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import AvatarButtons from "../../components/avatar/AvatarButtons";
 import { Basic, Colored, Modal } from "../../components/avatar/AvatarProps";
@@ -44,33 +44,25 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
 
   return (
     <div className={` ${styles.popup} ${show ? "block" : "hidden"}`}>
-      <div className="inset-0 transition-opacity" aria-hidden="true">
+      <div className="inset-0 transition-opacity">
         <div className={styles.backdrop}></div>
       </div>
-
       <motion.div animate={show ? "open" : "closed"} variants={variants}>
-        <div
-          className={styles.cardContainer}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-headline"
-        >
+        <div className={styles.cardContainer}>
           <div className={styles.card}>
             <h3 className={styles.title}>Customize your character</h3>
             <hr className={styles.divider} />
-            <div className="-mt-16 mb-8 w-full">
+            <div className="-mt-16 mb-8">
               <BigHead {...avatar} />
             </div>
             {Step === 0 && <AvatarButtons parts={Basic} />}
             {Step === 1 && <AvatarButtons parts={Colored} />}
             {Step === 2 && (
-              <>
-                <Input
-                  onChange={(e: any) => avatar.setName(e.target.value)}
-                  value={avatar.name}
-                  placeholder="Nickname"
-                />
-              </>
+              <Input
+                onChange={(e: any) => avatar.setName(e.target.value)}
+                value={avatar.name}
+                placeholder="Nickname"
+              />
             )}
           </div>
           <div className={styles.stepsContainer}>
