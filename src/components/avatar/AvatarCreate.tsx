@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import LZString from "lz-string";
 import { observer } from "mobx-react";
 import { useHistory } from "react-router-dom";
-import AvatarButtons from "../../components/avatar/AvatarButtons";
-import { Basic, Colored, Modal } from "../../components/avatar/AvatarProps";
-import { styles } from "../../components/avatar/AvatarStyles";
-import Button from "../../components/common/Button";
-import Input from "../../components/common/Input";
-import MultiStep from "../../components/common/MultiStep";
+import AvatarButtons from "./AvatarButtons";
+import { Basic, Colored, Modal } from "./AvatarProps";
+import { styles } from "./AvatarStyles";
+import Button from "../common/Button";
+import Input from "../common/Input";
+import MultiStep from "../common/MultiStep";
 import { avatar, toast } from "../../utils/Store";
 
 const variants = {
@@ -17,7 +17,7 @@ const variants = {
   closed: { opacity: 0, y: "-100%" },
 };
 
-const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
+const Avatar: React.FC<Modal> = observer(({ handleClose, show }) => {
   const history = useHistory();
 
   // Handles Step proccessing during avatar creation
@@ -84,4 +84,4 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
   );
 });
 
-export default CreateAvatar;
+export default Avatar;

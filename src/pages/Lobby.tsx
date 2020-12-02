@@ -1,11 +1,11 @@
 import { BigHead } from "@bigheads/core";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
-import RoomIcon from "../../assets/icons/RoomIcon";
-import Create from "../../components/lobby/LobbyCreate";
-import Login from "../../components/lobby/LobbyLogin";
-import { styles } from "../../components/lobby/LobbyStyles";
-import { avatar } from "../../utils/Store";
+import RoomIcon from "../assets/icons/RoomIcon";
+import Create from "../components/lobby/LobbyCreate";
+import Login from "../components/lobby/LobbyLogin";
+import { styles } from "../components/lobby/LobbyStyles";
+import { avatar } from "../utils/Store";
 
 const Lobby = () => {
   const [login, setLogin] = useState(false);
@@ -24,9 +24,7 @@ const Lobby = () => {
               <div className="max-w-xl mb-6 px-4">
                 <h2 className={styles.welcomeText}>
                   Greetings{" "}
-                  <span className="inline-block text-deep-purple-accent-400">
-                    {avatar.name}!
-                  </span>
+                  <span className={styles.nameText}>{avatar.name}!</span>
                 </h2>
                 <p className={styles.normalText}>
                   <strong>Note:</strong> You might encounter occasional bugs,
@@ -36,27 +34,7 @@ const Lobby = () => {
               <hr className="mb-6 border-gray-300" />
               <div className="flex">
                 <div className="h-32 w-32 -mt-6">
-                  <BigHead
-                    skinTone={avatar.skinTone}
-                    accessory={avatar.accessory}
-                    body={avatar.body}
-                    circleColor="blue"
-                    clothing={avatar.clothing}
-                    clothingColor={avatar.clothingColor}
-                    eyebrows="angry"
-                    eyes={avatar.eyes}
-                    graphic="none"
-                    faceMask={false}
-                    facialHair={avatar.facialHair}
-                    hair={avatar.hair}
-                    hairColor={avatar.hairColor}
-                    hat={avatar.hat}
-                    hatColor={avatar.hatColor}
-                    lashes={false}
-                    lipColor="red"
-                    mask
-                    mouth={avatar.mouth}
-                  />
+                  <BigHead {...avatar} />
                 </div>
                 <div className="flex flex-col mt-8">
                   <div className="text-sm font-semibold">Level 01</div>

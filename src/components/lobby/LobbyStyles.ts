@@ -25,6 +25,7 @@ export const styles = {
   createButton:
     "inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none",
   decriptionText: "max-w-md px-5 mb-3 text-xs text-gray-600 sm:text-sm md:mb-5",
+  nameText: "inline-block text-deep-purple-accent-400",
   roomCode: "text-center text-5xl text-deep-purple-accent-400 font-bold p-4",
   joinButton:
     "inline-flex items-center justify-center w-full h-12 px-6 font-semibold transition duration-200 bg-white border border-gray-300 rounded md:w-auto hover:bg-gray-100 focus:shadow-outline focus:outline-none",

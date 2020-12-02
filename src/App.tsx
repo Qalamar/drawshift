@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Toast from "./components/common/Toast";
-import Homepage from "./pages/homepage";
+import Home from "./pages/Home";
 import { observer } from "mobx-react";
 import { toast } from "./utils/Store";
-import Lobby from "./pages/lobby";
+import Lobby from "./pages/Lobby";
 
 const App = observer(() => {
   return (
@@ -17,7 +17,7 @@ const App = observer(() => {
         />
       )}
       <Switch>
-        <Route exact path="/" component={Homepage} />
+        <Route exact path="/" component={Home} />
         <Route exact path="/lobby" component={Lobby} />
         <Route path="/lobby/:id" component={Lobby} />
       </Switch>
