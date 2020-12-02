@@ -40,6 +40,12 @@ const Avatar = types
     facialHair: types.string,
     mouth: types.string,
     name: types.string,
+    circleColor: types.string,
+    eyebrows: types.string,
+    graphic: types.string,
+    faceMask: types.boolean,
+    lashes: types.boolean,
+    lipColor: types.string,
   })
   .actions((self) => ({
     setProperty(property: any) {
@@ -67,6 +73,12 @@ export const avatar = Avatar.create({
   hat: "none",
   hatColor: "white",
   name: "",
+  circleColor: "blue",
+  eyebrows: "angry",
+  graphic: "none",
+  faceMask: false,
+  lashes: false,
+  lipColor: "red",
 });
 
 const Toast = types

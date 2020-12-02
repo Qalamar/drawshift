@@ -1,19 +1,15 @@
-import React, { useCallback, useEffect, useState } from "react";
 import { BigHead } from "@bigheads/core";
 import { motion } from "framer-motion";
-import { observer } from "mobx-react";
-import { useHistory } from "react-router-dom";
 import LZString from "lz-string";
+import { observer } from "mobx-react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import AvatarButtons from "../../components/avatar/AvatarButtons";
+import { Basic, Colored, Modal } from "../../components/avatar/AvatarProps";
+import { styles } from "../../components/avatar/AvatarStyles";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
 import MultiStep from "../../components/common/MultiStep";
-import {
-  Basic,
-  Modal,
-  Parts,
-  Colored,
-} from "../../components/avatar/AvatarProps";
-import { styles } from "../../components/avatar/AvatarStyles";
 import { avatar, toast } from "../../utils/Store";
 
 const variants = {
@@ -46,20 +42,6 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
     history.push("/lobby");
   };
 
-  // Avatar customization buttons
-  const AvatarParts: React.FC<Parts> = ({ parts }) => (
-    <div className="justify-center my-6 px-3 grid grid-cols-3 gap-3">
-      {parts.map((part: any) => (
-        <Button
-          key={part.property}
-          clickable={true}
-          text={part.text}
-          onClick={() => avatar.setProperty(part.property)}
-        />
-      ))}
-    </div>
-  );
-
   return (
     <div className={` ${styles.popup} ${show ? "block" : "hidden"}`}>
       <div className="inset-0 transition-opacity" aria-hidden="true">
@@ -77,31 +59,10 @@ const CreateAvatar: React.FC<Modal> = observer(({ handleClose, show }) => {
             <h3 className={styles.title}>Customize your character</h3>
             <hr className={styles.divider} />
             <div className="-mt-16 mb-8 w-full">
-              <BigHead
-                skinTone={avatar.skinTone}
-                accessory={avatar.accessory}
-                body={avatar.body}
-                circleColor="blue"
-                clothing={avatar.clothing}
-                clothingColor={avatar.clothingColor}
-                eyebrows="angry"
-                eyes={avatar.eyes}
-                graphic="none"
-                faceMask={false}
-                facialHair={avatar.facialHair}
-                hair={avatar.hair}
-                hairColor={avatar.hairColor}
-                hat={avatar.hat}
-                hatColor={avatar.hatColor}
-                lashes={false}
-                lipColor="red"
-                mask
-                mouth={avatar.mouth}
-              />
+              <BigHead {...avatar} />
             </div>
-
-            {Step === 0 && <AvatarParts parts={Basic} />}
-            {Step === 1 && <AvatarParts parts={Colored} />}
+            {Step === 0 && <AvatarButtons parts={Basic} />}
+            {Step === 1 && <AvatarButtons parts={Colored} />}
             {Step === 2 && (
               <>
                 <Input
