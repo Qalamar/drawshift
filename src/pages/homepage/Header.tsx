@@ -26,11 +26,11 @@ const Header = ({ handleOpen }: props) => {
         <div className={styles.content}>
           <h1 className={styles.title}>
             <span className="relative inline-block pr-2">
-              <span className="relative text-teal-accent-400">Drawly</span>
+              <span className="relative text-teal-accent-400">Drawshift</span>
               <div className="w-full h-3 -mt-3 bg-deep-purple-accent-200" />
             </span>
-            is the game that
-            <br className="hidden md:block" /> ruins friendships
+            , the game that
+            <br className="hidden md:block" /> ruins your friendships
           </h1>
           <p className={styles.text}>
             Create or join a room, make your own avatar and start playing

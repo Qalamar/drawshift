@@ -4,7 +4,7 @@ const Github = () => {
   return (
     <button>
       <a
-        href="https://github.com/Qalamar/drawy"
+        href="https://github.com/Qalamar/drawshift"
         target="_blank"
         rel="noreferrer"
         className="transition-colors duration-300 text-deep-purple-100 hover:text-teal-accent-400"
