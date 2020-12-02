@@ -17,7 +17,7 @@ const variants = {
   closed: { opacity: 0, y: "-100%" },
 };
 
-const Avatar: React.FC<Modal> = observer(({ handleClose, show }) => {
+const Avatar = observer(({ handleClose, show }: Modal) => {
   const history = useHistory();
 
   // Handles Step proccessing during avatar creation
