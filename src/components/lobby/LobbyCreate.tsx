@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import { useDencrypt } from "use-dencrypt-effect";
+import { createRoom, firestore } from "../../firebase/firebase.utils";
+import { avatar } from "../../utils/Store";
 import Button from "../common/Button";
 import { styles } from "./LobbyStyles";
 
@@ -20,6 +22,9 @@ const Create = ({ handleClose, show }: props) => {
     dencrypt(Math.random().toString(16).substr(2, 4));
   }, [show]);
 
+  const handleSubmit = () => {
+    createRoom(result);
+  };
   return (
     <div className={` ${styles.popup} ${show ? "block" : "hidden"}`}>
       <div className="inset-0 transition-opacity">
@@ -41,7 +46,7 @@ const Create = ({ handleClose, show }: props) => {
             <Button
               text="Create"
               clickable={true}
-              onClick={() => handleClose()}
+              onClick={() => handleSubmit()}
             />
           </div>
         </div>

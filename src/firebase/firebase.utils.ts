@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
+import { avatar } from "../utils/Store";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -16,4 +17,20 @@ firebase.initializeApp(firebaseConfig);
 
 export const firestore = firebase.firestore();
 
+export const createRoom = (roomID: string) => {
+  firestore
+    .collection("rooms")
+    .doc(roomID)
+    .set({
+      players: [avatar.name],
+      words: [],
+      scores: [0],
+    })
+    .then(function () {
+      console.log("Document successfully written!");
+    })
+    .catch(function (error) {
+      console.error("Error writing document: ", error);
+    });
+};
 export default firebase;
