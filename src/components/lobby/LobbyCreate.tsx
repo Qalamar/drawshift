@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useDencrypt } from "use-dencrypt-effect";
-import { createRoom, firestore } from "../../firebase/firebase.utils";
-import { avatar } from "../../utils/Store";
+import { createRoom } from "../../firebase/firebase.utils";
 import Button from "../common/Button";
 import { styles } from "./LobbyStyles";
 
@@ -17,6 +17,8 @@ interface props {
 }
 
 const Create = ({ handleClose, show }: props) => {
+  const history = useHistory();
+
   const { result, dencrypt } = useDencrypt();
   useEffect(() => {
     dencrypt(Math.random().toString(16).substr(2, 4));
@@ -24,6 +26,8 @@ const Create = ({ handleClose, show }: props) => {
 
   const handleSubmit = () => {
     createRoom(result);
+    console.log("Done");
+    history.push(`/lobby/${result}`);
   };
   return (
     <div className={` ${styles.popup} ${show ? "block" : "hidden"}`}>

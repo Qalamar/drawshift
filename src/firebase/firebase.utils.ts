@@ -22,7 +22,7 @@ export const createRoom = (roomID: string) => {
     .collection("rooms")
     .doc(roomID)
     .set({
-      players: [avatar.name],
+      players: [{ name: avatar.name, avatar: localStorage.getItem("avatar") }],
       words: [],
       scores: [0],
     })
