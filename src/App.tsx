@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import { observer } from "mobx-react";
 import { toast } from "./utils/Store";
 import Lobby from "./pages/Lobby";
+import Room from "./pages/Room";
 
 const App = observer(() => {
   return (
@@ -19,7 +20,7 @@ const App = observer(() => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/lobby" component={Lobby} />
-        <Route path="/lobby/:id" component={Lobby} />
+        <Route path="/lobby/:id" component={Room} />
       </Switch>
     </Router>
   );
