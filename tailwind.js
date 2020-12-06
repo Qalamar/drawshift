@@ -4,20 +4,6 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      animation: {
-        slideDown:
-          "slideDown 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both",
-      },
-      keyframes: {
-        slideDown: {
-          "0%": {
-            transform: "translateY(0)",
-          },
-          "100%": {
-            transform: "translateY(100px)",
-          },
-        },
-      },
       fontFamily: {
         sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
       },
@@ -314,6 +300,18 @@ module.exports = {
           800: "#4e342e",
           900: "#3e2723",
         },
+        vod: {
+          logo: "#1E2134",
+          primary: "#666FE4",
+          action: "#F7F7FC",
+          secondary: "#D98585",
+          tertiary: "#DADAFF",
+          content: "#4E4B66",
+          600: "#6d4c41",
+          700: "#5d4037",
+          800: "#4e342e",
+          900: "#3e2723",
+        },
       },
       spacing: {
         7: "1.75rem",
@@ -333,6 +331,8 @@ module.exports = {
       },
       boxShadow: {
         outline: "0 0 0 3px rgba(101, 31, 255, 0.4)",
+        card:
+          "0px 6.5px 15px 0px rgba(102, 111, 228, 0.14), 0px 1px 5.4px 0px rgba(0, 0, 0, 0.07)",
       },
     },
   },
