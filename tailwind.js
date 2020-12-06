@@ -307,7 +307,7 @@ module.exports = {
           secondary: "#D98585",
           tertiary: "#DADAFF",
           content: "#4E4B66",
-          600: "#6d4c41",
+          scoreboard: "#F9F6FD",
           700: "#5d4037",
           800: "#4e342e",
           900: "#3e2723",

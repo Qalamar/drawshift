@@ -1,15 +1,10 @@
 import React from "react";
-import { avatar } from "../../../utils/Store";
-import { BigHead } from "@bigheads/core";
 
 const Navigation = () => {
   return (
     <div className="flex-none w-min flex flex-row px-6 invisible md:visible">
-      <div className="rounded-full text-vod-content bg-vod-action cursor-pointer font-semibold shadow-card flex justify-center items-center w-auto h-12 mx-3 px-4">
-        <div className="w-12 h-12 -mt-2">
-          <BigHead {...avatar} />
-        </div>
-        <span className="px-2">Xorium</span>
+      <div className="rounded-full text-vod-content bg-vod-action cursor-pointer font-semibold shadow-card flex justify-center items-center w-auto h-12 mx-3 px-6">
+        <span>Xorium</span>
       </div>
       <div className="rounded-full text-vod-primary bg-vod-action cursor-pointer font-semibold shadow-card flex justify-center items-center w-12 h-12 mx-3">
         <svg
