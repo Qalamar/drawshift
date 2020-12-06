@@ -1,11 +1,11 @@
-import { BigHead } from "@bigheads/core";
 import React from "react";
+import { BigHead } from "@bigheads/core";
 import { avatar } from "../../utils/Store";
 
 const Sidebar = () => {
   return (
     <div className="grid grid-cols-10 h-full">
-      <div className="col-span-8">4</div>
+      <div className="col-span-8"></div>
       <div className="col-span-2 bg-vod-action">
         <div className="bg-white w-full ml-1 text-center text-vod-content font-medium p-4 border-b-2 border-vod-primary">
           Round One
@@ -15,7 +15,7 @@ const Sidebar = () => {
             <div className="w-20 h-20 -mt-3">
               <BigHead {...avatar} />
             </div>
-            <span className="px-2">Xorium</span>
+            <span className="px-2">{avatar.name}</span>
           </div>
         </div>
       </div>

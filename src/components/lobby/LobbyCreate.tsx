@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDencrypt } from "use-dencrypt-effect";
 import { createRoom } from "../../firebase/firebase.utils";
+import { toast } from "../../utils/Store";
 import Button from "../common/Button";
 import { styles } from "./LobbyStyles";
 
@@ -22,11 +23,12 @@ const Create = ({ handleClose, show }: props) => {
   const { result, dencrypt } = useDencrypt();
   useEffect(() => {
     dencrypt(Math.random().toString(16).substr(2, 4));
-  }, [show]);
+  }, [dencrypt, show]);
 
   const handleSubmit = () => {
     createRoom(result);
     console.log("Done");
+    toast.setVisible(false);
     history.push(`/lobby/${result}`);
   };
   return (
