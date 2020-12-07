@@ -1,12 +1,12 @@
 import React from "react";
-import Sidebar from "../components/room/Sidebar";
-import Navbar from "../components/room/Navbar";
+import Layout from "../components/room/layout/Layout";
+import Navbar from "../components/room/navbar/Navbar";
 
 const Room = () => {
   return (
     <div className="h-screen overflow-hidden">
       <Navbar />
-      <Sidebar />
+      <Layout />
     </div>
   );
 };
