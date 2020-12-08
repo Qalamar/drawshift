@@ -12,9 +12,10 @@ const variants = {
 interface props {
   handleClose: any;
   show: boolean;
+  confirmed: any;
 }
 
-const Login = ({ handleClose, show }: props) => {
+const Login = ({ handleClose, show, confirmed }: props) => {
   const [code, setCode] = useState("");
   return (
     <div className={` ${styles.popup} ${show ? "block" : "hidden"}`}>

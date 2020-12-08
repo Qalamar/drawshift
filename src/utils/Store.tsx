@@ -94,3 +94,22 @@ const Toast = types
 export const toast = Toast.create({
   isVisible: false,
 });
+
+const Auth = types
+  .model({
+    isRegistred: types.boolean,
+    room: types.optional(types.string, ""),
+  })
+  .actions((self) => ({
+    setRegistred(status: boolean) {
+      self.isRegistred = status;
+    },
+    setRoom(status: string) {
+      self.room = status;
+    },
+  }));
+
+export const auth = Auth.create({
+  isRegistred: false,
+  room: "",
+});

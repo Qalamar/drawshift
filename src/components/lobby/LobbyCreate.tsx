@@ -1,9 +1,8 @@
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { useDencrypt } from "use-dencrypt-effect";
 import { createRoom } from "../../firebase/firebase.utils";
-import { toast } from "../../utils/Store";
+import { auth, toast } from "../../utils/Store";
 import Button from "../common/Button";
 import { styles } from "./LobbyStyles";
 
@@ -15,24 +14,32 @@ const variants = {
 interface props {
   handleClose: any;
   show: boolean;
+  confirmed: any;
 }
 
-const Create = ({ handleClose, show }: props) => {
-  const history = useHistory();
-
+const Create = ({ handleClose, show, confirmed }: props) => {
   const { result, dencrypt } = useDencrypt();
+  const controls = useAnimation();
+
   useEffect(() => {
     dencrypt(Math.random().toString(16).substr(2, 4));
   }, [dencrypt, show]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     createRoom(result);
     console.log("Done");
     toast.setVisible(false);
-    history.push(`/lobby/${result}`);
+    auth.setRoom(result);
+    await controls.start({
+      opacity: [1, 0],
+    });
+    confirmed();
   };
   return (
-    <div className={` ${styles.popup} ${show ? "block" : "hidden"}`}>
+    <motion.div
+      animate={controls}
+      className={` ${styles.popup} ${show ? "block" : "hidden"}`}
+    >
       <div className="inset-0 transition-opacity">
         <div className={styles.backdrop}></div>
       </div>
@@ -57,7 +64,7 @@ const Create = ({ handleClose, show }: props) => {
           </div>
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

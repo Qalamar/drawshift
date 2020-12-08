@@ -58,6 +58,7 @@ export const Colored = [
 export interface Modal {
   handleClose: any;
   show: boolean;
+  confirmed: any;
 }
 
 export interface Parts {

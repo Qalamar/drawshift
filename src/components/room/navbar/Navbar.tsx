@@ -7,12 +7,14 @@ import { motion } from "framer-motion";
 
 const Navbar = () => {
   return (
-    <motion.div animate={{ opacity: [0, 1] }} transition={{ duration: 1 }}>
-      <div className={styles.navbar}>
-        <NavbarLogo />
-        <NavbarCode />
-        <NavbarButtons />
-      </div>
+    <motion.div
+      animate={{ opacity: [0, 1], y: [-100, 0] }}
+      transition={{ duration: 1, delay: 0.5 }}
+      className={styles.navbar}
+    >
+      <NavbarLogo />
+      <NavbarCode />
+      <NavbarButtons />
     </motion.div>
   );
 };

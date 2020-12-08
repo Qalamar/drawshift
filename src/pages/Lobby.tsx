@@ -1,22 +1,51 @@
 import { BigHead } from "@bigheads/core";
-import { motion } from "framer-motion";
-import React, { useState } from "react";
+import { motion, useAnimation } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import RoomIcon from "../assets/icons/RoomIcon";
 import Create from "../components/lobby/LobbyCreate";
 import Login from "../components/lobby/LobbyLogin";
 import { styles } from "../components/lobby/LobbyStyles";
-import { avatar } from "../utils/Store";
+import { auth, avatar } from "../utils/Store";
 
 const Lobby = () => {
   const [login, setLogin] = useState(false);
   const [create, setCreate] = useState(false);
+
+  const history = useHistory();
+  const controls = useAnimation();
+
+  useEffect(() => {
+    controls.start({
+      opacity: [0, 1],
+      y: [-100, 0],
+    });
+  }, []);
+
+  const transition = async () => {
+    if (auth.isRegistred) {
+      await controls.start({
+        opacity: [1, 0],
+        y: [0, -100],
+      });
+      history.push(`/lobby/${auth.room}`);
+    }
+  };
+
   return (
-    <motion.div
-      animate={{ opacity: [0, 1], y: [-100, 0] }}
-      transition={{ duration: 1, delay: 0.5 }}
-    >
-      <Login show={login} handleClose={() => setLogin(false)} />
-      <Create show={create} handleClose={() => setCreate(false)} />
+    <motion.div animate={controls} transition={{ duration: 1, delay: 0.5 }}>
+      <Login
+        show={login}
+        handleClose={() => setLogin(false)}
+        confirmed={() => transition()}
+      />
+
+      <Create
+        show={create}
+        handleClose={() => setCreate(false)}
+        confirmed={() => transition()}
+      />
+
       <div className={styles.root}>
         <div className={styles.contentContainer}>
           <div className={styles.content}>

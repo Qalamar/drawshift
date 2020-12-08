@@ -9,7 +9,7 @@ const Layout = () => {
       <div className="col-span-8"></div>
       <motion.div
         animate={{ opacity: [0, 1], y: [100, 0] }}
-        transition={{ duration: 1, delay: 1.5 }}
+        transition={{ duration: 1, delay: 1 }}
         className="col-span-2 bg-vod-action"
       >
         <div className="bg-white w-full ml-1 text-center text-vod-content font-medium p-4 border-b-2 border-vod-primary">

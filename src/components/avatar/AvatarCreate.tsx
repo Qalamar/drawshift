@@ -1,25 +1,22 @@
-import React, { useCallback, useEffect, useState } from "react";
 import { BigHead } from "@bigheads/core";
 import { motion } from "framer-motion";
 import LZString from "lz-string";
 import { observer } from "mobx-react";
-import { useHistory } from "react-router-dom";
-import AvatarButtons from "./AvatarButtons";
-import { Basic, Colored, Modal } from "./AvatarProps";
-import { styles } from "./AvatarStyles";
+import React, { useCallback, useEffect, useState } from "react";
+import { auth, avatar, toast } from "../../utils/Store";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import MultiStep from "../common/MultiStep";
-import { avatar, toast } from "../../utils/Store";
+import AvatarButtons from "./AvatarButtons";
+import { Basic, Colored, Modal } from "./AvatarProps";
+import { styles } from "./AvatarStyles";
 
 const variants = {
   open: { opacity: 1, y: 0 },
   closed: { opacity: 0, y: "-100%" },
 };
 
-const Avatar = observer(({ handleClose, show }: Modal) => {
-  const history = useHistory();
-
+const Avatar = observer(({ handleClose, show, confirmed }: Modal) => {
   // Handles Step proccessing during avatar creation
   const [Step, setStep] = useState(0);
   const incrementSteps = useCallback(() => setStep(Step + 1), [Step]);
@@ -39,7 +36,8 @@ const Avatar = observer(({ handleClose, show }: Modal) => {
     localStorage.setItem("avatar", LZString.compress(JSON.stringify(avatar)));
     handleClose();
     toast.setVisible(true);
-    history.push("/lobby");
+    auth.setRegistred(true);
+    confirmed();
   };
 
   return (
