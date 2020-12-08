@@ -7,7 +7,7 @@ Drawshift is multiplayer drawing game inspired by scribble where you can create 
 # Progress
 
 - Create your own avatar. (**Done**)
-- Create or join a room which generates a special code you can share with others. (**WIP**)
+- Create or join a room which generates a special code you can share with others. (**Done**)
 - Choose which words to draw. (**WIP**)
 - Try to guess the words based on drawings. (**WIP**)
 
