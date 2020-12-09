@@ -1,7 +1,7 @@
 import { BigHead } from "@bigheads/core";
 import { motion } from "framer-motion";
 import React from "react";
-import { avatar } from "../../../utils/Store";
+import { avatar } from "../../../store/Store";
 
 const LayoutPlayers = () => {
   return (

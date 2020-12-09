@@ -6,7 +6,7 @@ import RoomIcon from "../assets/icons/RoomIcon";
 import Create from "../components/lobby/LobbyCreate";
 import Login from "../components/lobby/LobbyLogin";
 import { styles } from "../components/lobby/LobbyStyles";
-import { auth, avatar } from "../utils/Store";
+import { auth, avatar } from "../store/Store";
 
 const Lobby = () => {
   const [login, setLogin] = useState(false);
@@ -33,7 +33,11 @@ const Lobby = () => {
   };
 
   return (
-    <motion.div animate={controls} transition={{ duration: 1, delay: 0.5 }}>
+    <motion.div
+      animate={controls}
+      transition={{ duration: 1, delay: 0.5 }}
+      initial={{ opacity: 0 }}
+    >
       <Login
         show={login}
         handleClose={() => setLogin(false)}

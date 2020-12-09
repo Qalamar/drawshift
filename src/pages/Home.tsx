@@ -7,7 +7,7 @@ import Features from "../components/landing/Features";
 import Footer from "../components/landing/Footer";
 import Header from "../components/landing/Header";
 import Video from "../components/landing/Video";
-import { auth } from "../utils/Store";
+import { auth } from "../store/Store";
 
 const Home = observer(() => {
   const [isOpen, setIsOpen] = useState(false);

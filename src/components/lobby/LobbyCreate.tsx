@@ -1,8 +1,8 @@
 import { motion, useAnimation } from "framer-motion";
 import React, { useEffect } from "react";
 import { useDencrypt } from "use-dencrypt-effect";
-import { createRoom } from "../../firebase/firebase.utils";
-import { auth, toast } from "../../utils/Store";
+import { createRoom } from "../../utils/firebase.utils";
+import { auth, toast } from "../../store/Store";
 import Button from "../common/Button";
 import { styles } from "./LobbyStyles";
 

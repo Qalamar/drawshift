@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import LZString from "lz-string";
 import { observer } from "mobx-react";
 import React, { useCallback, useEffect, useState } from "react";
-import { auth, avatar, toast } from "../../utils/Store";
+import { auth, avatar, toast } from "../../store/Store";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import MultiStep from "../common/MultiStep";
