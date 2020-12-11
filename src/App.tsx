@@ -6,10 +6,12 @@ import Home from "./pages/Home";
 import Lobby from "./pages/Lobby";
 import Room from "./pages/Room";
 import { toast } from "./store/Store";
+import { GlobalStyles } from "twin.macro";
 
 const App = observer(() => {
   return (
     <Router>
+      <GlobalStyles />
       {toast.isVisible && (
         <Toast
           shortText="Confirmation successful"
