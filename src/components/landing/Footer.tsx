@@ -1,19 +1,28 @@
 import React from "react";
-import Github from "../../assets/icons/GithubIcon";
+import GithubIcon from "../../assets/icons/GithubIcon";
 import InfoIcon from "../../assets/icons/InfoIcon";
-import Mail from "../../assets/icons/MailIcon";
+import MailIcon from "../../assets/icons/MailIcon";
 import Divider from "../../components/common/Divider";
+import tw, { styled } from "twin.macro";
+
+const Container = styled.div`
+  ${tw`relative mt-32 bg-deep-purple-accent-400`}
+`;
+
+const Buttons = styled.div`
+  ${tw`flex justify-center h-28 items-center mt-4 space-x-4 sm:mt-0`}
+`;
 
 const Footer = () => {
   return (
-    <div className="relative mt-32 bg-deep-purple-accent-400">
+    <Container>
       <Divider />
-      <div className="flex justify-center h-28 items-center mt-4 space-x-4 sm:mt-0">
-        <Github />
-        <Mail />
+      <Buttons>
+        <GithubIcon />
+        <MailIcon />
         <InfoIcon />
-      </div>
-    </div>
+      </Buttons>
+    </Container>
   );
 };
 
