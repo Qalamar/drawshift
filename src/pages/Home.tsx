@@ -2,7 +2,7 @@ import { motion, useAnimation } from "framer-motion";
 import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Avatar from "../components/avatar/AvatarCreate";
+import Avatar from "../components/avatar/AvatarCreator";
 import Features from "../components/landing/Features";
 import Footer from "../components/landing/Footer";
 import Header from "../components/landing/Header";

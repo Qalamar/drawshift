@@ -7,7 +7,7 @@ interface props {
 }
 
 const Section = styled.div`
-  ${tw`relative mt-32 bg-deep-purple-accent-400`}
+  ${tw`relative bg-deep-purple-accent-400`}
 `;
 
 const Container = styled.div`
