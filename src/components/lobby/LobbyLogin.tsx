@@ -2,7 +2,16 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import Button from "../common/Button";
 import Input from "../common/Input";
-import { styles } from "./LobbyStyles";
+import {
+  Backdrop,
+  Card,
+  Container,
+  Divider,
+  Popup,
+  PopupContainer,
+  StepProgress,
+  Title,
+} from "../common/Modal";
 
 const variants = {
   open: { opacity: 1, y: 0 },
@@ -12,28 +21,27 @@ const variants = {
 interface props {
   handleClose: any;
   show: boolean;
-  confirmed: any;
 }
 
-const Login = ({ handleClose, show, confirmed }: props) => {
+const Login = ({ handleClose, show }: props) => {
   const [code, setCode] = useState("");
   return (
-    <div className={` ${styles.popup} ${show ? "block" : "hidden"}`}>
-      <div className="inset-0 transition-opacity">
-        <div className={styles.backdrop}></div>
-      </div>
+    <div className={` ${PopupContainer} ${show ? "block" : "hidden"}`}>
+      <Popup>
+        <Backdrop />
+      </Popup>
       <motion.div animate={show ? "open" : "closed"} variants={variants}>
-        <div className={styles.cardContainer}>
-          <div className={styles.card}>
-            <h3 className={styles.title}>Enter room code</h3>
-            <hr className={styles.divider} />
+        <Container>
+          <Card>
+            <Title>Customize your character</Title>
+            <Divider />
             <Input
               onChange={(e: any) => setCode(e.target.value)}
               value={code}
               placeholder="4-character code"
             />
-          </div>
-          <div className={styles.stepsContainer}>
+          </Card>
+          <StepProgress>
             <Button
               Sharp
               whileTap={{ scale: 0.9 }}
@@ -48,8 +56,8 @@ const Login = ({ handleClose, show, confirmed }: props) => {
             >
               Join
             </Button>
-          </div>
-        </div>
+          </StepProgress>
+        </Container>
       </motion.div>
     </div>
   );

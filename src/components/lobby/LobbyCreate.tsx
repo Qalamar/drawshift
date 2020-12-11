@@ -1,10 +1,20 @@
 import { motion, useAnimation } from "framer-motion";
 import React, { useEffect } from "react";
+import tw, { styled } from "twin.macro";
 import { useDencrypt } from "use-dencrypt-effect";
 import { auth, toast } from "../../store/Store";
 import { createRoom } from "../../utils/firebase.utils";
 import Button from "../common/Button";
-import { styles } from "./LobbyStyles";
+import {
+  Backdrop,
+  Card,
+  Container,
+  Divider,
+  Popup,
+  PopupContainer,
+  StepProgress,
+  Title,
+} from "../common/Modal";
 
 const variants = {
   open: { opacity: 1, y: 0 },
@@ -16,6 +26,10 @@ interface props {
   show: boolean;
   confirmed: any;
 }
+
+export const Code = styled.div`
+  ${tw`text-center text-5xl text-deep-purple-accent-400 font-bold p-4`}
+`;
 
 const Create = ({ handleClose, show, confirmed }: props) => {
   const { result, dencrypt } = useDencrypt();
@@ -38,19 +52,19 @@ const Create = ({ handleClose, show, confirmed }: props) => {
   return (
     <motion.div
       animate={controls}
-      className={` ${styles.popup} ${show ? "block" : "hidden"}`}
+      className={` ${PopupContainer} ${show ? "block" : "hidden"}`}
     >
-      <div className="inset-0 transition-opacity">
-        <div className={styles.backdrop}></div>
-      </div>
+      <Popup>
+        <Backdrop />
+      </Popup>
       <motion.div animate={show ? "open" : "closed"} variants={variants}>
-        <div className={styles.cardContainer}>
-          <div className={styles.card}>
-            <h3 className={styles.title}>Share this code</h3>
-            <hr className={styles.divider} />
-            <div className={styles.roomCode}>{result}</div>
-          </div>
-          <div className={styles.stepsContainer}>
+        <Container>
+          <Card>
+            <Title>Share this code</Title>
+            <Divider />
+            <Code>{result}</Code>
+          </Card>
+          <StepProgress>
             <Button
               Sharp
               whileTap={{ scale: 0.9 }}
@@ -65,8 +79,8 @@ const Create = ({ handleClose, show, confirmed }: props) => {
             >
               Create
             </Button>
-          </div>
-        </div>
+          </StepProgress>
+        </Container>
       </motion.div>
     </motion.div>
   );

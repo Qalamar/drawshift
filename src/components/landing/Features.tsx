@@ -37,7 +37,7 @@ const Features = () => {
           <span className="relative inline-block">
             <DottedIcon />
             <span className="relative">Play</span>
-          </span>
+          </span>{" "}
           anywhere you want
         </Title>
       </Header>
