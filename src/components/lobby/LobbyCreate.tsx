@@ -1,8 +1,8 @@
 import { motion, useAnimation } from "framer-motion";
 import React, { useEffect } from "react";
 import { useDencrypt } from "use-dencrypt-effect";
-import { createRoom } from "../../utils/firebase.utils";
 import { auth, toast } from "../../store/Store";
+import { createRoom } from "../../utils/firebase.utils";
 import Button from "../common/Button";
 import { styles } from "./LobbyStyles";
 
@@ -52,15 +52,19 @@ const Create = ({ handleClose, show, confirmed }: props) => {
           </div>
           <div className={styles.stepsContainer}>
             <Button
-              text="Cancel"
-              clickable={true}
+              Sharp
+              whileTap={{ scale: 0.9 }}
               onClick={() => handleClose()}
-            />
+            >
+              Cancel
+            </Button>
             <Button
-              text="Create"
-              clickable={true}
+              Sharp
+              whileTap={{ scale: 0.9 }}
               onClick={() => handleSubmit()}
-            />
+            >
+              Create
+            </Button>
           </div>
         </div>
       </motion.div>

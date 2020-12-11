@@ -1,6 +1,6 @@
 import React from "react";
 
-const DottedBackground = () => {
+const DottedIcon = () => {
   return (
     <svg
       viewBox="0 0 52 24"
@@ -27,4 +27,4 @@ const DottedBackground = () => {
   );
 };
 
-export default DottedBackground;
+export default DottedIcon;

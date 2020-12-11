@@ -1,24 +1,22 @@
-import React from "react";
+import { motion } from "framer-motion";
+import tw, { styled } from "twin.macro";
 
-interface props {
-  onClick?: any;
-  clickable?: boolean;
-  text: string;
-  selection?: boolean;
+interface ButtonProps {
+  Primary?: boolean;
+  Rounded?: boolean;
+  Sharp?: boolean;
 }
 
-const Button = ({ onClick, clickable, selection, text }: props) => {
-  return (
-    <button
-      onClick={onClick}
-      className={`h-10
-       flex w-full capitalize items-center justify-center transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline text-sm font-medium text-gray-700 ${
-         clickable && "hover:bg-gray-50 cursor-pointer"
-       } ${selection && "col-start-0 col-span-3"}`}
-    >
-      {text}
-    </button>
-  );
-};
+const Button = styled(motion.button)`
+  ${tw`flex justify-center items-center text-vod-primary cursor-pointer font-medium flex justify-center items-center w-auto h-12 px-4 transition duration-200`}
+  ${({ Primary }: ButtonProps) =>
+    Primary &&
+    tw`bg-vod-primary text-white shadow-card rounded-full hover:opacity-80`}
+  ${({ Rounded }: ButtonProps) =>
+    Rounded && tw`rounded-full shadow-card hover:opacity-80`}
+  ${({ Sharp }: ButtonProps) =>
+    Sharp &&
+    tw`capitalize border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline text-sm text-gray-700 hover:bg-gray-50`}
+`;
 
 export default Button;

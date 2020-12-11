@@ -9,10 +9,12 @@ const AvatarButtons = ({ parts }: Parts) => {
       {parts.map((part: any) => (
         <Button
           key={part.property}
-          clickable={true}
-          text={part.text}
+          Sharp
+          whileTap={{ scale: 0.9 }}
           onClick={() => avatar.setProperty(part.property)}
-        />
+        >
+          {part.text}
+        </Button>
       ))}
     </div>
   );

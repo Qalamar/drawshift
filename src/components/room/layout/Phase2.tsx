@@ -2,20 +2,9 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import RangeSlider from "react-bootstrap-range-slider";
 import CanvasDraw from "react-canvas-draw";
-import tw, { styled } from "twin.macro";
 import SubmitIcon from "../../../assets/icons/SubmitIcon";
 import UndoIcon from "../../../assets/icons/UndoIcon";
-
-interface ButtonProps {
-  isPrimary?: boolean;
-  isSecondary?: boolean;
-  isSmall?: boolean;
-}
-
-const Button = styled(motion.button)`
-  ${tw`flex justify-center items-center rounded-full text-vod-primary cursor-pointer font-semibold shadow-card flex justify-center items-center w-auto h-12 px-4 transition duration-200`}
-  ${({ isPrimary }: ButtonProps) => isPrimary && tw`bg-vod-primary text-white `}
-`;
+import Button from "../../common/Button";
 
 const colors = [
   "#ffffff",
@@ -106,7 +95,7 @@ const Phase2 = () => {
         <div className="flex justify-between w-wide">
           <div>
             <Button
-              whileHover={{ opacity: 0.8 }}
+              Rounded
               whileTap={{ scale: 0.9 }}
               onClick={() => {
                 saveableCanvas.undo();
@@ -117,11 +106,7 @@ const Phase2 = () => {
             </Button>
           </div>
           <div>
-            <Button
-              isPrimary
-              whileHover={{ opacity: 0.8 }}
-              whileTap={{ scale: 0.9 }}
-            >
+            <Button Primary whileTap={{ scale: 0.9 }}>
               <SubmitIcon />
               <span className="pl-2">Submit</span>
             </Button>

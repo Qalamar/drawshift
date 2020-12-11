@@ -65,16 +65,20 @@ const Avatar = observer(({ handleClose, show, confirmed }: Modal) => {
           </div>
           <div className={styles.stepsContainer}>
             <Button
-              text={CancelButton}
-              clickable={true}
+              Sharp
+              whileTap={{ scale: 0.9 }}
               onClick={() => (Step === 0 ? handleClose() : decreaseSteps())}
-            />
+            >
+              {CancelButton}
+            </Button>
             <MultiStep steps={3} progress={Step} />
             <Button
-              text={NextButton}
-              clickable={true}
+              Sharp
+              whileTap={{ scale: 0.9 }}
               onClick={() => (Step < 2 ? incrementSteps() : handleSubmit())}
-            />
+            >
+              {NextButton}
+            </Button>
           </div>
         </div>
       </motion.div>

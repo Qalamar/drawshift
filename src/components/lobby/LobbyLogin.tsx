@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import { motion } from "framer-motion";
+import React, { useState } from "react";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import { styles } from "./LobbyStyles";
@@ -35,15 +35,19 @@ const Login = ({ handleClose, show, confirmed }: props) => {
           </div>
           <div className={styles.stepsContainer}>
             <Button
-              text="Cancel"
-              clickable={true}
+              Sharp
+              whileTap={{ scale: 0.9 }}
               onClick={() => handleClose()}
-            />
+            >
+              Cancel
+            </Button>
             <Button
-              text="Join"
-              clickable={true}
+              Sharp
+              whileTap={{ scale: 0.9 }}
               onClick={() => handleClose()}
-            />
+            >
+              Join
+            </Button>
           </div>
         </div>
       </motion.div>
