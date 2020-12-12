@@ -34,8 +34,7 @@ const Login = ({ handleClose, show, confirmed }: props) => {
       <motion.div animate={show ? "open" : "closed"} variants={variants}>
         <Container>
           <Card>
-            <Title>Customize your character</Title>
-            <Divider />
+            <Title>Enter the room code</Title>
             <Input
               onChange={(e: any) => setCode(e.target.value)}
               value={code}
@@ -44,14 +43,15 @@ const Login = ({ handleClose, show, confirmed }: props) => {
           </Card>
           <StepProgress>
             <Button
-              Sharp
+              Rounded
               whileTap={{ scale: 0.9 }}
               onClick={() => handleClose()}
             >
               Cancel
             </Button>
+            <div className="col-span-3"></div>
             <Button
-              Sharp
+              Primary
               whileTap={{ scale: 0.9 }}
               onClick={() => handleClose()}
             >

@@ -41,7 +41,7 @@ const Phase2 = () => {
         </div>
       </div>
       {/*  */}
-      <div className="flex justify-center -mt-24 h-screen items-center flex-col space-y-4">
+      <div className="flex justify-center -mt-12 h-screen items-center flex-col space-y-4">
         <div className="shadow-card w-wide rounded-xl mb-10">
           <CanvasDraw
             brushColor={brushColor}

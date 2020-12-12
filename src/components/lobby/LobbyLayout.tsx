@@ -4,7 +4,7 @@ export const Page = styled.div`
   ${tw`w-screen h-screen justify-center items-center flex`}
 `;
 export const Container = styled.div`
-  ${tw`inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:max-w-lg sm:w-full`}
+  ${tw`px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20`}
 `;
 export const Content = styled.div`
   ${tw`flex flex-col justify-between lg:flex-row`}
@@ -31,9 +31,9 @@ export const Room = styled.div`
 `;
 
 export const CreateButton = styled.div`
-  ${tw`inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none`}
+  ${tw`inline-flex items-center justify-center cursor-pointer w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none`}
 `;
 
 export const JoinButton = styled.div`
-  ${tw`inline-flex items-center justify-center w-full h-12 px-6 font-semibold transition duration-200 bg-white border border-gray-300 rounded md:w-auto hover:bg-gray-100 focus:shadow-outline focus:outline-none`}
+  ${tw`inline-flex items-center justify-center cursor-pointer w-full h-12 px-6 font-semibold transition duration-200 bg-white border border-gray-300 rounded md:w-auto hover:bg-gray-100 focus:shadow-outline focus:outline-none`}
 `;

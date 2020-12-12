@@ -9,7 +9,6 @@ import {
   Backdrop,
   Card,
   Container,
-  Divider,
   Popup,
   PopupContainer,
   StepProgress,
@@ -61,19 +60,19 @@ const Create = ({ handleClose, show, confirmed }: props) => {
         <Container>
           <Card>
             <Title>Share this code</Title>
-            <Divider />
-            <Code>{result}</Code>
+            <Code className="my-4">{result}</Code>
           </Card>
           <StepProgress>
             <Button
-              Sharp
+              Rounded
               whileTap={{ scale: 0.9 }}
               onClick={() => handleClose()}
             >
               Cancel
             </Button>
+            <div className="col-span-3"></div>
             <Button
-              Sharp
+              Primary
               whileTap={{ scale: 0.9 }}
               onClick={() => handleSubmit()}
             >

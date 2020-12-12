@@ -3,9 +3,9 @@ import { motion, useAnimation } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import RoomIcon from "../assets/icons/RoomIcon";
-import { Container } from "../components/common/Modal";
 import Create from "../components/lobby/LobbyCreate";
 import {
+  Container,
   Content,
   CreateButton,
   Description,
