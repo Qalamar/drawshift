@@ -1,11 +1,15 @@
 import { motion } from "framer-motion";
 import React from "react";
 
-const SubmitButton = () => {
+interface props {
+  onClick: any;
+}
+const SubmitButton = ({ onClick }: props) => {
   return (
     <motion.button
       whileHover={{ opacity: 0.8 }}
       whileTap={{ scale: 0.9 }}
+      onClick={onClick}
       className="flex-grow flex justify-center items-center invisible md:visible"
     >
       <div className="rounded-full text-white bg-vod-primary cursor-pointer font-semibold shadow-card flex justify-center items-center w-auto h-12 px-4 transition duration-200">

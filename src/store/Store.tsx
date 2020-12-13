@@ -24,6 +24,7 @@ const parts = {
     "bob",
   ],
 };
+// -------------------------------------------
 
 const Avatar = types
   .model({
@@ -81,6 +82,8 @@ export const avatar = Avatar.create({
   lipColor: "red",
 });
 
+// -------------------------------------------
+
 const Toast = types
   .model({
     isVisible: types.boolean,
@@ -95,6 +98,7 @@ export const toast = Toast.create({
   isVisible: false,
 });
 
+// -------------------------------------------
 const Auth = types
   .model({
     isRegistred: types.boolean,
@@ -111,5 +115,25 @@ const Auth = types
 
 export const auth = Auth.create({
   isRegistred: false,
+  room: "",
+});
+
+// -------------------------------------------
+const Room = types
+  .model({
+    phase: types.integer,
+    room: types.optional(types.string, ""),
+  })
+  .actions((self) => ({
+    setPhase(status: number) {
+      self.phase = status;
+    },
+    setRoom(status: string) {
+      self.room = status;
+    },
+  }));
+
+export const room = Room.create({
+  phase: 1,
   room: "",
 });
