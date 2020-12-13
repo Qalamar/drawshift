@@ -3,6 +3,8 @@ import React from "react";
 import LayoutSidebar from "./LayoutSidebar";
 import Phase1 from "./Phase1";
 import Phase2 from "./Phase2";
+import Phase3 from "./Phase3";
+import Phase4 from "./Phase4";
 
 const Layout = () => {
   return (
@@ -13,7 +15,9 @@ const Layout = () => {
         className="col-span-8"
       >
         {/* <Phase1 /> */}
-        <Phase2 />
+        {/* <Phase2 /> */}
+        {/* <Phase3 /> */}
+        <Phase4 />
       </motion.div>
       <LayoutSidebar />
     </div>

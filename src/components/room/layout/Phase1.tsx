@@ -14,7 +14,7 @@ const Phase1 = () => {
           <input
             placeholder="Word"
             type="text"
-            className=" max-w-sm focus:border-deep-purple-accent-400 px-2 focus:outline-none"
+            className=" max-w-sm focus:border-deep-purple-accent-400 px-2 focus:outline-none rounded-lg"
           />
         </div>
         <div className="flex justify-between py-6">
