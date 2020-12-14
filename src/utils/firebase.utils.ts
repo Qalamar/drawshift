@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { avatar } from "../store/Store";
+import { avatar, player, room } from "../store/Store";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -22,7 +22,7 @@ export const createRoom = (roomID: string) => {
     .collection("rooms")
     .doc(roomID)
     .set({
-      players: [{ name: avatar.name, avatar: localStorage.getItem("avatar") }],
+      players: [{ name: player.name, avatar: localStorage.getItem("avatar") }],
       words: [],
       scores: [0],
     })
@@ -33,4 +33,37 @@ export const createRoom = (roomID: string) => {
       console.error("Error writing document: ", error);
     });
 };
+
+export const getRoom = (roomID: string) => {
+  firestore
+    .collection("rooms")
+    .doc(roomID)
+    .onSnapshot(function (doc) {
+      console.log("Current data: ", doc.data());
+      room.setPlayers(doc?.data()?.players);
+    });
+};
+
+export const joinRoom = (roomID: string) => {
+  let user = {
+    name: player.name,
+    avatar: player.avatar,
+  };
+  firestore
+    .collection("rooms")
+    .doc(roomID)
+    .update({
+      players: firebase.firestore.FieldValue.arrayUnion(user),
+    })
+    .then(function () {
+      console.log("Document successfully updated!");
+      room.setLoading(false);
+      getRoom(roomID)
+    })
+    .catch(function (error) {
+      // The document probably doesn't exist.
+      console.error("Error updating document: ", error);
+    });
+};
+
 export default firebase;

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import LZString from "lz-string";
 import { observer } from "mobx-react";
 import React, { useCallback, useEffect, useState } from "react";
-import { auth, avatar, toast } from "../../store/Store";
+import { auth, avatar, player, toast } from "../../store/Store";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import {
@@ -43,6 +43,7 @@ const Avatar = observer(({ handleClose, show, confirmed }: Modal) => {
 
   const handleSubmit = () => {
     localStorage.setItem("avatar", LZString.compress(JSON.stringify(avatar)));
+    player.setAvatar(LZString.compress(JSON.stringify(avatar)));
     handleClose();
     toast.setVisible(true);
     auth.setRegistred(true);
@@ -66,8 +67,8 @@ const Avatar = observer(({ handleClose, show, confirmed }: Modal) => {
             {Step === 1 && <AvatarButtons parts={Colored} />}
             {Step === 2 && (
               <Input
-                onChange={(e: any) => avatar.setName(e.target.value)}
-                value={avatar.name}
+                onChange={(e: any) => player.setName(e.target.value)}
+                value={player.name}
                 placeholder="Nickname"
               />
             )}

@@ -18,7 +18,7 @@ import {
   Welcome,
 } from "../components/lobby/LobbyLayout";
 import Login from "../components/lobby/LobbyLogin";
-import { auth, avatar } from "../store/Store";
+import { auth, avatar, room } from "../store/Store";
 
 const Lobby = () => {
   const [login, setLogin] = useState(false);
@@ -40,7 +40,7 @@ const Lobby = () => {
         opacity: [1, 0],
         y: [0, -100],
       });
-      history.push(`/lobby/${auth.room}`);
+      history.push(`/lobby/${room.room}`);
     }
   };
 

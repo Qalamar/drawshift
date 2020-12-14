@@ -1,5 +1,8 @@
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
+import result from "postcss/lib/result";
 import React, { useState } from "react";
+import { toast, auth, room } from "../../store/Store";
+import { joinRoom } from "../../utils/firebase.utils";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import {
@@ -26,8 +29,26 @@ interface props {
 
 const Login = ({ handleClose, show, confirmed }: props) => {
   const [code, setCode] = useState("");
+
+  const controls = useAnimation();
+
+  const handleSubmit = async () => {
+    room.setLoading(true);
+    joinRoom(code);
+    console.log("Done");
+    toast.setVisible(false);
+    room.setRoom(code);
+    await controls.start({
+      opacity: [1, 0],
+    });
+    confirmed();
+  };
+
   return (
-    <div className={` ${PopupContainer} ${show ? "block" : "hidden"}`}>
+    <motion.div
+      animate={controls}
+      className={` ${PopupContainer} ${show ? "block" : "hidden"}`}
+    >
       <Popup>
         <Backdrop />
       </Popup>
@@ -53,14 +74,14 @@ const Login = ({ handleClose, show, confirmed }: props) => {
             <Button
               Primary
               whileTap={{ scale: 0.9 }}
-              onClick={() => handleClose()}
+              onClick={() => handleSubmit()}
             >
               Join
             </Button>
           </StepProgress>
         </Container>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

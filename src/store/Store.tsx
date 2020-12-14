@@ -119,10 +119,32 @@ export const auth = Auth.create({
 });
 
 // -------------------------------------------
+
+const Player = types
+  .model({
+    name: types.string,
+    avatar: types.optional(types.string, ""),
+  })
+  .actions((self) => ({
+    setName(status: string) {
+      self.name = status;
+    },
+    setAvatar(status: string) {
+      self.avatar = status;
+    },
+  }));
+
+export const player = Player.create({
+  name: "",
+  avatar: "",
+});
+
 const Room = types
   .model({
     phase: types.integer,
     room: types.optional(types.string, ""),
+    playerList: types.optional(types.array(Player), []),
+    loading: types.optional(types.boolean, false),
   })
   .actions((self) => ({
     setPhase(status: number) {
@@ -131,9 +153,19 @@ const Room = types
     setRoom(status: string) {
       self.room = status;
     },
+    updatePlayers(status: any) {
+      self.playerList.push(status);
+    },
+    setPlayers(status: any) {
+      self.playerList = status;
+    },
+    setLoading(status: boolean) {
+      self.loading = status;
+    },
   }));
 
 export const room = Room.create({
   phase: 1,
   room: "",
+  loading: false,
 });
