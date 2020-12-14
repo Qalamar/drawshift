@@ -7,11 +7,13 @@ import Lobby from "./pages/Lobby";
 import Room from "./pages/Room";
 import { toast } from "./store/Store";
 import { GlobalStyles } from "twin.macro";
+import Spinner from "./components/common/Spinner";
 
 const App = observer(() => {
   return (
     <Router>
       <GlobalStyles />
+      {/* <Spinner /> */}
       {toast.isVisible && (
         <Toast
           shortText="Confirmation successful"
