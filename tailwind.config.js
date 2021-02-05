@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
+        serif: ["Quicksand", ...defaultTheme.fontFamily.serif],
       },
       colors: {
         red: {
@@ -312,6 +313,12 @@ module.exports = {
           800: "#4e342e",
           900: "#3e2723",
         },
+        colors: {
+          lightgray: "#F3F4F6",
+          gray: "#E5E5E5",
+          primary: "#342060",
+          secondary: "#4E4B66",
+        },
       },
       spacing: {
         7: "1.75rem",
@@ -332,6 +339,8 @@ module.exports = {
       },
       boxShadow: {
         outline: "0 0 0 3px rgba(101, 31, 255, 0.4)",
+        med:
+          "0px 57px 80px rgba(0, 0, 0, 0.03), 0px 17.1838px 24.1177px rgba(0, 0, 0, 0.0195477), 0px 7.13728px 10.0172px rgba(0, 0, 0, 0.015), 0px 2.58142px 3.62304px rgba(0, 0, 0, 0.0104523)",
         card:
           "0px 6.5px 15px 0px rgba(102, 111, 228, 0.14), 0px 1px 5.4px 0px rgba(0, 0, 0, 0.07)",
       },
