@@ -316,6 +316,7 @@ module.exports = {
         colors: {
           lightgray: "#F3F4F6",
           gray: "#E5E5E5",
+          darkgray: "#9EA6B2",
           primary: "#342060",
           secondary: "#4E4B66",
         },
