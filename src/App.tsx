@@ -8,7 +8,7 @@ import Room from "./pages/Room";
 import { room, toast } from "./store/Store";
 import { GlobalStyles } from "twin.macro";
 import Spinner from "./components/common/Spinner";
-import Boards from "./pages/Boards";
+import Boards from "./pages/boards/Boards";
 
 const App = observer(() => {
   return (
