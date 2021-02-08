@@ -1,4 +1,6 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   purge: ["./src/**/*.tsx"],
   darkMode: false, // or 'media' or 'class'
@@ -9,6 +11,7 @@ module.exports = {
         serif: ["Quicksand", ...defaultTheme.fontFamily.serif],
       },
       colors: {
+        rose: colors.rose,
         red: {
           50: "#ffebee",
           100: "#ffcdd2",
@@ -353,5 +356,8 @@ module.exports = {
     opacity: ["responsive", "hover", "focus", "group-hover"],
     backgroundColor: ["responsive", "hover", "focus", "group-hover"],
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/aspect-ratio"),
+  ],
 };

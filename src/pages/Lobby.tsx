@@ -66,7 +66,7 @@ const Lobby = () => {
         <Container>
           <Content>
             <User>
-              <div className="max-w-xl mb-6 px-4">
+              <div className="max-w-xl px-4 mb-6">
                 <Welcome>
                   Greetings <Nickname>{avatar.name}!</Nickname>
                 </Welcome>
@@ -77,8 +77,8 @@ const Lobby = () => {
               </div>
               <hr className="mb-6 border-gray-300" />
               <div className="flex">
-                <div className="h-32 w-32 -mt-6">
-                  <BigHead {...avatar} />
+                <div className="w-32 h-32 -mt-6">
+                  {/* <BigHead {...avatar} /> */}
                 </div>
                 <div className="flex flex-col mt-8">
                   <div className="text-sm font-semibold">Level 01</div>

@@ -60,9 +60,9 @@ const Avatar = observer(({ handleClose, show, confirmed }: Modal) => {
           <Card>
             <Title>Customize your character</Title>
             <Divider />
-            <div className="-mt-16 mb-8">
+            {/* <div className="mb-8 -mt-16">
               <BigHead {...avatar} />
-            </div>
+            </div> */}
             {Step === 0 && <AvatarButtons parts={Basic} />}
             {Step === 1 && <AvatarButtons parts={Colored} />}
             {Step === 2 && (
