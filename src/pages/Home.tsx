@@ -9,7 +9,7 @@ import Footer from "../components/landing/Footer";
 import Header from "../components/landing/Header";
 import Video from "../components/landing/Video";
 import { auth } from "../store/Store";
-import Main from "../assets/images/main.png";
+import Main from "../assets/images/drawshift.gif";
 import Feature from "../assets/images/features.png";
 import Options from "../assets/images/options.png";
 
@@ -35,20 +35,13 @@ const Home = observer(() => {
           <div className="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
             <div className="max-w-md px-4 mx-auto sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-24">
               <div>
-                <div>
-                  <img
-                    className="w-auto h-11"
-                    src="https://tailwindui.com/img/logos/workflow-mark.svg?color=rose&shade=500"
-                    alt="Workflow"
-                  />
-                </div>
                 <div className="mt-20">
                   <div className="mt-6 sm:max-w-xl">
                     <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-                      Thought organizing tool for messy minds
+                      Thought organizing for messy minds
                     </h1>
                     <p className="mt-6 text-xl text-gray-500">
-                      Create boards, drafts and flow charts to save them all in
+                      Create boards, drafts, flow charts and save them all in
                       one place. Accessible from anywhere.
                     </p>
                   </div>
@@ -221,30 +214,18 @@ const Home = observer(() => {
               <div className="relative max-w-md px-4 mx-auto sm:max-w-3xl sm:px-6 lg:px-0">
                 <div className="pt-12 sm:pt-16 lg:pt-20">
                   <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    On a mission to empower teams
+                    On a mission to simplify drafting
                   </h2>
                   <div className="mt-6 space-y-6 text-gray-500">
                     <p className="text-lg">
-                      Sagittis scelerisque nulla cursus in enim consectetur
-                      quam. Dictum urna sed consectetur neque tristique
-                      pellentesque. Blandit amet, sed aenean erat arcu morbi.
-                      Cursus faucibus nunc nisl netus morbi vel porttitor vitae
-                      ut. Amet vitae fames senectus vitae.
+                      Drawshift, makes the concept of saving ideas more
+                      appealing by gamifying the repetitive aspects . Instead of
+                      letting your notes wander off your mind, you can save them
+                      effortlessly and sync across all your devices.
                     </p>
                     <p className="text-base leading-7">
-                      Sollicitudin tristique eros erat odio sed vitae, consequat
-                      turpis elementum. Lorem nibh vel, eget pretium arcu vitae.
-                      Eros eu viverra donec ut volutpat donec laoreet quam urna.
-                      Sollicitudin tristique eros erat odio sed vitae, consequat
-                      turpis elementum. Lorem nibh vel, eget pretium arcu vitae.
-                      Eros eu viverra donec ut volutpat donec laoreet quam urna.
-                    </p>
-                    <p className="text-base leading-7">
-                      Rhoncus nisl, libero egestas diam fermentum dui. At quis
-                      tincidunt vel ultricies. Vulputate aliquet velit faucibus
-                      semper. Pellentesque in venenatis vestibulum consectetur
-                      nibh id. In id ut tempus egestas. Enim sit aliquam nec, a.
-                      Morbi enim fermentum lacus in. Viverra.
+                      You can get started by creating rough drafts and transform
+                      them into fully-fledged charts later on.
                     </p>
                   </div>
                 </div>
@@ -266,53 +247,57 @@ const Home = observer(() => {
                     href="#"
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
-                    customer support
-                  </a>{" "}
-                  team.
+                    support
+                  </a>
+                  .
                 </p>
               </div>
               <div className="mt-12 lg:mt-0 lg:col-span-2">
                 <dl className="space-y-12">
                   <div>
                     <dt className="text-lg font-semibold leading-6 text-gray-900">
-                      How do you make holy water?
+                      Where is my data being stored?
                     </dt>
                     <dd className="mt-2 text-base text-gray-500">
-                      You boil the hell out of it. Lorem ipsum dolor sit amet
-                      consectetur adipisicing elit. Quas cupiditate laboriosam
-                      fugiat.
+                      All user data is encrypted and only accessible to you.
+                      <br></br>
+                      Alternatively, you can choose to disable syncing and save
+                      your data locally.
                     </dd>
                   </div>
 
                   <div>
                     <dt className="text-lg font-semibold leading-6 text-gray-900">
-                      What&#039;s the best thing about Switzerland?
+                      What's coming next to Drawshift?
                     </dt>
                     <dd className="mt-2 text-base text-gray-500">
-                      I don&#039;t know, but the flag is a big plus. Lorem ipsum
-                      dolor sit amet consectetur adipisicing elit. Quas
-                      cupiditate laboriosam fugiat.
+                      We are constantly adding new features and will make
+                      anouncements when changes are made.
                     </dd>
                   </div>
 
                   <div>
                     <dt className="text-lg font-semibold leading-6 text-gray-900">
-                      What do you call someone with no body and no nose?
+                      What are the available licensing options?
                     </dt>
                     <dd className="mt-2 text-base text-gray-500">
-                      Nobody knows. Lorem ipsum dolor sit amet consectetur
-                      adipisicing elit. Quas cupiditate laboriosam fugiat.
+                      All the current Drawshift features are free of charge and
+                      will always be. However, additional paid features can be
+                      introduced in the future.
                     </dd>
                   </div>
 
                   <div>
                     <dt className="text-lg font-semibold leading-6 text-gray-900">
-                      Why do you never see elephants hiding in trees?
+                      Can I export my data?
                     </dt>
                     <dd className="mt-2 text-base text-gray-500">
-                      Because they&#039;re so good at it. Lorem ipsum dolor sit
-                      amet consectetur adipisicing elit. Quas cupiditate
-                      laboriosam fugiat.
+                      Yes, exporting data is possible. For more details please
+                      follow this{" "}
+                      <a href="#" className="font-medium text-rose-500">
+                        guide
+                      </a>
+                      .
                     </dd>
                   </div>
                 </dl>
@@ -321,16 +306,16 @@ const Home = observer(() => {
           </div>
         </div>
         <div className="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-lg shadow-xl bg-rose-500 lg:grid lg:grid-cols-2 lg:gap-4">
+          <div className="overflow-hidden rounded-lg shadow-xl bg-rose-500">
             <div className="px-6 pt-10 pb-12 sm:pt-16 sm:px-16 lg:py-16 lg:pr-0 xl:py-20 xl:px-20">
               <div className="lg:self-center">
                 <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
                   <span className="block">Ready to dive in?</span>
-                  <span className="block">Start your free trial today.</span>
                 </h2>
                 <p className="mt-4 text-lg leading-6 text-rose-200">
-                  Ac euismod vel sit maecenas id pellentesque eu sed
-                  consectetur. Malesuada adipiscing sagittis vel nulla nec.
+                  Create your account and follow the{" "}
+                  <span className="font-semibold">"Getting Started"</span> guide
+                  to explore all what Drawshift has to offer.
                 </p>
                 <a
                   href="#"
@@ -340,13 +325,13 @@ const Home = observer(() => {
                 </a>
               </div>
             </div>
-            <div className="-mt-6 aspect-w-5 aspect-h-3 md:aspect-w-2 md:aspect-h-1">
+            {/* <div className="-mt-6 aspect-w-5 aspect-h-3 md:aspect-w-2 md:aspect-h-1">
               <img
-                className="object-cover object-center transform translate-x-6 translate-y-6 rounded-md sm:translate-x-16 lg:translate-y-20"
-                src={Options}
+                className="object-cover object-left-top transform translate-x-6 translate-y-6 rounded-md sm:translate-x-16 lg:translate-y-20"
+                src="https://image.freepik.com/free-vector/pack-designers-illustration_23-2148521835.jpg"
                 alt="App screenshot"
               />
-            </div>
+            </div> */}
           </div>
         </div>
         <footer className="bg-white">
@@ -430,7 +415,7 @@ const Home = observer(() => {
             </div>
             <div className="mt-8 md:mt-0 md:order-1">
               <p className="text-base text-center text-gray-400">
-                &copy; 2020 Workflow, Inc. All rights reserved.
+                All rights reserved.
               </p>
             </div>
           </div>
