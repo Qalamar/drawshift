@@ -172,7 +172,7 @@ const Home = observer(() => {
                       <blockquote className="mt-8">
                         <div className="relative text-lg font-medium text-white md:flex-grow">
                           <p className="relative">
-                            Save time by creating rough drafts on-the-go and
+                            Save time by creating drafts on-the-go and
                             transforming them into fully-fledged charts later
                             on.
                           </p>
@@ -273,25 +273,22 @@ const Home = observer(() => {
             </div>
           </div>
         </div>
-        <div className="px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="py-16 mx-auto max-w-7xl lg:px-8">
           <div className="overflow-hidden rounded-lg shadow-xl bg-rose-500">
-            <div className="px-6 pt-10 pb-12 sm:pt-16 sm:px-16 lg:py-16 lg:pr-0 xl:py-20 xl:px-20">
-              <div className="lg:self-center">
-                <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-                  <span className="block">Ready to dive in?</span>
-                </h2>
-                <p className="mt-4 text-lg leading-6 text-rose-200">
-                  Create your account and follow the{" "}
-                  <span className="font-semibold">"Getting Started"</span> guide
-                  to explore all what Drawshift has to offer.
-                </p>
-                <a
-                  href="#"
-                  className="inline-flex items-center px-6 py-3 mt-8 text-base font-medium bg-white border border-transparent rounded-md shadow text-rose-600 hover:bg-rose-50"
-                >
-                  Sign up for free
-                </a>
-              </div>
+            <div className="max-w-3xl px-4 py-16 mx-auto text-center sm:py-20 sm:px-6 lg:px-8">
+              <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
+                <span className="block">Ready to dive in?</span>
+              </h2>
+              <p className="mt-4 text-lg leading-6 text-rose-200">
+                Follow the <strong>"Getting Started"</strong> guide to explore
+                all what Drawshift has to offer.
+              </p>
+              <a
+                href="#"
+                className="inline-flex items-center justify-center w-full px-5 py-3 mt-8 text-base font-medium bg-white border border-transparent rounded-md text-rose-600 hover:bg-rose-50 sm:w-auto"
+              >
+                Get Started
+              </a>
             </div>
           </div>
         </div>
