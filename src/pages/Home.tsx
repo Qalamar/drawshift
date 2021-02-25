@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Main from "../assets/images/drawshift.gif";
 import Feature from "../assets/images/features.png";
+import Navbar from "../components/common/Navbar";
 import { auth } from "../store/Store";
 
 const Home = observer(() => {
@@ -24,6 +25,7 @@ const Home = observer(() => {
 
   return (
     <motion.div animate={controls}>
+      <Navbar />
       <div className="bg-white">
         <main>
           <div className="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">

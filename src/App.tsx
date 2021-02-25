@@ -9,7 +9,6 @@ import { room, toast } from "./store/Store";
 import { GlobalStyles } from "twin.macro";
 import Spinner from "./components/common/Spinner";
 import Boards from "./pages/boards/Boards";
-import Neural from "./pages/Neural";
 
 const App = observer(() => {
   return (
@@ -27,7 +26,6 @@ const App = observer(() => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/lobby" component={Lobby} />
-        <Route exact path="/neural" component={Neural} />
         <Route exact path="/boards" component={Boards} />
         <Route path="/lobby/:id" component={Room} />
       </Switch>
