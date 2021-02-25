@@ -32,7 +32,7 @@ const Home = observer(() => {
                 <div className="mt-20">
                   <div className="mt-6 sm:max-w-xl">
                     <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-                      Thought organizing for messy minds
+                      Doodling & canvas storage space
                     </h1>
                     <p className="mt-6 text-xl text-gray-500">
                       Create boards, drafts, flow charts and save them all in
@@ -170,13 +170,13 @@ const Home = observer(() => {
                     <div className="absolute inset-0 bg-gradient-to-t from-rose-600 via-rose-600 opacity-90"></div>
                     <div className="relative px-8">
                       <blockquote className="mt-8">
-                        <div className="relative text-lg font-medium text-white md:flex-grow">
+                        {/* <div className="relative text-lg font-medium text-white md:flex-grow">
                           <p className="relative">
                             Save time by creating drafts on-the-go and
                             transforming them into fully-fledged charts later
                             on.
                           </p>
-                        </div>
+                        </div> */}
                       </blockquote>
                     </div>
                   </div>
@@ -184,16 +184,18 @@ const Home = observer(() => {
               </div>
 
               <div className="relative max-w-md px-4 mx-auto sm:max-w-3xl sm:px-6 lg:px-0">
-                <div className="pt-12 sm:pt-16 lg:pt-20">
+                <div className="pt-12 sm:pt-16 lg:pt-32">
                   <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    On a mission to simplify drafting
+                    A Productive habit or a waste of time?
                   </h2>
                   <div className="mt-6 space-y-6 text-gray-500">
                     <p className="text-lg">
-                      Drawshift makes the concept of saving ideas more appealing
-                      by gamifying the repetitive aspects. Instead of letting
-                      your notes wander off your mind, you can save them
-                      effortlessly and sync them across all your devices.
+                      Drawshift aims to make the proccess of saving ideas and
+                      organizing them more appealing by gamifying the boring
+                      aspects and visualizing your ideas.
+                      <br></br>
+                      You can save & access them effortlessly and sync them
+                      across all your devices.
                     </p>
                   </div>
                 </div>
@@ -273,7 +275,7 @@ const Home = observer(() => {
             </div>
           </div>
         </div>
-        <div className="py-16 mx-auto max-w-7xl lg:px-8">
+        {/* <div className="py-16 mx-auto max-w-7xl lg:px-8">
           <div className="overflow-hidden rounded-lg shadow-xl bg-rose-500">
             <div className="max-w-3xl px-4 py-16 mx-auto text-center sm:py-20 sm:px-6 lg:px-8">
               <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
@@ -291,7 +293,7 @@ const Home = observer(() => {
               </a>
             </div>
           </div>
-        </div>
+        </div> */}
         <footer className="bg-white">
           <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
             <div className="flex justify-center space-x-6 md:order-2">
@@ -326,7 +328,7 @@ const Home = observer(() => {
             </div>
             <div className="mt-8 md:mt-0 md:order-1">
               <p className="text-base text-center text-gray-400">
-                Created by Tariq Hamrit.
+                Created by Tariq Hamrit
               </p>
             </div>
           </div>
