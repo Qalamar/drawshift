@@ -335,8 +335,15 @@ const Home = observer(() => {
               </a>
             </div>
             <div className="mt-8 md:mt-0 md:order-1">
-              <p className="text-base text-center text-white">
-                Created by Tariq Hamrit
+              <p className="text-sm text-center text-white ">
+                Created by{" "}
+                <a
+                  className="relative inline-block font-semibold transition duration-200 hover:opacity-80 "
+                  href="https://tariqhamrit.com/"
+                >
+                  Tariq Hamrit
+                  <div className="w-full h-2 -mt-2 bg-rose-600" />
+                </a>
               </p>
             </div>
           </div>
