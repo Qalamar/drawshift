@@ -28,7 +28,7 @@ const Home = observer(() => {
       <Navbar />
       <div className="bg-white">
         <main>
-          <div className="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
+          <div className="overflow-hidden sm:pt-12 lg:relative lg:py-40">
             <div className="max-w-md px-4 mx-auto sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-24">
               <div>
                 <div className="mt-20">
@@ -296,10 +296,13 @@ const Home = observer(() => {
             </div>
           </div>
         </div> */}
-        <footer className="bg-white">
-          <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
+        <footer className=" bg-rose-500">
+          <div className="px-4 py-8 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
             <div className="flex justify-center space-x-6 md:order-2">
-              <a href="#" className="text-gray-400 hover:text-gray-500">
+              <a
+                href="#"
+                className="text-white transition duration-200 hover:text-gray-200"
+              >
                 <span className="sr-only">Info</span>
                 <svg
                   className="w-6 h-6"
@@ -315,7 +318,10 @@ const Home = observer(() => {
                 </svg>
               </a>
 
-              <a href="#" className="text-gray-400 hover:text-gray-500">
+              <a
+                href="#"
+                className="text-white transition duration-200 hover:text-gray-200"
+              >
                 <span className="sr-only">Mail</span>
                 <svg
                   className="w-6 h-6"
@@ -329,7 +335,7 @@ const Home = observer(() => {
               </a>
             </div>
             <div className="mt-8 md:mt-0 md:order-1">
-              <p className="text-base text-center text-gray-400">
+              <p className="text-base text-center text-white">
                 Created by Tariq Hamrit
               </p>
             </div>

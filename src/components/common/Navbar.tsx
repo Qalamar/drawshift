@@ -3,9 +3,9 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <div className="relative bg-white">
+    <div className="relative bg-white shadow-sm">
       <div className="">
-        <div className="flex items-center justify-between px-6 py-6 border-b-2 border-gray-100 md:px-12 md:justify-start md:space-x-10">
+        <div className="flex items-center justify-between px-6 py-6 mx-auto lg:max-w-7xl md:px-12 md:justify-start md:space-x-10">
           <div className="flex flex-row items-center justify-start lg:w-0 lg:flex-1">
             <a href="#">
               <img
