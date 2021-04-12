@@ -1,15 +1,10 @@
-![Header](https://i.imgur.com/vRRHNlE.png)
+![Header](https://drawshift.com/static/media/drawshift.d5656871.gif)
+![Header](https://i.imgur.com/enRJ0ls.png)
+
 
 # About
 
-Drawshift is multiplayer drawing game inspired by scribble where you can create or join rooms and invite your friends.
-
-# Progress
-
-- Create your own avatar. (**Done**)
-- Create or join a room which generates a special code you can share with others. (**Done**)
-- Choose which words to draw. (**WIP**)
-- Try to guess the words based on drawings. (**WIP**)
+Real-time collaboration platform with private/public boards and cross-platform support.
 
 ## Preview
 
