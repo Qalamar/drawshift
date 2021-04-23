@@ -1,0 +1,63 @@
+.font-monst {
+  font-family: "Montserrat";
+}
+
+.font-quick {
+  font-family: "Quicksand";
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Montserrat"), url(../fonts/Montserrat-Bold.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  src: local("Montserrat"),
+    url(../fonts/Montserrat-SemiBold.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  src: local("Montserrat"), url(../fonts/Montserrat-Medium.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Montserrat"), url(../fonts/Montserrat-Regular.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: bold;
+  src: local("Quicksand"), url(../fonts/Quicksand-Bold.woff) format("woff");
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #c2c2c2;
+  border-radius: 15px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: inset 7px 10px 12px #f0f0f0;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
