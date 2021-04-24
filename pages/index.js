@@ -3,6 +3,7 @@ import AuthPopup from "../components/Auth";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import { supabase } from "../lib/initSupabase";
+import { useRouter } from "next/router";
 
 const contest = {
   description:
@@ -13,12 +14,13 @@ const contest = {
 };
 
 export default function Home() {
-  useEffect(() => {
-    console.log(supabase.auth.getSessionFromUrl());
-    console.log(supabase.auth.refreshSession());
-    console.log(supabase.auth.session());
-    console.log(supabase.auth.user());
-  }, []);
+  const router = useRouter();
+
+  useEffect(() => {}, []);
+
+  supabase.auth.getSessionFromUrl().then((res) => {
+    if (!!res.data) router.push("/home");
+  });
 
   return (
     <div className="h-screen">
