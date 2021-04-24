@@ -1,10 +1,8 @@
-import DurationDropdown from "../components/DurationDropdown";
-import Contest from "../components/Contest";
-import Navbar from "../components/Navbar";
+import { useEffect } from "react";
+import AuthPopup from "../components/Auth";
 import Header from "../components/Header";
-import Phases from "../components/Phases";
-import NoContest from "../components/NoContest";
-import CreateContest from "../components/CreateContest";
+import Navbar from "../components/Navbar";
+import { supabase } from "../lib/initSupabase";
 
 const contest = {
   description:
@@ -15,9 +13,16 @@ const contest = {
 };
 
 export default function Home() {
-  const isContestActive = true;
+  useEffect(() => {
+    console.log(supabase.auth.getSessionFromUrl());
+    console.log(supabase.auth.refreshSession());
+    console.log(supabase.auth.session());
+    console.log(supabase.auth.user());
+  }, []);
+
   return (
     <div className="h-screen">
+      <AuthPopup />
       <div className="pb-32 bg-gray-800">
         <Navbar />
         <Header name="Start" />

@@ -1,10 +1,10 @@
 import { Disclosure } from "@headlessui/react";
-import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { LoginIcon } from "@heroicons/react/solid";
 import produce from "immer";
-import Link from "next/link";
 import { useRecoilState } from "recoil";
-import { navState } from "../utils/store";
+import { authPopup, navState } from "../utils/store";
+import { Auth } from "@supabase/ui";
+import { supabase } from "../lib/initSupabase";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -12,6 +12,8 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [NavState, setNavState] = useRecoilState(navState);
+  const [auth, setAuthPopup] = useRecoilState(authPopup);
+  const { user } = Auth.useUser();
 
   const handleUpdates = (id) => {
     setNavState({
@@ -22,7 +24,7 @@ export default function Navbar() {
     });
   };
   return (
-    <Disclosure as="nav" className="relative z-20 bg-gray-800">
+    <Disclosure as="nav" className="relative bg-gray-800">
       {({ open }) => (
         <>
           <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -46,26 +48,54 @@ export default function Navbar() {
               </div>
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <button
-                    type="button"
-                    className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm focus:outline-none"
-                  >
-                    <div
-                      className="invisible w-5 h-5 mr-2 -ml-1"
-                      aria-hidden="true"
-                    />
-                    <span>Register</span>
-                  </button>
-                  <button
-                    type="button"
-                    className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-500 border border-transparent rounded-md shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
-                  >
-                    <LoginIcon
-                      className="w-5 h-5 mr-2 -ml-1"
-                      aria-hidden="true"
-                    />
-                    <span>Sign in</span>
-                  </button>
+                  {!!user ? (
+                    <button
+                      type="button"
+                      className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm focus:outline-none"
+                    >
+                      <div
+                        className="invisible w-5 h-5 mr-2 -ml-1"
+                        aria-hidden="true"
+                      />
+                      <span>Logout</span>
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm focus:outline-none"
+                    >
+                      <div
+                        className="invisible w-5 h-5 mr-2 -ml-1"
+                        aria-hidden="true"
+                      />
+                      <span>Register</span>
+                    </button>
+                  )}
+                  {!!user ? (
+                    <button
+                      type="button"
+                      onClick={() => supabase.auth.signOut()}
+                      className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-200 bg-indigo-500 border border-transparent rounded-md shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                    >
+                      <LoginIcon
+                        className="w-5 h-5 mr-2 -ml-1"
+                        aria-hidden="true"
+                      />
+                      <span>Launch</span>
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setAuthPopup(true)}
+                      className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-200 bg-indigo-500 border border-transparent rounded-md shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                    >
+                      <LoginIcon
+                        className="w-5 h-5 mr-2 -ml-1"
+                        aria-hidden="true"
+                      />
+                      <span>Sign in</span>
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
