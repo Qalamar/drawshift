@@ -5,8 +5,10 @@ import { Fragment, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { supabase } from "../lib/initSupabase";
 import { authPopup } from "../lib/store";
-
+//@ts-ignore
 const Container = (props) => {
+  const [auth, setAuthPopup] = useRecoilState(authPopup);
+
   const { user } = Auth.useUser();
   if (user)
     return (
@@ -14,10 +16,7 @@ const Container = (props) => {
         <div className="font-quick">
           Signed in as: <span className="font-bold">{user.email}</span>
         </div>
-        <button
-          block
-          onClick={() => props.supabaseClient.auth.signOut()}
-        ></button>
+        <button onClick={() => props.supabaseClient.auth.signOut()}></button>
         <button
           type="button"
           onClick={() => setAuthPopup(true)}
@@ -44,10 +43,10 @@ const AuthPopup = () => {
   function openModal() {
     setAuthPopup(true);
   }
-
   return (
     <Transition
       show={auth}
+      //@ts-ignore
       as={Fragment}
       enter="transition-opacity duration-300 ease-out"
       enterFrom="opacity-0"
@@ -67,10 +66,7 @@ const AuthPopup = () => {
 
         <div className="z-20 flex flex-col bg-white rounded-lg opacity-100">
           <div className="flex justify-end pt-3 pr-3">
-            <button
-              className="focus:outline-none"
-              onClick={() => closeModal(false)}
-            >
+            <button className="focus:outline-none" onClick={() => closeModal()}>
               <XIcon className="w-5 h-5 text-green-400" aria-hidden="true" />
             </button>
           </div>

@@ -5,6 +5,9 @@
   src: local("Montserrat"), url(../fonts/Montserrat-Bold.woff) format("woff");
 }
 
+.input:focus {
+  outline: none;
+}
 @font-face {
   font-family: "Montserrat";
   font-style: normal;

@@ -20,7 +20,7 @@ export default function Home() {
   useEffect(() => {}, []);
 
   supabase.auth.getSessionFromUrl().then((res) => {
-    if (!!res.data) router.push("/home");
+    if (!!res.data) router.push("/dashboard");
   });
 
   return (

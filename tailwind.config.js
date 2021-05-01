@@ -2,13 +2,13 @@ const colors = require("tailwindcss/colors");
 
 module.exports = {
   mode: "jit",
+  darkMode: "class",
   purge: [
     "./public/**/*.{html,svg}",
     "./pages/**/*.{js,jsx,ts,tsx}",
     "./components/**/*.{js,jsx,ts,tsx}",
     "./lib/**/*.{js,jsx,ts,tsx}",
   ],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
       monst: ["Montserrat"],
@@ -17,14 +17,12 @@ module.exports = {
     extend: {
       colors: {
         orange: colors.orange,
+        dark: "#181818",
       },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [
-    require("@tailwindcss/forms"),
-    require("@tailwindcss/aspect-ratio"),
-  ],
+  plugins: [require("@tailwindcss/aspect-ratio")],
 };

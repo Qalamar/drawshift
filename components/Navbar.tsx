@@ -64,7 +64,7 @@ export default function Navbar() {
                   )}
                   {!!user ? (
                     <button
-                      onClick={() => router.push("/home")}
+                      onClick={() => router.push("/dashboard")}
                       type="button"
                       className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-200 bg-indigo-500 border border-transparent rounded-md shadow-sm font-monst hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
                     >
