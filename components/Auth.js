@@ -4,14 +4,14 @@ import { Auth } from "@supabase/ui";
 import { Fragment, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { supabase } from "../lib/initSupabase";
-import { authPopup } from "../utils/store";
+import { authPopup } from "../lib/store";
 
 const Container = (props) => {
   const { user } = Auth.useUser();
   if (user)
     return (
       <div className="flex flex-col items-center justify-center">
-        <div className="font-sans">
+        <div className="font-quick">
           Signed in as: <span className="font-bold">{user.email}</span>
         </div>
         <button
@@ -49,19 +49,19 @@ const AuthPopup = () => {
     <Transition
       show={auth}
       as={Fragment}
-      enter="transition duration-300 ease-out"
-      enterFrom="transform opacity-0"
-      enterTo="transform opacity-100"
-      leave="transition duration-200 ease-out"
-      leaveFrom="transform opacity-100"
-      leaveTo="transform opacity-0"
+      enter="transition-opacity duration-300 ease-out"
+      enterFrom="opacity-0"
+      enterTo="opacity-100"
+      leave="transition-opacity duration-200 ease-out"
+      leaveFrom="opacity-100"
+      leaveTo="opacity-0"
     >
       <Dialog
         open={auth}
         initialFocus={cancelButtonRef}
         static
         onClose={closeModal}
-        className="fixed inset-0 z-10 flex items-center justify-center overflow-y-auto"
+        className="fixed inset-0 z-10 flex items-center justify-center overflow-y-auto font-monst"
       >
         <Dialog.Overlay className="fixed inset-0 bg-black opacity-50" />
 
