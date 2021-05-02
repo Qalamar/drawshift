@@ -1,4 +1,4 @@
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, Transition, Listbox } from "@headlessui/react";
 import {
   ArchiveIcon,
   BanIcon,
@@ -13,6 +13,8 @@ import {
 } from "@heroicons/react/outline";
 import {
   CheckCircleIcon,
+  CheckIcon,
+  SelectorIcon,
   FilterIcon,
   MailIcon,
   OfficeBuildingIcon,
@@ -22,18 +24,31 @@ import {
 } from "@heroicons/react/solid";
 import { Auth } from "@supabase/ui";
 import React, { Fragment, useState } from "react";
-import { Search } from "./dashboard.styled";
-
-const cards = [
-  { name: "Account balance", href: "#", icon: ScaleIcon, amount: "$30,659.45" },
-  // More items...
-];
+import {
+  Header,
+  HeaderButtons,
+  HeaderContainer,
+  HeaderContent,
+  HeaderProfile,
+  Main,
+  Search,
+  Searchbar,
+  SearchbarContainer,
+  Utils,
+} from "./dashboard.styled";
 
 const tabs = [
   { name: "Recently Viewed", href: "#", current: true },
   { name: "Recently Added", href: "#", current: false },
   { name: "Favorited", href: "#", current: false },
 ];
+
+const views = [
+  { id: 1, name: "Wade Cooper" },
+  { id: 2, name: "Arlene Mccoy" },
+  { id: 3, name: "Devon Webb" },
+];
+
 const files = [
   {
     name: "IMG_4985.HEIC",
@@ -47,28 +62,28 @@ const files = [
     size: "3.9 MB",
     source:
       "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80",
-    current: true,
+    current: false,
   },
   {
     name: "IMG_4985.HEIC",
     size: "3.9 MB",
     source:
       "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80",
-    current: true,
+    current: false,
   },
   {
     name: "IMG_4985.HEIC",
     size: "3.9 MB",
     source:
       "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80",
-    current: true,
+    current: false,
   },
   {
     name: "IMG_4985.HEIC",
     size: "3.9 MB",
     source:
       "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80",
-    current: true,
+    current: false,
   },
   // More files...
 ];
@@ -105,6 +120,8 @@ function classNames(...classes) {
 
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selected, setSelected] = useState(views[1]);
+  const [List, setList] = useState(true);
   const { user } = Auth.useUser();
   console.log(user);
   return (
@@ -284,12 +301,12 @@ export default function Example() {
         </nav>
 
         {/* Main area */}
-        <main className="relative z-0 flex-1 pb-8 overflow-y-auto">
+        <Main>
           {/* Page header */}
-          <div className="bg-white shadow dark:bg-dark dark:border-b dark:border-gray-300">
-            <div className="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
-              <div className="pb-6 md:flex md:items-center md:justify-between">
-                <div className="flex-1 min-w-0">
+          <Header>
+            <HeaderContainer>
+              <HeaderContent>
+                <HeaderProfile>
                   {/* Profile */}
                   <div className="flex items-center">
                     <img
@@ -328,13 +345,13 @@ export default function Example() {
                       </dl>
                     </div>
                   </div>
-                </div>
-                <div className="flex mt-6 space-x-3 md:mt-0 md:ml-4">
+                </HeaderProfile>
+                <HeaderButtons>
                   <button
                     type="button"
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-800 bg-white border-2 border-gray-800 rounded-md shadow-sm group-hover:bg-gray-500 focus:outline-none"
                   >
-                    Button text
+                    Settings
                     <MailIcon
                       className="w-5 h-5 ml-2 -mr-1"
                       aria-hidden="true"
@@ -342,48 +359,53 @@ export default function Example() {
                   </button>
                   <button
                     type="button"
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-800 bg-red-600 border-2 border-gray-800 rounded-md shadow-sm hover:bg-gray-500 focus:outline-none"
                   >
-                    Button text
+                    Logout
                     <MailIcon
                       className="w-5 h-5 ml-2 -mr-1"
                       aria-hidden="true"
                     />
                   </button>
-                </div>
-              </div>
-            </div>
-          </div>
+                </HeaderButtons>
+              </HeaderContent>
+            </HeaderContainer>
+          </Header>
 
           <div className="mt-8">
-            <div className="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
-              <div className="flex flex-row w-full h-12">
+            <Searchbar>
+              <SearchbarContainer>
                 <Search>
                   <input
                     type="text"
                     name="email"
                     id="email"
-                    className="block w-10/12 text-dark dark:bg-dark bg-gray-50 dark:text-gray-200 font-quick ring-0 focus:ring-0 focus:border-none focus:outline-none rounded-l-md sm:text-sm"
+                    className="block w-full text-dark dark:bg-dark bg-gray-50 dark:text-gray-200 font-quick ring-0 focus:ring-0 focus:border-none focus:outline-none rounded-l-md sm:text-sm"
                     placeholder="John Doe"
                   />
                 </Search>
                 <button
                   type="button"
-                  className="relative inline-flex items-center ml-3 mr-1 text-sm font-medium text-gray-700 transition duration-200 border border-transparent rounded-md dark:text-gray-200 font-monst hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                  className="relative inline-flex items-center w-12 h-12 p-1 text-gray-800 transition duration-200 bg-white border-2 border-gray-800 rounded-md shadow-lg font-monst dark:text-gray-200 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
                 >
-                  <FilterIcon className="w-10 h-10" aria-hidden="true" />
+                  <FilterIcon
+                    className="w-full h-full fill-current"
+                    aria-hidden="true"
+                  />
                 </button>
                 <button
                   type="button"
-                  className="relative inline-flex items-center ml-1 text-sm font-medium text-gray-700 transition duration-200 border border-transparent rounded-md font-monst dark:text-gray-200 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                  className="relative inline-flex items-center w-12 h-12 p-1 ml-2 text-gray-800 transition duration-200 bg-white border-2 border-gray-800 rounded-md shadow-lg font-monst dark:text-gray-200 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
                 >
-                  <ViewGridAddIcon className="w-10 h-10" aria-hidden="true" />
+                  <ViewGridAddIcon
+                    className="w-full h-full fill-current"
+                    aria-hidden="true"
+                  />
                 </button>
-              </div>
-            </div>
+              </SearchbarContainer>
+            </Searchbar>
 
-            {/* Activity table (small breakpoint and up) */}
-            <div className="max-w-6xl px-4 pt-8 mx-auto sm:px-6 lg:px-8">
+            <Utils>
               <div className="flex">
                 <h1 className="flex-1 text-2xl font-bold text-gray-900">
                   Photos
@@ -408,21 +430,91 @@ export default function Example() {
 
               {/* Tabs */}
               <div className="mt-3 sm:mt-2">
+                {/* Mobile View Selector */}
                 <div className="sm:hidden">
-                  <label htmlFor="tabs" className="sr-only">
-                    Select a tab
-                  </label>
-                  <select
-                    id="tabs"
-                    name="tabs"
-                    className="block w-full py-2 pl-3 pr-10 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    defaultValue="Recently Viewed"
-                  >
-                    <option>Recently Viewed</option>
-                    <option>Recently Added</option>
-                    <option>Favorited</option>
-                  </select>
+                  <Listbox value={selected} onChange={setSelected}>
+                    {({ open }) => (
+                      <>
+                        <Listbox.Label className="block text-sm font-medium text-gray-700">
+                          Assigned to
+                        </Listbox.Label>
+                        <div className="relative mt-1">
+                          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <span className="block truncate">
+                              {selected.name}
+                            </span>
+                            <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                              <SelectorIcon
+                                className="w-5 h-5 text-gray-400"
+                                aria-hidden="true"
+                              />
+                            </span>
+                          </Listbox.Button>
+
+                          <Transition
+                            show={open}
+                            as={Fragment}
+                            leave="transition ease-in duration-100"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                          >
+                            <Listbox.Options
+                              static
+                              className="absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                            >
+                              {views.map((person) => (
+                                <Listbox.Option
+                                  key={person.id}
+                                  className={({ active }) =>
+                                    classNames(
+                                      active
+                                        ? "text-white bg-indigo-600"
+                                        : "text-gray-900",
+                                      "cursor-default select-none relative py-2 pl-3 pr-9"
+                                    )
+                                  }
+                                  value={person}
+                                >
+                                  {({ selected, active }) => (
+                                    <>
+                                      <span
+                                        className={classNames(
+                                          selected
+                                            ? "font-semibold"
+                                            : "font-normal",
+                                          "block truncate"
+                                        )}
+                                      >
+                                        {person.name}
+                                      </span>
+
+                                      {selected ? (
+                                        <span
+                                          className={classNames(
+                                            active
+                                              ? "text-white"
+                                              : "text-indigo-600",
+                                            "absolute inset-y-0 right-0 flex items-center pr-4"
+                                          )}
+                                        >
+                                          <CheckIcon
+                                            className="w-5 h-5"
+                                            aria-hidden="true"
+                                          />
+                                        </span>
+                                      ) : null}
+                                    </>
+                                  )}
+                                </Listbox.Option>
+                              ))}
+                            </Listbox.Options>
+                          </Transition>
+                        </div>
+                      </>
+                    )}
+                  </Listbox>
                 </div>
+                {/* Desktop View Selector */}
                 <div className="hidden sm:block">
                   <div className="flex items-center border-b border-gray-200">
                     <nav
@@ -470,50 +562,66 @@ export default function Example() {
                 <h2 id="gallery-heading" className="sr-only">
                   Recently viewed
                 </h2>
-                <ul
-                  role="list"
-                  className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
-                >
-                  {files.map((file) => (
-                    <li key={file.name} className="relative">
-                      <div
-                        className={classNames(
-                          file.current
-                            ? "ring-2 ring-offset-2 ring-indigo-500"
-                            : "focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500",
-                          "group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 overflow-hidden"
-                        )}
-                      >
-                        <img
-                          src={file.source}
-                          alt=""
+
+                {List && (
+                  <ul
+                    role="list"
+                    className="grid grid-cols-1 bg-white border border-gray-300 rounded-lg shadow-lg border-1 gap-x-4 gap-y-0"
+                  >
+                    {files.map((file) => (
+                      <li key={file.name} className="relative">
+                        <div className="h-8 col-span-2 border-b border-gray-300 rounded md:col-span-4 lg:col-span-3 xl:col-span-4"></div>
+                      </li>
+                    ))}{" "}
+                  </ul>
+                )}
+
+                {!List && (
+                  <ul
+                    role="list"
+                    className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
+                  >
+                    {files.map((file) => (
+                      <li key={file.name} className="relative">
+                        <div
                           className={classNames(
-                            file.current ? "" : "group-hover:opacity-75",
-                            "object-cover pointer-events-none"
+                            file.current
+                              ? "ring-2 ring-offset-2 ring-indigo-500"
+                              : "focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500",
+                            "group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 overflow-hidden"
                           )}
-                        />
-                        <button
-                          type="button"
-                          className="absolute inset-0 focus:outline-none"
                         >
-                          <span className="sr-only">
-                            View details for {file.name}
-                          </span>
-                        </button>
-                      </div>
-                      <p className="block mt-2 text-sm font-medium text-gray-900 truncate pointer-events-none">
-                        {file.name}
-                      </p>
-                      <p className="block text-sm font-medium text-gray-500 pointer-events-none">
-                        {file.size}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
+                          <img
+                            src={file.source}
+                            alt=""
+                            className={classNames(
+                              file.current ? "" : "group-hover:opacity-75",
+                              "object-cover pointer-events-none"
+                            )}
+                          />
+                          <button
+                            type="button"
+                            className="absolute inset-0 focus:outline-none"
+                          >
+                            <span className="sr-only">
+                              View details for {file.name}
+                            </span>
+                          </button>
+                        </div>
+                        <p className="block mt-2 text-sm font-medium text-gray-900 truncate pointer-events-none">
+                          {file.name}
+                        </p>
+                        <p className="block text-sm font-medium text-gray-500 pointer-events-none">
+                          {file.size}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </section>
-            </div>
+            </Utils>
           </div>
-        </main>
+        </Main>
       </div>
     </div>
   );
