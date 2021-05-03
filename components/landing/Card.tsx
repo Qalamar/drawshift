@@ -17,11 +17,11 @@ export const CardButton = styled.button`
 `;
 
 export const CardImage = styled.img`
-  ${tw`object-cover object-left-top transform translate-x-6 translate-y-6 rounded-md sm:translate-x-16 lg:translate-y-20`}
+  ${tw`object-cover transform translate-x-6 rounded-md sm:translate-x-16`}
 `;
 const Card = () => {
   return (
-    <main className="-mt-24">
+    <main className="-mt-24 font-monst">
       <CardBackground>
         <CardContent>
           <div className="lg:self-center">
@@ -36,7 +36,7 @@ const Card = () => {
             <CardButton href="#">Sign up for free</CardButton>
           </div>
         </CardContent>
-        <div className="-mt-6">
+        <div className="flex items-center">
           <CardImage src="/drawshift.gif" alt="App screenshot" />
         </div>
       </CardBackground>
