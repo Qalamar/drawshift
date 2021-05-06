@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Dialog, Transition, Listbox } from "@headlessui/react";
 import {
   ArchiveIcon,
@@ -24,7 +25,7 @@ import {
   ViewListIcon,
 } from "@heroicons/react/solid";
 import { Auth } from "@supabase/ui";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Header,
   HeaderButtons,
@@ -37,6 +38,10 @@ import {
   SearchbarContainer,
   Utils,
 } from "./dashboard.styled";
+import { supabase } from "lib/initSupabase";
+import useSWR from "swr";
+import { useQuery } from "react-query";
+import Spinner from "components/Spinner";
 
 const tabs = [
   { name: "Recently Viewed", href: "#", current: true },
@@ -119,12 +124,45 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+const fetchUser = new Promise(function (resolve, reject) {
+  // Make an asynchronous call and either resolve or reject
+  if (!supabase.auth.session) supabase.auth.refreshSession();
+  resolve(supabase.auth.user());
+});
+
+interface User {
+  user_metadata: {
+    avatar_url: string;
+    full_name: string;
+  };
+}
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selected, setSelected] = useState(views[1]);
   const [List, setList] = useState(true);
-  const { user } = Auth.useUser();
-  console.log(user);
+  const [user, setUser] = useState({
+    user_metadata: {
+      avatar_url: "",
+      full_name: "",
+    },
+  });
+
+  useEffect(() => {
+    console.log(user);
+
+    supabase.auth.refreshSession();
+    const data = supabase.auth.user();
+    console.log(data);
+  }, []);
+  // @ts-ignore
+  const { isLoading, error, data } = useQuery("userData", () =>
+    fetchUser.then((res) => setUser(res))
+  );
+
+  if (isLoading) return <Spinner />;
+
+  if (error) return "An error has occurred: " + error.message;
+
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark">
       {/* Top nav*/}
@@ -243,10 +281,10 @@ export default function Example() {
                     </div>
                     <div className="flex-1 min-w-0 ml-3">
                       <div className="text-base font-medium text-gray-800 truncate">
-                        {user.user_metadata.full_name}
+                        {data?.user_metadata.full_name}
                       </div>
                       <div className="text-sm font-medium text-gray-500 truncate">
-                        {user.user_metadata.full_name}
+                        {data?.user_metadata!.full_name}
                       </div>
                     </div>
                     <a
@@ -322,7 +360,7 @@ export default function Example() {
                           src={user.user_metadata.avatar_url}
                           alt=""
                         />
-                        <h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 dark:text-gray-100 sm:leading-9 sm:truncate">
+                        <h1 className="ml-3 text-3xl font-bold leading-7 text-gray-900 dark:text-gray-100 sm:leading-9 sm:truncate">
                           Good morning, {user.user_metadata.full_name}
                         </h1>
                       </div>
