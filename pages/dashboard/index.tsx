@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Dialog, Transition, Listbox } from "@headlessui/react";
+import { Dialog, Listbox, Transition } from "@headlessui/react";
 import {
   ArchiveIcon,
   BanIcon,
@@ -8,24 +8,28 @@ import {
   InboxIcon,
   MenuIcon,
   PencilAltIcon,
-  ScaleIcon,
   SearchIcon,
   UserCircleIcon,
   XIcon,
 } from "@heroicons/react/outline";
 import {
+  CalendarIcon,
   CheckCircleIcon,
   CheckIcon,
-  SelectorIcon,
   FilterIcon,
+  LocationMarkerIcon,
+  LogoutIcon,
   MailIcon,
-  OfficeBuildingIcon,
+  SelectorIcon,
+  UsersIcon,
   ViewGridAddIcon,
   ViewGridIcon,
   ViewListIcon,
 } from "@heroicons/react/solid";
-import { Auth } from "@supabase/ui";
+import Spinner from "components/Spinner";
+import { supabase } from "lib/initSupabase";
 import React, { Fragment, useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import {
   Header,
   HeaderButtons,
@@ -38,10 +42,6 @@ import {
   SearchbarContainer,
   Utils,
 } from "./dashboard.styled";
-import { supabase } from "lib/initSupabase";
-import useSWR from "swr";
-import { useQuery } from "react-query";
-import Spinner from "components/Spinner";
 
 const tabs = [
   { name: "Recently Viewed", href: "#", current: true },
@@ -92,6 +92,36 @@ const files = [
     current: false,
   },
   // More files...
+];
+
+const positions = [
+  {
+    id: 1,
+    title: "Back End Developer",
+    type: "Full-time",
+    location: "Remote",
+    department: "Engineering",
+    closeDate: "2020-01-07",
+    closeDateFull: "January 7, 2020",
+  },
+  {
+    id: 2,
+    title: "Front End Developer",
+    type: "Full-time",
+    location: "Remote",
+    department: "Engineering",
+    closeDate: "2020-01-07",
+    closeDateFull: "January 7, 2020",
+  },
+  {
+    id: 3,
+    title: "User Interface Designer",
+    type: "Full-time",
+    location: "Remote",
+    department: "Design",
+    closeDate: "2020-01-14",
+    closeDateFull: "January 14, 2020",
+  },
 ];
 
 const navigation = [
@@ -360,19 +390,11 @@ export default function Example() {
                           src={user.user_metadata.avatar_url}
                           alt=""
                         />
-                        <h1 className="ml-3 text-3xl font-bold leading-7 text-gray-900 dark:text-gray-100 sm:leading-9 sm:truncate">
+                        <h1 className="ml-3 text-3xl font-bold text-gray-900 dark:text-gray-100 sm:truncate">
                           Good morning, {user.user_metadata.full_name}
                         </h1>
                       </div>
                       <dl className="flex flex-col mt-6 sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
-                        <dt className="sr-only">Company</dt>
-                        <dd className="flex items-center text-sm font-medium text-gray-500 capitalize sm:mr-6">
-                          <OfficeBuildingIcon
-                            className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                            aria-hidden="true"
-                          />
-                          Duke street studio
-                        </dd>
                         <dt className="sr-only">Account status</dt>
                         <dd className="flex items-center mt-3 text-sm font-medium text-gray-500 capitalize sm:mr-6 sm:mt-0">
                           <CheckCircleIcon
@@ -388,7 +410,7 @@ export default function Example() {
                 <HeaderButtons>
                   <button
                     type="button"
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-800 bg-white border-2 border-gray-800 rounded-md shadow-sm group-hover:bg-gray-500 focus:outline-none"
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-800 transition duration-200 bg-white border-2 border-gray-300 rounded-md shadow-lg hover:bg-gray-800 hover:text-white hover:border-transparent focus:outline-none"
                   >
                     Settings
                     <MailIcon
@@ -398,10 +420,10 @@ export default function Example() {
                   </button>
                   <button
                     type="button"
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-800 bg-red-600 border-2 border-gray-800 rounded-md shadow-sm hover:bg-gray-500 focus:outline-none"
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-200 bg-gray-800 rounded-md shadow-lg hover:bg-gray-700 hover:text-white focus:outline-none"
                   >
                     Logout
-                    <MailIcon
+                    <LogoutIcon
                       className="w-5 h-5 ml-2 -mr-1"
                       aria-hidden="true"
                     />
@@ -583,14 +605,20 @@ export default function Example() {
                     <div className="hidden ml-6 bg-gray-100 p-0.5 rounded-lg items-center sm:flex">
                       <button
                         type="button"
-                        className="p-1.5 rounded-md text-gray-400 hover:bg-white hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                        onClick={() => setList(true)}
+                        className={`p-1.5 rounded-md text-gray-400  hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 ${
+                          List ? "bg-white" : "hover:bg-white"
+                        }`}
                       >
                         <ViewListIcon className="w-5 h-5" aria-hidden="true" />
                         <span className="sr-only">Use list view</span>
                       </button>
                       <button
                         type="button"
-                        className="ml-0.5 bg-white p-1.5 rounded-md shadow-sm text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                        onClick={() => setList(false)}
+                        className={`p-1.5 rounded-md text-gray-400  hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 ${
+                          List ? "hover:bg-white" : "bg-white"
+                        }`}
                       >
                         <ViewGridIcon className="w-5 h-5" aria-hidden="true" />
                         <span className="sr-only">Use grid view</span>
@@ -609,13 +637,56 @@ export default function Example() {
                 {List && (
                   <ul
                     role="list"
-                    className="grid grid-cols-1 bg-white border border-gray-300 rounded-lg shadow-lg border-1 gap-x-4 gap-y-0"
+                    className="grid grid-cols-1 bg-white border border-gray-300 divide-y divide-gray-200 rounded-lg shadow-lg border-1 gap-x-4 gap-y-0"
                   >
-                    {files.map((file) => (
-                      <li key={file.name} className="relative">
-                        <div className="h-8 col-span-2 border-b border-gray-300 rounded md:col-span-4 lg:col-span-3 xl:col-span-4"></div>
+                    {positions.map((position) => (
+                      <li key={position.id}>
+                        <a href="#" className="block hover:bg-gray-50">
+                          <div className="px-4 py-4 sm:px-6">
+                            <div className="flex items-center justify-between">
+                              <p className="text-sm font-medium text-indigo-600 truncate">
+                                {position.title}
+                              </p>
+                              <div className="flex flex-shrink-0 ml-2">
+                                <p className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                  {position.type}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="mt-2 sm:flex sm:justify-between">
+                              <div className="sm:flex">
+                                <p className="flex items-center text-sm text-gray-500">
+                                  <UsersIcon
+                                    className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                    aria-hidden="true"
+                                  />
+                                  {position.department}
+                                </p>
+                                <p className="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                                  <LocationMarkerIcon
+                                    className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                    aria-hidden="true"
+                                  />
+                                  {position.location}
+                                </p>
+                              </div>
+                              <div className="flex items-center mt-2 text-sm text-gray-500 sm:mt-0">
+                                <CalendarIcon
+                                  className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                  aria-hidden="true"
+                                />
+                                <p>
+                                  Closing on{" "}
+                                  <time dateTime={position.closeDate}>
+                                    {position.closeDateFull}
+                                  </time>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
                       </li>
-                    ))}{" "}
+                    ))}
                   </ul>
                 )}
 
