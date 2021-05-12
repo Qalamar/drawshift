@@ -11,7 +11,7 @@
     "@headlessui/react": "^1.1.1",
     "@heroicons/react": "^1.0.1",
     "@supabase/supabase-js": "^1.11.10",
-    "@supabase/ui": "^0.24.3",
+    "@supabase/ui": "^0.25.2",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "immer": "^9.0.2",
     "next": "10.2.0",
