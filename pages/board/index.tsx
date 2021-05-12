@@ -105,14 +105,28 @@ export default function Example() {
     console.log(user);
 
     supabase.auth.refreshSession();
-    const data = supabase.auth.user();
-    console.log(data);
+    const userData = supabase.auth.user();
+    console.log(userData);
+
+    fetchPath(userData);
   }, []);
   // @ts-ignore
   const { isLoading, error, data } = useQuery("userData", () =>
     fetchUser.then((res) => setUser(res))
   );
 
+  const fetchPath = async (userData: any) => {
+    // const { data: boards, error } = await supabase.from("boards").select("*");
+    // console.log("boards", boards);
+    // console.log("error", error);
+    console.log(userData);
+
+    const { data, error } = await supabase
+      .from("boards")
+      .insert([{ user_id: userData.id, board: "Hmmm" }]);
+    console.log("boards", data);
+    console.log("error", error);
+  };
   if (isLoading) return <Spinner />;
 
   if (error) return "An error has occurred: " + error.message;
@@ -297,50 +311,52 @@ export default function Example() {
         <Main>
           {/* Page header */}
           <Header canvas={saveableCanvas} />
-          <div className="mx-auto mt-16 bg-white rounded-lg shadow-lg h-3/5 max-w-7xl">
+          <div className="h-auto mx-auto mt-8 bg-white rounded-lg shadow-lg max-w-7xl">
             <CanvasDraw
               brushColor={brushColor}
               brushRadius={brushRadius}
               hideInterface={true}
               hideGrid={true}
               canvasWidth="auto"
-              canvasHeight={500}
+              canvasHeight={450}
               lazyRadius="0"
               className="rounded-xl"
               ref={(canvasDraw: any) => (saveableCanvas = canvasDraw)}
             />
           </div>
-          <div className="flex flex-row items-center justify-center max-w-xs mx-auto mt-8 space-x-6 bg-white shadow-lg h-14 rounded-xl">
-            <svg
-              width="33"
-              height="33"
-              viewBox="0 0 33 33"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M10.7654 19.9379C8.17959 20.1042 5.83289 21.0891 4.50132 24.5979C4.34986 24.9981 3.9857 25.2411 3.56097 25.2411C2.84491 25.2411 0.630984 23.4577 0 23.0272C0.000644519 28.3349 2.4453 33 8.25048 33C13.1398 33 16.5003 30.1789 16.5003 25.2534C16.5003 25.0529 16.4584 24.8615 16.4378 24.6649L10.7654 19.9379ZM29.5125 0C28.5354 0 27.6196 0.432481 26.9209 1.06025C13.7463 12.8294 12.3754 13.1059 12.3754 16.5703C12.3754 17.4533 12.5849 18.295 12.9381 19.0646L17.0514 22.4922C17.5161 22.6082 17.995 22.6875 18.4945 22.6875C22.4976 22.6875 24.8178 19.7568 32.1041 6.15785C32.5798 5.23295 33 4.23393 33 3.19365C33 1.33031 31.3243 0 29.5125 0Z"
-                fill="#666FE4"
-              />
-            </svg>
+          <div className="flex justify-between mx-auto mt-8 max-w-7xl">
+            <div className="flex flex-row items-center justify-center px-5 space-x-6 bg-white shadow-lg h-14 rounded-xl">
+              <svg
+                width="33"
+                height="33"
+                viewBox="0 0 33 33"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10.7654 19.9379C8.17959 20.1042 5.83289 21.0891 4.50132 24.5979C4.34986 24.9981 3.9857 25.2411 3.56097 25.2411C2.84491 25.2411 0.630984 23.4577 0 23.0272C0.000644519 28.3349 2.4453 33 8.25048 33C13.1398 33 16.5003 30.1789 16.5003 25.2534C16.5003 25.0529 16.4584 24.8615 16.4378 24.6649L10.7654 19.9379ZM29.5125 0C28.5354 0 27.6196 0.432481 26.9209 1.06025C13.7463 12.8294 12.3754 13.1059 12.3754 16.5703C12.3754 17.4533 12.5849 18.295 12.9381 19.0646L17.0514 22.4922C17.5161 22.6082 17.995 22.6875 18.4945 22.6875C22.4976 22.6875 24.8178 19.7568 32.1041 6.15785C32.5798 5.23295 33 4.23393 33 3.19365C33 1.33031 31.3243 0 29.5125 0Z"
+                  fill="#666FE4"
+                />
+              </svg>
 
-            <RangeSlider
-              value={brushRadius}
-              min={2}
-              max={16}
-              onChange={(changeEvent: any) =>
-                setbrushRadius(changeEvent.target.value)
-              }
-            />
-          </div>
-          <div className="flex flex-row items-center justify-center max-w-xs mx-auto mt-3 space-x-6 bg-white shadow-lg h-14 rounded-xl">
-            {colors.map((color) => (
-              <div
-                onClick={() => updateColors(color)}
-                className="border border-gray-300 rounded-full shadow-lg w-7 h-7"
-                style={{ backgroundColor: color }}
+              <RangeSlider
+                value={brushRadius}
+                min={2}
+                max={16}
+                onChange={(changeEvent: any) =>
+                  setbrushRadius(changeEvent.target.value)
+                }
               />
-            ))}
+            </div>
+            <div className="flex flex-row items-center justify-center px-5 space-x-6 bg-white shadow-lg h-14 rounded-xl">
+              {colors.map((color) => (
+                <div
+                  onClick={() => updateColors(color)}
+                  className="border border-gray-300 rounded-full shadow-lg w-7 h-7"
+                  style={{ backgroundColor: color }}
+                />
+              ))}
+            </div>
           </div>
         </Main>
       </div>

@@ -29,34 +29,7 @@ const Header: FC<Canvas> = (canvas) => {
   return (
     <div className="mx-auto lg:flex lg:items-center lg:justify-between max-w-7xl">
       <div className="flex-1 min-w-0">
-        <nav className="flex" aria-label="Breadcrumb">
-          <ol className="flex items-center space-x-4" role="list">
-            <li>
-              <div>
-                <a
-                  href="#"
-                  className="text-sm font-medium text-gray-500 hover:text-gray-700"
-                >
-                  Jobs
-                </a>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-center">
-                <ChevronRightIcon
-                  className="flex-shrink-0 w-5 h-5 text-gray-400"
-                  aria-hidden="true"
-                />
-                <a
-                  href="#"
-                  className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
-                >
-                  Engineering
-                </a>
-              </div>
-            </li>
-          </ol>
-        </nav>
+        <nav className="flex" aria-label="Breadcrumb"></nav>
         <h2 className="mt-2 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
           Back End Developer
         </h2>
