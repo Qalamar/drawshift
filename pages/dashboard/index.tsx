@@ -42,6 +42,7 @@ import {
   SearchbarContainer,
   Utils,
 } from "./dashboard.styled";
+import { useRouter } from "next/router";
 
 const tabs = [
   { name: "Recently Viewed", href: "#", current: true },
@@ -177,6 +178,12 @@ export default function Example() {
     },
   });
 
+  const router = useRouter();
+
+  const Logout = () => {
+    supabase.auth.signOut();
+    router.push("/");
+  };
   useEffect(() => {
     console.log(user);
 
@@ -194,7 +201,7 @@ export default function Example() {
   if (error) return "An error has occurred: " + error.message;
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark">
+    <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark font-monst">
       {/* Top nav*/}
       <header className="relative flex items-center flex-shrink-0 h-16 bg-white dark:bg-dark">
         {/* Logo area */}
@@ -420,6 +427,7 @@ export default function Example() {
                   </button>
                   <button
                     type="button"
+                    onClick={() => Logout()}
                     className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-200 bg-gray-800 rounded-md shadow-lg hover:bg-gray-700 hover:text-white focus:outline-none"
                   >
                     Logout
@@ -441,26 +449,26 @@ export default function Example() {
                     type="text"
                     name="email"
                     id="email"
-                    className="block w-full bg-white text-dark dark:bg-dark dark:text-gray-200 font-quick ring-0 focus:ring-0 focus:border-none focus:outline-none rounded-l-md sm:text-sm"
+                    className="block w-full font-medium bg-white text-dark dark:bg-dark dark:text-gray-200 ring-0 focus:ring-0 focus:border-none focus:outline-none rounded-l-md sm:text-sm"
                     placeholder="John Doe"
                   />
                   <SearchIcon
-                    className="w-8 h-8 text-gray-300"
+                    className="w-8 h-8 text-gray-400"
                     aria-hidden="true"
                   />
                 </Search>
                 <button
                   type="button"
-                  className="items-center w-12 h-12 p-1 text-orange-300 transition duration-200 bg-white border-2 border-gray-300 rounded-md shadow-lg font-monst dark:text-gray-200 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                  className="items-center w-12 h-12 p-1 text-gray-400 transition duration-200 bg-white border-2 border-gray-300 rounded-md shadow-lg font-monst dark:text-gray-200 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-800 focus:ring-indigo-500"
                 >
                   <FilterIcon
-                    className="object-fill w-full h-full text-orange-300 fill-current from-current"
+                    className="w-full h-full fill-current "
                     aria-hidden="true"
                   />
                 </button>
                 <button
                   type="button"
-                  className="relative inline-flex items-center w-12 h-12 p-1 ml-2 text-gray-800 transition duration-200 bg-white border-2 border-gray-300 rounded-md shadow-lg font-monst dark:text-gray-200 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                  className="relative inline-flex items-center w-12 h-12 p-1 ml-2 text-gray-400 transition duration-200 bg-white border-2 border-gray-300 rounded-md shadow-lg font-monst dark:text-gray-200 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-800 focus:ring-indigo-500"
                 >
                   <ViewGridAddIcon
                     className="w-full h-full fill-current"
