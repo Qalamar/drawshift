@@ -42,6 +42,8 @@ import {
   SearchbarContainer,
   Utils,
 } from "./dashboard.styled";
+import { compress, decompress } from "lzutf8";
+import CanvasDraw from "react-canvas-draw";
 import { useRouter } from "next/router";
 
 const tabs = [
@@ -184,9 +186,18 @@ export default function Example() {
     supabase.auth.signOut();
     router.push("/");
   };
+
+  const [boards, setBoards] = useState();
+
+  const fetchBoards = async () => {
+    const { data: boards, error } = await supabase.from("boards").select("*");
+    setBoards(boards);
+    console.log("boards", boards);
+    console.log("error", error);
+  };
   useEffect(() => {
     console.log(user);
-
+    fetchBoards();
     supabase.auth.refreshSession();
     const data = supabase.auth.user();
     console.log(data);
@@ -701,7 +712,7 @@ export default function Example() {
                 {!List && (
                   <ul
                     role="list"
-                    className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
+                    className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-2 xl:gap-x-8"
                   >
                     {files.map((file) => (
                       <li key={file.name} className="relative">
@@ -713,14 +724,20 @@ export default function Example() {
                             "group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 overflow-hidden"
                           )}
                         >
-                          <img
-                            src={file.source}
-                            alt=""
-                            className={classNames(
-                              file.current ? "" : "group-hover:opacity-75",
-                              "object-cover pointer-events-none"
-                            )}
-                          />
+                          <div className="w-full h-auto bg-white rounded-lg shadow-lg">
+                            <CanvasDraw
+                              hideInterface={true}
+                              hideGrid={true}
+                              canvasWidth="auto"
+                              canvasHeight={450}
+                              saveData={decompress(boards[0].board, {
+                                inputEncoding: "Base64",
+                              })}
+                              lazyRadius="0"
+                              className="pointer-events-none rounded-x"
+                            />
+                          </div>
+
                           <button
                             type="button"
                             className="absolute inset-0 focus:outline-none"

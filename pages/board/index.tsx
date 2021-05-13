@@ -119,7 +119,9 @@ export default function Example() {
       {
         user_id: userData.id,
         title: "Title",
-        board: compress(saveableCanvas.getSaveData()),
+        board: compress(saveableCanvas.getSaveData(), {
+          outputEncoding: "Base64",
+        }),
       },
     ]);
     console.log(data);
