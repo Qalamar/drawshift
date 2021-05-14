@@ -30,6 +30,7 @@ import Spinner from "components/Spinner";
 import { supabase } from "lib/initSupabase";
 import React, { Fragment, useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import NewBoard from "./newboard";
 import {
   Header,
   HeaderButtons,
@@ -47,9 +48,8 @@ import CanvasDraw from "react-canvas-draw";
 import { useRouter } from "next/router";
 
 const tabs = [
-  { name: "Recently Viewed", href: "#", current: true },
-  { name: "Recently Added", href: "#", current: false },
-  { name: "Favorited", href: "#", current: false },
+  { name: "Boards", href: "#", current: true },
+  { name: "Charts", href: "#", current: false },
 ];
 
 const views = [
@@ -213,6 +213,7 @@ export default function Example() {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark font-monst">
+      <NewBoard />
       {/* Top nav*/}
       <header className="relative flex items-center flex-shrink-0 h-16 bg-white dark:bg-dark">
         {/* Logo area */}
@@ -457,20 +458,17 @@ export default function Example() {
               <SearchbarContainer>
                 <Search>
                   <input
-                    type="text"
-                    name="email"
-                    id="email"
-                    className="block w-full font-medium bg-white text-dark dark:bg-dark dark:text-gray-200 ring-0 focus:ring-0 focus:border-none focus:outline-none rounded-l-md sm:text-sm"
-                    placeholder="John Doe"
+                    className="w-full px-4 py-2 text-sm font-medium text-gray-700 transition duration-200 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                    placeholder="Search..."
                   />
                   <SearchIcon
-                    className="w-8 h-8 text-gray-400"
+                    className="w-5 h-5 -ml-8 text-gray-400"
                     aria-hidden="true"
                   />
                 </Search>
                 <button
                   type="button"
-                  className="items-center w-12 h-12 p-1 text-gray-400 transition duration-200 bg-white border-2 border-gray-300 rounded-md shadow-lg font-monst dark:text-gray-200 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-800 focus:ring-indigo-500"
+                  className="items-center w-10 h-10 p-1 text-gray-400 transition duration-200 bg-white border border-gray-300 rounded-md shadow-sm font-monst dark:text-gray-200 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-800 focus:ring-indigo-500"
                 >
                   <FilterIcon
                     className="w-full h-full fill-current "
@@ -479,7 +477,7 @@ export default function Example() {
                 </button>
                 <button
                   type="button"
-                  className="relative inline-flex items-center w-12 h-12 p-1 ml-2 text-gray-400 transition duration-200 bg-white border-2 border-gray-300 rounded-md shadow-lg font-monst dark:text-gray-200 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-800 focus:ring-indigo-500"
+                  className="relative inline-flex items-center w-10 h-10 p-1 ml-2 text-gray-400 transition duration-200 bg-white border border-gray-300 rounded-md shadow font-monst dark:text-gray-200 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-800 focus:ring-indigo-500"
                 >
                   <ViewGridAddIcon
                     className="w-full h-full fill-current"
@@ -492,7 +490,7 @@ export default function Example() {
             <Utils>
               <div className="flex">
                 <h1 className="flex-1 text-2xl font-bold text-gray-900">
-                  Photos
+                  Private
                 </h1>
                 <div className="ml-6 bg-gray-100 p-0.5 rounded-lg flex items-center sm:hidden">
                   <button

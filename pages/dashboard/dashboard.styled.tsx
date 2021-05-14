@@ -1,7 +1,7 @@
 import tw, { styled } from "twin.macro";
 
 export const Search = styled.div`
-  ${tw`flex flex-row w-full px-4 py-1 mr-4 transition duration-200 border-2 border-gray-300 rounded-lg shadow-md bg-white dark:bg-none`}
+  ${tw`flex flex-row flex-grow items-center`}
 `;
 
 export const SearchButton = styled.div`
@@ -36,7 +36,7 @@ export const Searchbar = styled.div`
 `;
 
 export const SearchbarContainer = styled.div`
-  ${tw`flex flex-row w-full h-12`}
+  ${tw`flex flex-row w-full space-x-4 items-center h-12`}
 `;
 export const Utils = styled.div`
   ${tw`max-w-6xl px-4 pt-8 mx-auto sm:px-6 lg:px-8`}
