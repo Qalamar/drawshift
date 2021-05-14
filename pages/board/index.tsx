@@ -336,42 +336,13 @@ export default function Example() {
         {/* Main area */}
         <Main>
           {/* Page header */}
-          <div className="mx-auto lg:flex lg:items-center lg:justify-between max-w-7xl">
+          <div className="mx-auto mt-2 lg:flex lg:items-center lg:justify-between max-w-7xl">
             <div className="flex-1 min-w-0">
               <nav className="flex" aria-label="Breadcrumb"></nav>
-              <h2 className="mt-2 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-                Back End Developer
-              </h2>
-              <div className="flex flex-col mt-1 sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6">
-                <div className="flex items-center mt-2 text-sm text-gray-500">
-                  <BriefcaseIcon
-                    className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                  Full-time
-                </div>
-                <div className="flex items-center mt-2 text-sm text-gray-500">
-                  <LocationMarkerIcon
-                    className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                  Remote
-                </div>
-                <div className="flex items-center mt-2 text-sm text-gray-500">
-                  <CurrencyDollarIcon
-                    className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                  $120k &ndash; $140k
-                </div>
-                <div className="flex items-center mt-2 text-sm text-gray-500">
-                  <CalendarIcon
-                    className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                  Closing on January 9, 2020
-                </div>
-              </div>
+              <input
+                className="px-4 py-2 text-sm font-medium text-gray-700 transition duration-200 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                placeholder="Board 01"
+              />
             </div>
             <div className="flex mt-5 lg:mt-0 lg:ml-4">
               <span className="hidden sm:block">

@@ -714,7 +714,7 @@ export default function Example() {
                     role="list"
                     className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-2 xl:gap-x-8"
                   >
-                    {files.map((file) => (
+                    {boards.map((file, index) => (
                       <li key={file.name} className="relative">
                         <div
                           className={classNames(
@@ -730,7 +730,7 @@ export default function Example() {
                               hideGrid={true}
                               canvasWidth="auto"
                               canvasHeight={450}
-                              saveData={decompress(boards[0].board, {
+                              saveData={decompress(boards[index].board, {
                                 inputEncoding: "Base64",
                               })}
                               lazyRadius="0"
