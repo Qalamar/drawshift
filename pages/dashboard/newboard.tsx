@@ -1,23 +1,7 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ]
-  }
-  ```
-*/
-import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { HeartIcon, XIcon } from "@heroicons/react/outline";
-import { PencilIcon, PlusIcon } from "@heroicons/react/solid";
+import { XIcon } from "@heroicons/react/outline";
+import { LinkIcon } from "@heroicons/react/solid";
+import React, { Fragment, useState } from "react";
 
 export default function Example() {
   const [open, setOpen] = useState(true);
@@ -64,155 +48,163 @@ export default function Example() {
                   leaveTo="opacity-0"
                 >
                   <div className="absolute top-0 left-0 flex pt-4 pr-2 -ml-8 sm:-ml-10 sm:pr-4">
-                    <button
-                      className="text-gray-300 rounded-md hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
-                      onClick={() => setOpen(false)}
-                    >
-                      <span className="sr-only">Close panel</span>
-                      <XIcon className="w-6 h-6" aria-hidden="true" />
-                    </button>
+                    <div onClick={() => setOpen(false)}></div>
                   </div>
                 </Transition.Child>
-                <div className="h-full p-8 overflow-y-auto bg-white">
+                <div className="px-4 py-6 bg-indigo-700 sm:px-6 font-monst">
+                  <div className="flex items-center justify-between">
+                    <Dialog.Title className="text-lg font-medium text-white">
+                      New Project
+                    </Dialog.Title>
+                    <div className="flex items-center ml-3 h-7">
+                      <button
+                        type="button"
+                        className="text-indigo-200 bg-indigo-700 rounded-md hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
+                        onClick={() => setOpen(false)}
+                      >
+                        <span className="sr-only">Close panel</span>
+                        <XIcon className="w-6 h-6" aria-hidden="true" />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="mt-1">
+                    <p className="text-sm text-indigo-300">
+                      Get started by filling in the information below to create
+                      your new project.
+                    </p>
+                  </div>
+                </div>
+                <div className="h-full p-8 overflow-y-auto bg-white font-monst">
                   <div className="pb-16 space-y-6">
                     <div>
-                      <div className="block w-full overflow-hidden rounded-lg aspect-w-10 aspect-h-7">
-                        <img
-                          src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80"
-                          alt=""
-                          className="object-cover"
-                        />
-                      </div>
-                      <div className="flex items-start justify-between mt-4">
-                        <div>
-                          <h2 className="text-lg font-medium text-gray-900">
-                            <span className="sr-only">Details for </span>
-                            IMG_4985.HEIC
-                          </h2>
-                          <p className="text-sm font-medium text-gray-500">
-                            3.9 MB
-                          </p>
-                        </div>
-                        <button
-                          type="button"
-                          className="flex items-center justify-center w-8 h-8 ml-4 text-gray-400 bg-white rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                        >
-                          <HeartIcon className="w-6 h-6" aria-hidden="true" />
-                          <span className="sr-only">Favorite</span>
-                        </button>
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-gray-900">Information</h3>
-                      <dl className="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
-                        <div className="flex justify-between py-3 text-sm font-medium">
-                          <dt className="text-gray-500">Uploaded by</dt>
-                          <dd className="text-gray-900">Marie Culver</dd>
-                        </div>
-                        <div className="flex justify-between py-3 text-sm font-medium">
-                          <dt className="text-gray-500">Created</dt>
-                          <dd className="text-gray-900">June 8, 2020</dd>
-                        </div>
-                        <div className="flex justify-between py-3 text-sm font-medium">
-                          <dt className="text-gray-500">Last modified</dt>
-                          <dd className="text-gray-900">June 8, 2020</dd>
-                        </div>
-                        <div className="flex justify-between py-3 text-sm font-medium">
-                          <dt className="text-gray-500">Dimensions</dt>
-                          <dd className="text-gray-900">4032 x 3024</dd>
-                        </div>
-                        <div className="flex justify-between py-3 text-sm font-medium">
-                          <dt className="text-gray-500">Resolution</dt>
-                          <dd className="text-gray-900">72 x 72</dd>
-                        </div>
-                      </dl>
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-gray-900">Description</h3>
-                      <div className="flex items-center justify-between mt-2">
-                        <p className="text-sm italic text-gray-500">
-                          Add a description to this image.
-                        </p>
-                        <button
-                          type="button"
-                          className="flex items-center justify-center w-8 h-8 -mr-2 text-gray-400 bg-white rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                        >
-                          <PencilIcon className="w-5 h-5" aria-hidden="true" />
-                          <span className="sr-only">Add description</span>
-                        </button>
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-gray-900">Shared with</h3>
-                      <ul className="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
-                        <li className="flex items-center justify-between py-3">
-                          <div className="flex items-center">
-                            <img
-                              src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80"
-                              alt=""
-                              className="w-8 h-8 rounded-full"
+                      <div className="flex flex-col items-start justify-between space-y-4">
+                        <div className="w-full">
+                          <label
+                            htmlFor="project_name"
+                            className="block text-sm font-medium text-gray-900"
+                          >
+                            Project name
+                          </label>
+                          <div className="mt-1">
+                            <input
+                              className="w-full px-4 py-2 text-sm font-medium text-gray-700 transition duration-200 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                              placeholder="Search..."
                             />
-                            <p className="ml-4 text-sm font-medium text-gray-900">
-                              Aimee Douglas
-                            </p>
                           </div>
-                          <button
-                            type="button"
-                            className="ml-6 text-sm font-medium text-indigo-600 bg-white rounded-md hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        </div>
+                        <div className="w-full">
+                          <label
+                            htmlFor="description"
+                            className="block text-sm font-medium text-gray-900"
                           >
-                            Remove
-                            <span className="sr-only"> Aimee Douglas</span>
-                          </button>
-                        </li>
-                        <li className="flex items-center justify-between py-3">
-                          <div className="flex items-center">
-                            <img
-                              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=oilqXxSqey&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                              alt=""
-                              className="w-8 h-8 rounded-full"
+                            Description
+                          </label>
+                          <div className="mt-1">
+                            <textarea
+                              id="description"
+                              name="description"
+                              rows={4}
+                              className="block w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500"
+                              defaultValue={""}
                             />
-                            <p className="ml-4 text-sm font-medium text-gray-900">
-                              Andrea McMillan
-                            </p>
                           </div>
-                          <button
-                            type="button"
-                            className="ml-6 text-sm font-medium text-indigo-600 bg-white rounded-md hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                          >
-                            Remove
-                            <span className="sr-only"> Andrea McMillan</span>
-                          </button>
-                        </li>
-                        <li className="flex items-center justify-between py-2">
-                          <button
-                            type="button"
-                            className="flex items-center p-1 -ml-1 bg-white rounded-md group focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                          >
-                            <span className="flex items-center justify-center w-8 h-8 text-gray-400 border-2 border-gray-300 border-dashed rounded-full">
-                              <PlusIcon
-                                className="w-5 h-5"
-                                aria-hidden="true"
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <fieldset>
+                        <legend className="text-sm font-medium text-gray-900">
+                          Privacy
+                        </legend>
+                        <div className="mt-2 space-y-5">
+                          <div className="relative flex items-start">
+                            <div className="absolute flex items-center h-5">
+                              <input
+                                id="privacy_public"
+                                name="privacy"
+                                aria-describedby="privacy_public_description"
+                                type="radio"
+                                className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+                                defaultChecked
                               />
-                            </span>
-                            <span className="ml-4 text-sm font-medium text-indigo-600 group-hover:text-indigo-500">
-                              Share
-                            </span>
-                          </button>
-                        </li>
-                      </ul>
+                            </div>
+                            <div className="text-sm pl-7">
+                              <label
+                                htmlFor="privacy_public"
+                                className="font-medium text-gray-900"
+                              >
+                                Public access
+                              </label>
+                              <p
+                                id="privacy_public_description"
+                                className="text-gray-500"
+                              >
+                                Everyone with the link will see this project.
+                              </p>
+                            </div>
+                          </div>
+
+                          <div>
+                            <div className="relative flex items-start">
+                              <div className="absolute flex items-center h-5">
+                                <input
+                                  id="privacy_private"
+                                  name="privacy"
+                                  aria-describedby="privacy_private-to-project_description"
+                                  type="radio"
+                                  className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
+                                />
+                              </div>
+                              <div className="text-sm pl-7">
+                                <label
+                                  htmlFor="privacy_private"
+                                  className="font-medium text-gray-900"
+                                >
+                                  Private to you
+                                </label>
+                                <p
+                                  id="privacy_private_description"
+                                  className="text-gray-500"
+                                >
+                                  You are the only one able to access this
+                                  project.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
                     </div>
+                    <div>
+                      <hr className="border-gray-200" />
+                      <div className="flex flex-col mt-4 space-space-y-4 space-between sm:flex-row sm:items-center sm:space-between sm:space-y-0">
+                        <div className="flex-1">
+                          <a
+                            href="#"
+                            className="group flex items-center text-sm text-indigo-600 hover:text-indigo-900 font-medium space-x-2.5"
+                          >
+                            <LinkIcon
+                              className="w-5 h-5 text-indigo-500 group-hover:text-indigo-900"
+                              aria-hidden="true"
+                            />
+                            <span>Copy link</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="flex">
                       <button
                         type="button"
                         className="flex-1 px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       >
-                        Download
+                        Save
                       </button>
                       <button
                         type="button"
                         className="flex-1 px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       >
-                        Delete
+                        Cancel
                       </button>
                     </div>
                   </div>
