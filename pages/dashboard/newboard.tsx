@@ -11,6 +11,12 @@ const NewBoard = observer(() => {
     setOpen(false);
     ui.setNewBoard(false);
   };
+
+  const uniqueId = () => {
+    const dateString = Date.now().toString(36);
+    const randomness = Math.random().toString(36).substr(2);
+    return dateString + randomness;
+  };
   return (
     <Transition.Root show={ui.createForm} as={Fragment}>
       <Dialog
@@ -61,6 +67,7 @@ const NewBoard = observer(() => {
                     <Dialog.Title className="text-lg font-medium text-white">
                       New Project
                     </Dialog.Title>
+                    <div></div>
                     <div className="flex items-center ml-3 h-7">
                       <button
                         type="button"
