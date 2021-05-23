@@ -1,19 +1,24 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { LinkIcon } from "@heroicons/react/solid";
+import { ui } from "lib/store";
+import { observer } from "mobx-react-lite";
 import React, { Fragment, useState } from "react";
 
-export default function Example() {
+const NewBoard = observer(() => {
   const [open, setOpen] = useState(true);
-
+  const handleClose = () => {
+    setOpen(false);
+    ui.setNewBoard(false);
+  };
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition.Root show={ui.createForm} as={Fragment}>
       <Dialog
         as="div"
         static
         className="fixed inset-0 overflow-hidden"
         open={open}
-        onClose={setOpen}
+        onClose={handleClose}
       >
         <div className="absolute inset-0 overflow-hidden">
           <Transition.Child
@@ -48,7 +53,7 @@ export default function Example() {
                   leaveTo="opacity-0"
                 >
                   <div className="absolute top-0 left-0 flex pt-4 pr-2 -ml-8 sm:-ml-10 sm:pr-4">
-                    <div onClick={() => setOpen(false)}></div>
+                    <div onClick={() => handleClose()}></div>
                   </div>
                 </Transition.Child>
                 <div className="px-4 py-6 bg-indigo-700 sm:px-6 font-monst">
@@ -60,7 +65,7 @@ export default function Example() {
                       <button
                         type="button"
                         className="text-indigo-200 bg-indigo-700 rounded-md hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
-                        onClick={() => setOpen(false)}
+                        onClick={() => handleClose()}
                       >
                         <span className="sr-only">Close panel</span>
                         <XIcon className="w-6 h-6" aria-hidden="true" />
@@ -217,4 +222,5 @@ export default function Example() {
       </Dialog>
     </Transition.Root>
   );
-}
+});
+export default NewBoard;

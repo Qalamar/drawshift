@@ -26,6 +26,7 @@ import {
   ViewGridIcon,
   ViewListIcon,
 } from "@heroicons/react/solid";
+import { observer } from "mobx-react-lite";
 import Spinner from "components/Spinner";
 import { supabase } from "lib/initSupabase";
 import React, { Fragment, useEffect, useState } from "react";
@@ -46,6 +47,7 @@ import {
 import { compress, decompress } from "lzutf8";
 import CanvasDraw from "react-canvas-draw";
 import { useRouter } from "next/router";
+import { ui } from "lib/store";
 
 const tabs = [
   { name: "Boards", href: "#", current: true },
@@ -56,45 +58,6 @@ const views = [
   { id: 1, name: "Wade Cooper" },
   { id: 2, name: "Arlene Mccoy" },
   { id: 3, name: "Devon Webb" },
-];
-
-const files = [
-  {
-    name: "IMG_4985.HEIC",
-    size: "3.9 MB",
-    source:
-      "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80",
-    current: true,
-  },
-  {
-    name: "IMG_4985.HEIC",
-    size: "3.9 MB",
-    source:
-      "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80",
-    current: false,
-  },
-  {
-    name: "IMG_4985.HEIC",
-    size: "3.9 MB",
-    source:
-      "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80",
-    current: false,
-  },
-  {
-    name: "IMG_4985.HEIC",
-    size: "3.9 MB",
-    source:
-      "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80",
-    current: false,
-  },
-  {
-    name: "IMG_4985.HEIC",
-    size: "3.9 MB",
-    source:
-      "https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80",
-    current: false,
-  },
-  // More files...
 ];
 
 const positions = [
@@ -169,7 +132,7 @@ interface User {
     full_name: string;
   };
 }
-export default function Example() {
+const Dasboard = observer(() => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selected, setSelected] = useState(views[1]);
   const [List, setList] = useState(true);
@@ -476,6 +439,7 @@ export default function Example() {
                   />
                 </button>
                 <button
+                  onClick={() => ui.setNewBoard(true)}
                   type="button"
                   className="relative inline-flex items-center w-10 h-10 p-1 ml-2 text-gray-400 transition duration-200 bg-white border border-gray-300 rounded-md shadow font-monst dark:text-gray-200 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-800 focus:ring-indigo-500"
                 >
@@ -762,4 +726,5 @@ export default function Example() {
       </div>
     </div>
   );
-}
+});
+export default Dasboard;

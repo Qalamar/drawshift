@@ -1,18 +1,26 @@
-import { atom } from "recoil";
+import { types } from "mobx-state-tree";
 
-export const phaseState = atom({
-  key: "phaseState", // unique ID (with respect to other atoms/selectors)
-  default: { phase: 2 }, // default value (aka initial value)
-});
+const UI = types
+  .model({
+    createForm: types.boolean,
+    month: types.optional(types.string, ""),
+    year: types.optional(types.string, ""),
+  })
+  .actions((self) => ({
+    setNewBoard(status) {
+      self.createForm = status;
+    },
 
-export const navState = atom({
-  key: "navState", // unique ID (with respect to other atoms/selectors)
-  default: {
-    navigation: [{ name: "About us", href: "/history", current: false }],
-  }, // default value (aka initial value)
-});
+    setMonth(status) {
+      self.month = status;
+    },
+    setYear(status) {
+      self.year = status;
+    },
+  }));
 
-export const authPopup = atom({
-  key: "authPopup", // unique ID (with respect to other atoms/selectors)
-  default: false, // default value (aka initial value)
+export const ui = UI.create({
+  createForm: false,
+  month: "Month",
+  year: "Year",
 });
