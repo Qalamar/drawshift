@@ -43,7 +43,7 @@ import {
   Searchbar,
   SearchbarContainer,
   Utils,
-} from "./dashboard.styled";
+} from "../../components/styled/dashboard.styled";
 import { compress, decompress } from "lzutf8";
 import CanvasDraw from "react-canvas-draw";
 import { useRouter } from "next/router";

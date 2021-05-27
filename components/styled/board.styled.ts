@@ -41,6 +41,3 @@ export const SearchbarContainer = styled.div`
 export const Utils = styled.div`
   ${tw`max-w-6xl px-4 pt-8 mx-auto sm:px-6 lg:px-8`}
 `;
-export const HeadsersCosntainer = styled.div`
-  ${tw``}
-`;

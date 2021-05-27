@@ -27,7 +27,7 @@ import { useRouter } from "next/router";
 import React, { Fragment, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import RangeSlider from "react-bootstrap-range-slider";
-import { Main } from "./board.styled";
+import { Main } from "../../components/styled/board.styled";
 import Header from "./Header";
 import { compress, decompress } from "lzutf8";
 import CanvasDraw from "react-canvas-draw";
