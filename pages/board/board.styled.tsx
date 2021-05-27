@@ -9,7 +9,7 @@ export const SearchButton = styled.div`
 `;
 
 export const Main = styled.main`
-  ${tw`relative z-0 flex-1 pb-8 px-24 overflow-y-auto`}
+  ${tw`relative z-0 flex-1 pb-8 md:px-24 px-2 overflow-y-auto`}
 `;
 
 export const Header = styled.div`

@@ -16,7 +16,7 @@ export default function Home() {
   });
 
   return (
-    <div className="h-screen">
+    <div className="h-screen lg:overflow-y-hidden">
       <AuthPopup />
       <div className="pb-32 bg-gray-800">
         <Navbar />

@@ -169,7 +169,7 @@ export default function Example() {
           >
             <img
               className="w-auto h-8"
-              src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white"
+              src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
               alt="Workflow"
             />
           </a>
@@ -336,16 +336,16 @@ export default function Example() {
         {/* Main area */}
         <Main>
           {/* Page header */}
-          <div className="mx-auto mt-2 lg:flex lg:items-center lg:justify-between max-w-7xl">
+          <div className="mx-auto mt-2 flex items-center justify-between flex-col md:flex-row max-w-7xl">
             <div className="flex-1 min-w-0">
               <nav className="flex" aria-label="Breadcrumb"></nav>
               <input
-                className="px-4 py-2 text-sm font-medium text-gray-700 transition duration-200 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="px-4 py-2 flex-grow text-sm font-medium text-gray-700 transition duration-200 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                 placeholder="Board 01"
               />
             </div>
             <div className="flex mt-5 lg:mt-0 lg:ml-4">
-              <span className="hidden sm:block">
+              <span className="">
                 <button
                   onClick={() => saveableCanvas.undo()}
                   type="button"
@@ -359,7 +359,7 @@ export default function Example() {
                 </button>
               </span>
 
-              <span className="hidden ml-3 sm:block">
+              <span className="ml-3">
                 <button
                   onClick={() => saveableCanvas.clear()}
                   type="button"
@@ -373,7 +373,7 @@ export default function Example() {
                 </button>
               </span>
 
-              <span className="sm:ml-3">
+              <span className="ml-3">
                 <button
                   onClick={() => saveBoard()}
                   type="button"
@@ -388,62 +388,6 @@ export default function Example() {
               </span>
 
               {/* Dropdown */}
-              <Menu as="span" className="relative ml-3 sm:hidden">
-                {({ open }) => (
-                  <>
-                    <Menu.Button className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                      More
-                      <ChevronDownIcon
-                        className="w-5 h-5 ml-2 -mr-1 text-gray-500"
-                        aria-hidden="true"
-                      />
-                    </Menu.Button>
-
-                    <Transition
-                      show={open}
-                      as={Fragment}
-                      enter="transition ease-out duration-200"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <Menu.Items
-                        static
-                        className="absolute right-0 w-48 py-1 mt-2 -mr-1 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                      >
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Edit
-                            </a>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              View
-                            </a>
-                          )}
-                        </Menu.Item>
-                      </Menu.Items>
-                    </Transition>
-                  </>
-                )}
-              </Menu>
             </div>
           </div>
           <div className="h-auto mx-auto mt-8 bg-white rounded-lg shadow-lg max-w-7xl">
@@ -459,7 +403,7 @@ export default function Example() {
               ref={(canvasDraw: any) => (saveableCanvas = canvasDraw)}
             />
           </div>
-          <div className="flex justify-between mx-auto mt-8 max-w-7xl">
+          <div className="flex justify-between flex-col md:flex-row mx-auto mt-8 max-w-7xl">
             <div className="flex flex-row items-center justify-center px-5 space-x-6 bg-white shadow-lg h-14 rounded-xl">
               <svg
                 width="33"
@@ -483,7 +427,7 @@ export default function Example() {
                 }
               />
             </div>
-            <div className="flex flex-row items-center justify-center px-5 space-x-6 bg-white shadow-lg h-14 rounded-xl">
+            <div className="flex flex-row items-center justify-center mt-2 md:mt-0 px-5 space-x-6 bg-white shadow-lg h-14 rounded-xl">
               {colors.map((color) => (
                 <div
                   onClick={() => updateColors(color)}

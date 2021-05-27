@@ -3,6 +3,7 @@ import { XIcon } from "@heroicons/react/outline";
 import { LinkIcon } from "@heroicons/react/solid";
 import { ui } from "lib/store";
 import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 
 const NewBoard = observer(() => {
@@ -11,7 +12,10 @@ const NewBoard = observer(() => {
     setOpen(false);
     ui.setNewBoard(false);
   };
-
+  const router = useRouter();
+  const createBoard = () => {
+    router.push("/board");
+  };
   const uniqueId = () => {
     const dateString = Date.now().toString(36);
     const randomness = Math.random().toString(36).substr(2);
@@ -207,6 +211,7 @@ const NewBoard = observer(() => {
 
                     <div className="flex">
                       <button
+                        onClick={() => createBoard()}
                         type="button"
                         className="flex-1 px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       >

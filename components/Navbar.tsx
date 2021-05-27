@@ -1,29 +1,22 @@
 import { Disclosure } from "@headlessui/react";
 import { LoginIcon } from "@heroicons/react/solid";
 import produce from "immer";
-import { useRecoilState } from "recoil";
-import { authPopup, navState } from "../lib/store";
 import { Auth } from "@supabase/ui";
 import { supabase } from "../lib/initSupabase";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { ui } from "../lib/store";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
-  const [NavState, setNavState] = useRecoilState(navState);
-  const [auth, setAuthPopup] = useRecoilState(authPopup);
+  const [NavState, setNavState] = useState(true);
+  const [auth, setAuthPopup] = useState(true);
   const { user } = Auth.useUser();
   const router = useRouter();
-  const handleUpdates = (id) => {
-    setNavState({
-      navigation: produce(NavState.navigation, (draft) => {
-        draft.map((a) => (a.current = false));
-        draft[id].current = true;
-      }),
-    });
-  };
+  const handleUpdates = (id) => {};
   return (
     <Disclosure as="nav" className="relative bg-gray-800">
       {({ open }) => (
@@ -42,7 +35,7 @@ export default function Navbar() {
                   />
                   <img
                     className="hidden w-auto h-8 lg:block"
-                    src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
+                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                     alt="Workflow"
                   />
                 </div>
@@ -77,7 +70,7 @@ export default function Navbar() {
                   ) : (
                     <button
                       type="button"
-                      onClick={() => setAuthPopup(true)}
+                      onClick={() => ui.setLoginForm(true)}
                       className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-200 bg-indigo-500 border border-transparent rounded-md shadow-sm font-monst hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
                     >
                       <LoginIcon
