@@ -13,8 +13,6 @@ interface Canvas {
   undo: any;
 }
 const Header: FC<Canvas> = (canvas) => {
-  return (
-    
-  );
+  return <div></div>;
 };
 export default Header;
