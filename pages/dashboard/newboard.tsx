@@ -1,13 +1,31 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
-import { LinkIcon } from "@heroicons/react/solid";
+import {
+  CheckCircleIcon,
+  LinkIcon,
+  MinusCircleIcon,
+} from "@heroicons/react/solid";
+import { saveBoard } from "lib/calls";
 import { ui } from "lib/store";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
+import { useForm } from "react-hook-form";
 
 const NewBoard = observer(() => {
   const [open, setOpen] = useState(true);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  console.log(watch("title"));
+  const onSubmit = (data) => {
+    // saveBoard(data);
+    createBoard();
+  };
+
   const handleClose = () => {
     setOpen(false);
     ui.setNewBoard(false);
@@ -91,7 +109,10 @@ const NewBoard = observer(() => {
                   </div>
                 </div>
                 <div className="h-full p-8 overflow-y-auto bg-white font-monst">
-                  <div className="pb-16 space-y-6">
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="pb-16 space-y-6"
+                  >
                     <div>
                       <div className="flex flex-col items-start justify-between space-y-4">
                         <div className="w-full">
@@ -103,9 +124,31 @@ const NewBoard = observer(() => {
                           </label>
                           <div className="mt-1">
                             <input
+                              {...register("title", { required: true })}
                               className="w-full px-4 py-2 text-sm font-medium text-gray-700 transition duration-200 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                              placeholder="Search..."
+                              placeholder="Title..."
                             />
+                            {errors.title?.type !== "required" ? (
+                              <div className="flex mt-2 flex-row items-center text-green-400">
+                                <CheckCircleIcon
+                                  className="w-3 h-3 mr-2"
+                                  aria-hidden="true"
+                                />
+                                <div className="text-xs">
+                                  Must be at least 3 characters
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="flex mt-2 flex-row items-center text-red-400">
+                                <MinusCircleIcon
+                                  className="w-3 h-3 mr-2"
+                                  aria-hidden="true"
+                                />
+                                <div className="text-xs">
+                                  Must be at least 3 characters
+                                </div>
+                              </div>
+                            )}
                           </div>
                         </div>
                         <div className="w-full">
@@ -117,9 +160,12 @@ const NewBoard = observer(() => {
                           </label>
                           <div className="mt-1">
                             <textarea
+                              {...register("description")}
                               id="description"
                               name="description"
+                              maxLength={100}
                               rows={4}
+                              placeholder="Optional"
                               className="block w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500"
                               defaultValue={""}
                             />
@@ -211,8 +257,8 @@ const NewBoard = observer(() => {
 
                     <div className="flex">
                       <button
-                        onClick={() => createBoard()}
-                        type="button"
+                        // onClick={() => createBoard()}
+                        type="submit"
                         className="flex-1 px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       >
                         Save
@@ -224,7 +270,7 @@ const NewBoard = observer(() => {
                         Cancel
                       </button>
                     </div>
-                  </div>
+                  </form>
                 </div>
               </div>
             </Transition.Child>

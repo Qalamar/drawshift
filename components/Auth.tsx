@@ -45,10 +45,7 @@ const AuthPopup = observer(() => {
 
           <div className="px-16 py-8">
             <Auth.UserContextProvider supabaseClient={supabase}>
-              <Auth
-                supabaseClient={supabase}
-                providers={["google", "github"]}
-              />
+              <Auth supabaseClient={supabase} providers={["github"]} />
             </Auth.UserContextProvider>
           </div>
         </div>

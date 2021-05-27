@@ -49,10 +49,7 @@ import CanvasDraw from "react-canvas-draw";
 import { useRouter } from "next/router";
 import { ui } from "lib/store";
 
-const tabs = [
-  { name: "Boards", href: "#", current: true },
-  { name: "Charts", href: "#", current: false },
-];
+const tabs = [{ name: "Boards", href: "#", current: true }];
 
 const views = [
   { id: 1, name: "Wade Cooper" },
@@ -63,30 +60,12 @@ const views = [
 const positions = [
   {
     id: 1,
-    title: "Back End Developer",
-    type: "Full-time",
-    location: "Remote",
-    department: "Engineering",
+    title: "Sample Board",
+    type: "Tutorial",
+    location: "Canvas",
+    department: "Private",
     closeDate: "2020-01-07",
     closeDateFull: "January 7, 2020",
-  },
-  {
-    id: 2,
-    title: "Front End Developer",
-    type: "Full-time",
-    location: "Remote",
-    department: "Engineering",
-    closeDate: "2020-01-07",
-    closeDateFull: "January 7, 2020",
-  },
-  {
-    id: 3,
-    title: "User Interface Designer",
-    type: "Full-time",
-    location: "Remote",
-    department: "Design",
-    closeDate: "2020-01-14",
-    closeDateFull: "January 14, 2020",
   },
 ];
 
@@ -622,7 +601,11 @@ const Dasboard = observer(() => {
                   >
                     {positions.map((position) => (
                       <li key={position.id}>
-                        <a href="#" className="block hover:bg-gray-50">
+                        <a
+                          onClick={() => ui.setNewBoard(true)}
+                          href="#"
+                          className="block hover:bg-gray-50"
+                        >
                           <div className="px-4 py-4 sm:px-6">
                             <div className="flex items-center justify-between">
                               <p className="text-sm font-medium text-indigo-600 truncate">
@@ -657,7 +640,7 @@ const Dasboard = observer(() => {
                                   aria-hidden="true"
                                 />
                                 <p>
-                                  Closing on{" "}
+                                  Created at{" "}
                                   <time dateTime={position.closeDate}>
                                     {position.closeDateFull}
                                   </time>
