@@ -40,6 +40,7 @@ const NewBoard = observer(() => {
     return dateString + randomness;
   };
   return (
+    // @ts-ignore
     <Transition.Root show={ui.createForm} as={Fragment}>
       <Dialog
         as="div"
@@ -50,6 +51,7 @@ const NewBoard = observer(() => {
       >
         <div className="absolute inset-0 overflow-hidden">
           <Transition.Child
+            // @ts-ignore
             as={Fragment}
             enter="ease-in-out duration-500"
             enterFrom="opacity-0"
@@ -62,6 +64,7 @@ const NewBoard = observer(() => {
           </Transition.Child>
           <div className="fixed inset-y-0 right-0 flex max-w-full pl-10">
             <Transition.Child
+              // @ts-ignore
               as={Fragment}
               enter="transform transition ease-in-out duration-500 sm:duration-700"
               enterFrom="translate-x-full"
@@ -72,6 +75,7 @@ const NewBoard = observer(() => {
             >
               <div className="relative w-96">
                 <Transition.Child
+                  // @ts-ignore
                   as={Fragment}
                   enter="ease-in-out duration-500"
                   enterFrom="opacity-0"
