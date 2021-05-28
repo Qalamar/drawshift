@@ -48,6 +48,7 @@ import { compress, decompress } from "lzutf8";
 import CanvasDraw from "react-canvas-draw";
 import { useRouter } from "next/router";
 import { ui } from "lib/store";
+import Head from "next/head";
 
 const tabs = [{ name: "Boards", href: "#", current: true }];
 
@@ -155,6 +156,10 @@ const Dasboard = observer(() => {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark font-monst">
+      <Head>
+        <title>Drashift | Dashboard</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <NewBoard />
       {/* Top nav*/}
       <header className="relative flex items-center flex-shrink-0 h-16 bg-white dark:bg-dark">

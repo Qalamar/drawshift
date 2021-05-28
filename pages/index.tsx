@@ -4,6 +4,7 @@ import Header from "components/Header";
 import Navbar from "components/Navbar";
 import { supabase } from "lib/initSupabase";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import Card from "components/landing/Card";
 
 export default function Home() {
@@ -17,6 +18,11 @@ export default function Home() {
 
   return (
     <div className="h-screen lg:overflow-y-hidden">
+      <Head>
+        <title>Drawshift</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+
       <AuthPopup />
       <div className="pb-32 bg-gray-800">
         <Navbar />

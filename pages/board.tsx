@@ -32,6 +32,7 @@ import Header from "./board/Header";
 import { compress, decompress } from "lzutf8";
 import CanvasDraw from "react-canvas-draw";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
+import Head from "next/head";
 const views = [
   { id: 1, name: "Wade Cooper" },
   { id: 2, name: "Arlene Mccoy" },
@@ -160,6 +161,10 @@ export default function Example() {
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark font-monst">
       {/* Top nav*/}
+      <Head>
+        <title>Drashift | Boards</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <header className="relative flex items-center flex-shrink-0 h-16 bg-gray-100 dark:bg-dark">
         {/* Logo area */}
         <div className="absolute inset-y-0 left-0 md:static md:flex-shrink-0">
