@@ -31,7 +31,7 @@ import Spinner from "components/Spinner";
 import { supabase } from "lib/initSupabase";
 import React, { Fragment, useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import NewBoard from "./newboard";
+import NewBoard from "./dashboard/newboard";
 import {
   Header,
   HeaderButtons,
@@ -43,7 +43,7 @@ import {
   Searchbar,
   SearchbarContainer,
   Utils,
-} from "../../components/styled/dashboard.styled";
+} from "../components/styled/dashboard.styled";
 import { compress, decompress } from "lzutf8";
 import CanvasDraw from "react-canvas-draw";
 import { useRouter } from "next/router";
