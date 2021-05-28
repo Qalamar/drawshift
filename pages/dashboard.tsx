@@ -31,7 +31,7 @@ import Spinner from "components/Spinner";
 import { supabase } from "lib/initSupabase";
 import React, { Fragment, useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import NewBoard from "./dashboard/newboard";
+import NewBoard from "../components/Newboard";
 import {
   Header,
   HeaderButtons,

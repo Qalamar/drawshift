@@ -1,10 +1,8 @@
 import { Disclosure } from "@headlessui/react";
 import { LoginIcon } from "@heroicons/react/solid";
-import produce from "immer";
 import { Auth } from "@supabase/ui";
-import { supabase } from "../lib/initSupabase";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { supabase } from "../lib/initSupabase";
 import { ui } from "../lib/store";
 
 function classNames(...classes) {
@@ -12,11 +10,9 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const [NavState, setNavState] = useState(true);
-  const [auth, setAuthPopup] = useState(true);
   const { user } = Auth.useUser();
   const router = useRouter();
-  const handleUpdates = (id) => {};
+
   return (
     <Disclosure as="nav" className="relative bg-gray-800">
       {({ open }) => (
