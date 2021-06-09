@@ -1,7 +1,7 @@
 import tw, { styled } from "twin.macro";
 
 export const CardBackground = styled.div`
-  ${tw`m-auto overflow-hidden rounded-lg shadow-xl max-w-7xl sm:px-6 lg:px-8 bg-gradient-to-r from-orange-400 to-pink-500 lg:grid lg:grid-cols-2 lg:gap-4`}
+  ${tw`m-auto overflow-hidden h-screen rounded-lg shadow-xl max-w-7xl sm:px-6 lg:px-8 bg-gradient-to-r from-orange-400 to-pink-500 lg:grid lg:grid-cols-2 lg:gap-4`}
 `;
 
 export const CardContent = styled.div`
@@ -21,7 +21,7 @@ export const CardImage = styled.img`
 `;
 const Card = () => {
   return (
-    <main className="-mt-24 font-monst">
+    <main className="-mt-24 font-monst relative">
       <CardBackground>
         <CardContent>
           <div className="lg:self-center">
@@ -36,7 +36,7 @@ const Card = () => {
             <CardButton href="#">Sign up for free</CardButton>
           </div>
         </CardContent>
-        <div className="flex items-center">
+        <div className="flex items-start pt-10 pb-12 lg:pt-12">
           <CardImage src="/drawshift.gif" alt="App screenshot" />
         </div>
       </CardBackground>

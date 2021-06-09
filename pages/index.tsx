@@ -24,10 +24,14 @@ export default function Home() {
       </Head>
 
       <AuthPopup />
-      <div className="pb-32 bg-gray-800">
+      <div className="fixed">
+        <img className="w-screen" src="./wave.svg" />
+      </div>
+      <div className="pb-32 relative bg-gray-800">
         <Navbar />
         <Header name="Start" />
       </div>
+
       <Card />
     </div>
   );
