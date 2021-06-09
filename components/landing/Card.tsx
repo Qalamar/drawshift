@@ -1,7 +1,7 @@
 import tw, { styled } from "twin.macro";
 
 export const CardBackground = styled.div`
-  ${tw`m-auto overflow-hidden h-screen rounded-lg shadow-xl max-w-7xl sm:px-6 lg:px-8 bg-gradient-to-r from-orange-400 to-pink-500 lg:grid lg:grid-cols-2 lg:gap-4`}
+  ${tw`m-auto overflow-hidden rounded-lg shadow-xl max-w-7xl sm:px-6 lg:px-8 bg-gradient-to-r from-orange-400 to-pink-500 lg:grid lg:grid-cols-2 lg:gap-4`}
 `;
 
 export const CardContent = styled.div`

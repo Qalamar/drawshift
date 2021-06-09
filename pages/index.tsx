@@ -24,7 +24,7 @@ export default function Home() {
       </Head>
 
       <AuthPopup />
-      <div className="fixed">
+      <div className="fixed mt-32">
         <img className="w-screen" src="./wave.svg" />
       </div>
       <div className="pb-32 relative bg-gray-800">
