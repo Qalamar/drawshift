@@ -7,16 +7,41 @@ interface userData {
   board: string;
   description: string;
 }
-export const saveBoard = async (userData: userData) => {
+export const createBoard = async (userData: userData) => {
   const { data, error } = await supabase.from("boards").insert([
     {
       user_id: userData.user_id,
       title: userData.title,
       description: userData.description,
-      board: compress(userData.board, {
-        outputEncoding: "Base64",
-      }),
+      board: comp(userData.board),
     },
   ]);
   console.log(data);
+  console.log("error", error);
+};
+
+export const saveBoard = async (userData: userData) => {
+  const { data, error } = await supabase
+    .from("boards")
+    .update([
+      {
+        title: userData.title,
+        board: comp(userData.board),
+      },
+    ])
+    .eq("user_id", userData.user_id);
+  console.log(data);
+  console.log("error", error);
+};
+
+export const decomp = (text: String) => {
+  return decompress(text, {
+    inputEncoding: "Base64",
+  });
+};
+
+export const comp = (text: String) => {
+  return compress(text, {
+    outputEncoding: "Base64",
+  });
 };

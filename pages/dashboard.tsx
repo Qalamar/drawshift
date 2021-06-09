@@ -47,8 +47,9 @@ import {
 import { compress, decompress } from "lzutf8";
 import CanvasDraw from "react-canvas-draw";
 import { useRouter } from "next/router";
-import { ui } from "lib/store";
+import { canvas, ui } from "lib/store";
 import Head from "next/head";
+import { decomp } from "lib/calls";
 
 const tabs = [{ name: "Boards", href: "#", current: true }];
 
@@ -138,11 +139,21 @@ const Dasboard = observer(() => {
     console.log("boards", boards);
     console.log("error", error);
   };
+
+  const loadBoard = (id) => {
+    console.log(boards[id]);
+    canvas.setBoard(decomp(boards[id].board));
+    canvas.setTitle(boards[id].title);
+    canvas.setDescription(boards[id].description);
+    console.log("title",boards[id].title);
+    
+    router.push("/board");
+  };
   useEffect(() => {
-    console.log(user);
     fetchBoards();
     supabase.auth.refreshSession();
     const data = supabase.auth.user();
+    canvas.setUserId(data.id);
     console.log(data);
   }, []);
   // @ts-ignore
@@ -157,7 +168,7 @@ const Dasboard = observer(() => {
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark font-monst">
       <Head>
-        <title>Drashift | Dashboard</title>
+        <title>Drawshift | Dashboard</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <NewBoard />
@@ -667,6 +678,7 @@ const Dasboard = observer(() => {
                     {boards.map((file, index) => (
                       <li key={file.name} className="relative">
                         <div
+                          onClick={() => loadBoard(index)}
                           className={classNames(
                             file.current
                               ? "ring-2 ring-offset-2 ring-indigo-500"
@@ -680,9 +692,7 @@ const Dasboard = observer(() => {
                               hideGrid={true}
                               canvasWidth="auto"
                               canvasHeight={450}
-                              saveData={decompress(boards[index].board, {
-                                inputEncoding: "Base64",
-                              })}
+                              saveData={decomp(boards[index].board)}
                               lazyRadius="0"
                               className="pointer-events-none rounded-x"
                             />

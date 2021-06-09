@@ -33,6 +33,9 @@ import { compress, decompress } from "lzutf8";
 import CanvasDraw from "react-canvas-draw";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import Head from "next/head";
+import { observer } from "mobx-react-lite";
+import { canvas } from "lib/store";
+import { decomp, saveBoard } from "lib/calls";
 const views = [
   { id: 1, name: "Wade Cooper" },
   { id: 2, name: "Arlene Mccoy" },
@@ -90,7 +93,7 @@ const fetchUser = new Promise(function (resolve, reject) {
   resolve(supabase.auth.user());
 });
 
-export default function Example() {
+const Board = observer(() => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selected, setSelected] = useState(views[1]);
   const [List, setList] = useState(true);
@@ -115,27 +118,25 @@ export default function Example() {
     router.push("/");
   };
 
-  const saveBoard = async () => {
-    const { data, error } = await supabase.from("boards").insert([
-      {
-        user_id: userData.id,
-        title: "Title",
-        board: compress(saveableCanvas.getSaveData(), {
-          outputEncoding: "Base64",
-        }),
-      },
-    ]);
-    console.log(data);
+  const updateBoard = async () => {
+    const canvasCopy = {
+      user_id: canvas.user_id,
+      title: canvas.title,
+      board: saveableCanvas.getSaveData(),
+    };
+    saveBoard(canvasCopy);
   };
 
   useEffect(() => {
     console.log(user);
-
     supabase.auth.refreshSession();
     const userData = supabase.auth.user();
     console.log(userData);
     setuserData(userData);
     fetchPath(userData);
+    setTimeout(() => {
+      console.log(saveableCanvas.getSaveData());
+    }, 1000);
   }, []);
   // @ts-ignore
   const { isLoading, error, data } = useQuery("userData", () =>
@@ -162,7 +163,7 @@ export default function Example() {
     <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark font-monst">
       {/* Top nav*/}
       <Head>
-        <title>Drashift | Boards</title>
+        <title>Drawshift | Boards</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <header className="relative flex items-center flex-shrink-0 h-16 bg-gray-100 dark:bg-dark">
@@ -346,7 +347,7 @@ export default function Example() {
               <nav className="flex" aria-label="Breadcrumb"></nav>
               <input
                 className="px-4 py-2 flex-grow text-sm font-medium text-gray-700 transition duration-200 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                placeholder="Board 01"
+                placeholder={canvas.title}
               />
             </div>
             <div className="flex mt-5 lg:mt-0 lg:ml-4">
@@ -380,7 +381,7 @@ export default function Example() {
 
               <span className="ml-3">
                 <button
-                  onClick={() => saveBoard()}
+                  onClick={() => updateBoard()}
                   type="button"
                   className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
@@ -401,6 +402,7 @@ export default function Example() {
               brushRadius={brushRadius}
               hideInterface={true}
               hideGrid={true}
+              saveData={canvas.board}
               canvasWidth="auto"
               canvasHeight={450}
               lazyRadius="0"
@@ -446,4 +448,6 @@ export default function Example() {
       </div>
     </div>
   );
-}
+});
+
+export default Board;

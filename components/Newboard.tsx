@@ -5,8 +5,8 @@ import {
   LinkIcon,
   MinusCircleIcon,
 } from "@heroicons/react/solid";
-import { saveBoard } from "lib/calls";
-import { ui } from "lib/store";
+import { createBoard } from "lib/calls";
+import { ui, canvas } from "lib/store";
 import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
@@ -22,8 +22,18 @@ const NewBoard = observer(() => {
   } = useForm();
   console.log(watch("title"));
   const onSubmit = (data) => {
-    // saveBoard(data);
-    createBoard();
+    console.log(data);
+    canvas.setTitle(data.title);
+    canvas.setDescription(data.description);
+    const canvasCopy = {
+      user_id: canvas.user_id,
+      title: canvas.title,
+      description: canvas.description,
+      board: canvas.board,
+    };
+    console.log(canvasCopy);
+    router.push("/board");
+    createBoard(canvasCopy);
   };
 
   const handleClose = () => {
@@ -31,9 +41,7 @@ const NewBoard = observer(() => {
     ui.setNewBoard(false);
   };
   const router = useRouter();
-  const createBoard = () => {
-    router.push("/board");
-  };
+
   const uniqueId = () => {
     const dateString = Date.now().toString(36);
     const randomness = Math.random().toString(36).substr(2);
