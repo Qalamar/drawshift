@@ -50,6 +50,7 @@ import { useRouter } from "next/router";
 import { canvas, ui } from "lib/store";
 import Head from "next/head";
 import { decomp } from "lib/calls";
+import DeleteForm from "components/Settings";
 
 const tabs = [{ name: "Boards", href: "#", current: true }];
 
@@ -62,7 +63,7 @@ const views = [
 const positions = [
   {
     id: 1,
-    title: "Sample Board",
+    title: "Click here to create your first board",
     type: "Tutorial",
     location: "Canvas",
     department: "Private",
@@ -74,23 +75,28 @@ const positions = [
 const navigation = [
   {
     name: "Inboxes",
-    href: "#",
+    href: "/dashboard",
     children: [
-      { name: "Technical Support", href: "#" },
-      { name: "Sales", href: "#" },
-      { name: "General", href: "#" },
+      { name: "Technical Support", href: "/dashboard" },
+      { name: "Sales", href: "/dashboard" },
+      { name: "General", href: "/dashboard" },
     ],
   },
-  { name: "Reporting", href: "#", children: [] },
-  { name: "Settings", href: "#", children: [] },
+  { name: "Reporting", href: "/dashboard", children: [] },
+  { name: "Settings", href: "/dashboard", children: [] },
 ];
 const sidebarNavigation = [
-  { name: "Open", href: "#", icon: InboxIcon, current: true },
-  { name: "Archive", href: "#", icon: ArchiveIcon, current: false },
-  { name: "Customers", href: "#", icon: UserCircleIcon, current: false },
-  { name: "Flagged", href: "#", icon: FlagIcon, current: false },
-  { name: "Spam", href: "#", icon: BanIcon, current: false },
-  { name: "Drafts", href: "#", icon: PencilAltIcon, current: false },
+  { name: "Open", href: "/dashboard", icon: InboxIcon, current: true },
+  { name: "Archive", href: "/dashboard", icon: ArchiveIcon, current: false },
+  {
+    name: "Customers",
+    href: "/dashboard",
+    icon: UserCircleIcon,
+    current: false,
+  },
+  { name: "Flagged", href: "/dashboard", icon: FlagIcon, current: false },
+  { name: "Spam", href: "/dashboard", icon: BanIcon, current: false },
+  { name: "Drafts", href: "/dashboard", icon: PencilAltIcon, current: false },
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#" },
@@ -145,8 +151,8 @@ const Dasboard = observer(() => {
     canvas.setBoard(decomp(boards[id].board));
     canvas.setTitle(boards[id].title);
     canvas.setDescription(boards[id].description);
-    console.log("title",boards[id].title);
-    
+    console.log("title", boards[id].title);
+
     router.push("/board");
   };
   useEffect(() => {
@@ -171,6 +177,7 @@ const Dasboard = observer(() => {
         <title>Drawshift | Dashboard</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
+      <DeleteForm />
       <NewBoard />
       {/* Top nav*/}
       <header className="relative flex items-center flex-shrink-0 h-16 bg-white dark:bg-dark">
@@ -426,6 +433,7 @@ const Dasboard = observer(() => {
                 </Search>
                 <button
                   type="button"
+                  onClick={() => ui.setDeleteForm(true)}
                   className="items-center w-10 h-10 p-1 text-gray-400 transition duration-200 bg-white border border-gray-300 rounded-md shadow-sm font-monst dark:text-gray-200 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-800 focus:ring-indigo-500"
                 >
                   <FilterIcon

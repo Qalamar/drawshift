@@ -71,12 +71,17 @@ const navigation = [
   { name: "Settings", href: "#", children: [] },
 ];
 const sidebarNavigation = [
-  { name: "Open", href: "#", icon: InboxIcon, current: true },
-  { name: "Archive", href: "#", icon: ArchiveIcon, current: false },
-  { name: "Customers", href: "#", icon: UserCircleIcon, current: false },
-  { name: "Flagged", href: "#", icon: FlagIcon, current: false },
-  { name: "Spam", href: "#", icon: BanIcon, current: false },
-  { name: "Drafts", href: "#", icon: PencilAltIcon, current: false },
+  { name: "Open", href: "/dashboard", icon: InboxIcon, current: true },
+  { name: "Archive", href: "/dashboard", icon: ArchiveIcon, current: false },
+  {
+    name: "Customers",
+    href: "/dashboard",
+    icon: UserCircleIcon,
+    current: false,
+  },
+  { name: "Flagged", href: "/dashboard", icon: FlagIcon, current: false },
+  { name: "Spam", href: "/dashboard", icon: BanIcon, current: false },
+  { name: "Drafts", href: "/dashboard", icon: PencilAltIcon, current: false },
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#" },

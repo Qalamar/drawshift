@@ -4,6 +4,7 @@ const UI = types
   .model({
     createForm: types.boolean,
     loginForm: types.boolean,
+    deleteForm: types.boolean,
   })
   .actions((self) => ({
     setNewBoard(status) {
@@ -12,11 +13,15 @@ const UI = types
     setLoginForm(status) {
       self.loginForm = status;
     },
+    setDeleteForm(status) {
+      self.deleteForm = status;
+    },
   }));
 
 export const ui = UI.create({
   createForm: false,
   loginForm: false,
+  deleteForm: false,
 });
 
 const CANVAS = types
