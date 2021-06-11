@@ -23,6 +23,7 @@ import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import ReactFlow from "react-flow-renderer";
 import { useQuery } from "react-query";
 import { Main } from "../components/styled/board.styled";
+import useWebSocket, { ReadyState } from "react-use-websocket";
 
 const views = [
   { id: 1, name: "Wade Cooper" },
@@ -112,9 +113,58 @@ const Chart = observer(() => {
     },
     // animated edge
     { id: "e1-2", source: "1", target: "2", animated: true },
-    { id: "e2-3", source: "2", target: "3" },
+    { id: "e2-3", source: "2", target: "3", animated: true },
   ]);
   const [userData, setuserData] = useState();
+  const [socketUrl, setSocketUrl] = useState(
+    "ws://localhost:3003/ws/chat/someroom/"
+  );
+  const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
+  const connectionStatus = {
+    [ReadyState.CONNECTING]: "Connecting",
+    [ReadyState.OPEN]: "Open",
+    [ReadyState.CLOSING]: "Closing",
+    [ReadyState.CLOSED]: "Closed",
+    [ReadyState.UNINSTANTIATED]: "Uninstantiated",
+  }[readyState];
+  // Updating the position
+  useEffect(() => {
+    if (lastMessage != null) {
+      setElements((els) =>
+        els.map((el) => {
+          let v = lastMessage.data.split(",");
+          if (el.id === v[1]) {
+            el.position = {
+              x: parseInt(v[3]),
+              y: parseInt(v[5]),
+            };
+            v = [0, 0, 0, 0, 0, 0];
+          }
+          return el;
+        })
+      );
+    }
+  }, [lastMessage]);
+
+  const onUpdateGraph = (e, n) => {
+    setElements((els) =>
+      els.map((el) => {
+        if (el.id === n.id) {
+          // it's important that you create a new object here
+          // in order to notify react flow about the change
+          el.position = {
+            x: n.position.x,
+            y: n.position.y,
+          };
+        }
+
+        return el;
+      })
+    );
+    // sendMessage("id," + n.id + ",x," + n.position.x + ",y," + n.position.y);
+  };
+
+  // Removing node/edge
 
   useEffect(() => {
     console.log(user);
@@ -372,8 +422,9 @@ const Chart = observer(() => {
           </div>
           <div className="h-auto mx-auto mt-8 bg-white rounded-lg shadow-lg max-w-7xl">
             <div className="w-[1200px] h-96">
-              <ReactFlow elements={elements} />
+              <ReactFlow elements={elements} onNodeDragStop={onUpdateGraph} />
             </div>
+            <span>The WebSocket is currently {connectionStatus}</span>
           </div>
         </Main>
       </div>
