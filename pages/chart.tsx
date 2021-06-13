@@ -157,18 +157,18 @@ const Chart = observer(() => {
     setElements((els) =>
       els.map((el) => {
         if (el.id === n.id) {
-          // it's important that you create a new object here
-          // in order to notify react flow about the change
           el.position = {
             x: n.position.x,
             y: n.position.y,
           };
         }
-
         return el;
       })
     );
-    // sendMessage("id," + n.id + ",x," + n.position.x + ",y," + n.position.y);
+    let a = [];
+    a.push(n);
+    a.push({ typeofoperation: "move" });
+    sendJsonMessage(a);
   };
 
   // Removing node/edge
@@ -181,11 +181,22 @@ const Chart = observer(() => {
   useEffect(() => {
     // avoiding issues on startup
     if (lastJsonMessage != null) {
-      // Checking type of operation
-      if (lastJsonMessage["message"].pop()["typeofoperation"] == "remove") {
+      let typeofoperation = lastJsonMessage["message"].pop()["typeofoperation"];
+      if (typeofoperation == "remove") {
         setElements((els) => removeElements(lastJsonMessage["message"], els));
-      } else {
-        // other types of operations to be added
+      } else if (typeofoperation == "move") {
+        let n = lastJsonMessage["message"][0];
+        setElements((els) =>
+          els.map((el) => {
+            if (el.id === n.id) {
+              el.position = {
+                x: n.position.x,
+                y: n.position.y,
+              };
+            }
+            return el;
+          })
+        );
       }
     }
   }, [lastJsonMessage]);
