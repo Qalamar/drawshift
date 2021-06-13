@@ -20,7 +20,7 @@ import { observer } from "mobx-react-lite";
 import Head from "next/head";
 import React, { Fragment, useEffect, useState } from "react";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
-import ReactFlow from "react-flow-renderer";
+import ReactFlow, { removeElements } from "react-flow-renderer";
 import { useQuery } from "react-query";
 import { Main } from "../components/styled/board.styled";
 import useWebSocket, { ReadyState } from "react-use-websocket";
@@ -102,7 +102,7 @@ const Chart = observer(() => {
     {
       id: "2",
       // you can also pass a React component as a label
-      data: { label: <div>Default Node</div> },
+      data: { label: "default node" },
       position: { x: 100, y: 125 },
     },
     {
@@ -119,7 +119,13 @@ const Chart = observer(() => {
   const [socketUrl, setSocketUrl] = useState(
     "ws://localhost:3003/ws/chat/someroom/"
   );
-  const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
+  const {
+    sendMessage,
+    sendJsonMessage,
+    lastMessage,
+    lastJsonMessage,
+    readyState,
+  } = useWebSocket(socketUrl);
   const connectionStatus = {
     [ReadyState.CONNECTING]: "Connecting",
     [ReadyState.OPEN]: "Open",
@@ -127,24 +133,25 @@ const Chart = observer(() => {
     [ReadyState.CLOSED]: "Closed",
     [ReadyState.UNINSTANTIATED]: "Uninstantiated",
   }[readyState];
+
   // Updating the position
-  useEffect(() => {
-    if (lastMessage != null) {
-      setElements((els) =>
-        els.map((el) => {
-          let v = lastMessage.data.split(",");
-          if (el.id === v[1]) {
-            el.position = {
-              x: parseInt(v[3]),
-              y: parseInt(v[5]),
-            };
-            v = [0, 0, 0, 0, 0, 0];
-          }
-          return el;
-        })
-      );
-    }
-  }, [lastMessage]);
+  // useEffect(() => {
+  //   if (lastMessage != null) {
+  //     setElements((els) =>
+  //       els.map((el) => {
+  //         let v = lastMessage.data.split(",");
+  //         if (el.id === v[1]) {
+  //           el.position = {
+  //             x: parseInt(v[3]),
+  //             y: parseInt(v[5]),
+  //           };
+  //           v = [0, 0, 0, 0, 0, 0];
+  //         }
+  //         return el;
+  //       })
+  //     );
+  //   }
+  // }, [lastMessage]);
 
   const onUpdateGraph = (e, n) => {
     setElements((els) =>
@@ -165,6 +172,23 @@ const Chart = observer(() => {
   };
 
   // Removing node/edge
+  const onElementsRemove = (elementsToRemove) => {
+    setElements((els) => removeElements(elementsToRemove, els));
+    elementsToRemove.push({ typeofoperation: "remove" });
+    sendJsonMessage(elementsToRemove);
+  };
+
+  useEffect(() => {
+    // avoiding issues on startup
+    if (lastJsonMessage != null) {
+      // Checking type of operation
+      if (lastJsonMessage["message"].pop()["typeofoperation"] == "remove") {
+        setElements((els) => removeElements(lastJsonMessage["message"], els));
+      } else {
+        // other types of operations to be added
+      }
+    }
+  }, [lastJsonMessage]);
 
   useEffect(() => {
     console.log(user);
@@ -422,7 +446,11 @@ const Chart = observer(() => {
           </div>
           <div className="h-auto mx-auto mt-8 bg-white rounded-lg shadow-lg max-w-7xl">
             <div className="w-[1200px] h-96">
-              <ReactFlow elements={elements} onNodeDragStop={onUpdateGraph} />
+              <ReactFlow
+                elements={elements}
+                onNodeDragStop={onUpdateGraph}
+                onElementsRemove={onElementsRemove}
+              />
             </div>
             <span>The WebSocket is currently {connectionStatus}</span>
           </div>

@@ -15,6 +15,7 @@
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/forms": "^0.3.2",
     "immer": "^9.0.2",
+    "json-decycle": "^1.0.0",
     "lzutf8": "^0.6.0",
     "mobx": "^6.3.2",
     "mobx-react-lite": "^3.2.0",
@@ -31,6 +32,7 @@
     "recoil": "^0.3.1",
     "styled-components": "^5.3.0",
     "swr": "^0.5.6",
+    "use-state-with-callback": "^2.0.3",
     "yarn": "^1.22.10"
   },
   "devDependencies": {
