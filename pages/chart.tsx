@@ -18,7 +18,7 @@ import { store } from "lib/store";
 import { compress, decompress } from "lzutf8";
 import { observer } from "mobx-react-lite";
 import Head from "next/head";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useCallback } from "react";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import ReactFlow, { removeElements } from "react-flow-renderer";
 import { useQuery } from "react-query";
@@ -81,6 +81,8 @@ const fetchUser = new Promise(function (resolve, reject) {
   if (!supabase.auth.session) supabase.auth.refreshSession();
   resolve(supabase.auth.user());
 });
+
+const getNodeId = () => `randomnode_${+new Date()}`;
 
 const Chart = observer(() => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -178,6 +180,24 @@ const Chart = observer(() => {
     sendJsonMessage(elementsToRemove);
   };
 
+  // Adding a node
+  const addNode = useCallback(() => {
+    const newNode = {
+      id: getNodeId(),
+      data: { label: "Added node" },
+      position: {
+        x: Math.random() * window.innerWidth - 100,
+        y: Math.random() * window.innerHeight,
+      },
+    };
+    setElements((els) => els.concat(newNode));
+    let a = [];
+    a.push(newNode);
+    a.push({ typeofoperation: "add" });
+    sendJsonMessage(a);
+  }, [setElements]);
+
+  // Handling different updates
   useEffect(() => {
     // avoiding issues on startup
     if (lastJsonMessage != null) {
@@ -197,6 +217,10 @@ const Chart = observer(() => {
             return el;
           })
         );
+      } else if (typeofoperation == "add") {
+        let newNode = lastJsonMessage["message"][0];
+        console.log(newNode);
+        setElements((els) => els.concat(newNode));
       }
     }
   }, [lastJsonMessage]);
@@ -465,6 +489,7 @@ const Chart = observer(() => {
             </div>
             <span>The WebSocket is currently {connectionStatus}</span>
           </div>
+          <button onClick={addNode}>Add node</button>
         </Main>
       </div>
     </div>
