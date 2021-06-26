@@ -1,9 +1,8 @@
 // @ts-nocheck
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, Transition, Listbox } from "@headlessui/react";
 import {
   ArchiveIcon,
   BanIcon,
-  BellIcon,
   FlagIcon,
   InboxIcon,
   MenuIcon,
@@ -11,40 +10,36 @@ import {
   UserCircleIcon,
   XIcon,
 } from "@heroicons/react/outline";
-import { ReplyIcon, SaveAsIcon, TrashIcon } from "@heroicons/react/solid";
-import Spinner from "components/Spinner";
+import {
+  ReplyIcon,
+  SaveAsIcon,
+  TrashIcon,
+  CheckIcon,
+  SelectorIcon,
+} from "@heroicons/react/solid";
 import { supabase } from "lib/initSupabase";
-import { store } from "lib/store";
-import { compress, decompress } from "lzutf8";
 import { observer } from "mobx-react-lite";
 import Head from "next/head";
-import React, { Fragment, useEffect, useState, useCallback } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
-import ReactFlow, { removeElements } from "react-flow-renderer";
-import { useQuery } from "react-query";
-import { Main } from "../components/styled/board.styled";
+import ReactFlow, {
+  removeElements,
+  addEdge,
+  MiniMap,
+  Controls,
+  Background,
+} from "react-flow-renderer";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-
-const views = [
-  { id: 1, name: "Wade Cooper" },
-  { id: 2, name: "Arlene Mccoy" },
-  { id: 3, name: "Devon Webb" },
-];
-
-const colors = [
-  "#e4fafa",
-  "#30d343",
-  "#FFFF33",
-  "#6200F5",
-  "#ed4e4e",
-  "#141314",
-];
+import { Main } from "../components/styled/board.styled";
+import { HexColorPicker } from "react-colorful";
 
 let saveableCanvas: {
   clear: () => void;
   getSaveData: () => string;
   undo: () => void;
 };
+
+const people = ["Input", "Output"];
 
 const navigation = [
   {
@@ -86,7 +81,9 @@ const getNodeId = () => `randomnode_${+new Date()}`;
 
 const Chart = observer(() => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const [input, setInput] = useState("initialState");
+  const [selected, setSelected] = useState("Input");
+  const [color, setColor] = useState("#aabbcc");
   const [user, setUser] = useState({
     user_metadata: {
       avatar_url: "",
@@ -99,6 +96,11 @@ const Chart = observer(() => {
       type: "input", // input node
       data: { label: "Input Node" },
       position: { x: 250, y: 25 },
+      style: {
+        border: "1px solid #777",
+        padding: 10,
+        backgroundColor: "#f2a2c2",
+      },
     },
     // default node
     {
@@ -180,6 +182,10 @@ const Chart = observer(() => {
     sendJsonMessage(elementsToRemove);
   };
 
+  const onElementClick = (event, element) => {
+    console.log(event);
+    console.log(element);
+  };
   // Adding a node
   const addNode = useCallback(() => {
     const newNode = {
@@ -227,26 +233,26 @@ const Chart = observer(() => {
 
   useEffect(() => {
     console.log(user);
-    supabase.auth.refreshSession();
-    const userData = supabase.auth.user();
+    // supabase.auth.refreshSession();
+    // const userData = supabase.auth.user();
     console.log(userData);
     setuserData(userData);
   }, []);
 
   // @ts-ignore
-  const { isLoading, error, data } = useQuery("userData", () =>
-    fetchUser.then((res) => setUser(res))
-  );
+  // const { isLoading, error, data } = useQuery("userData", () =>
+  //   fetchUser.then((res) => setUser(res))
+  // );
 
-  if (isLoading) return <Spinner />;
+  // if (isLoading) return <Spinner />;
 
-  if (error) return "An error has occurred: " + error.message;
+  // if (error) return "An error has occurred: " + error.message;
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark font-monst">
       {/* Top nav*/}
       <Head>
-        <title>Drashift | Boards</title>
+        <title>Drawshift | Boards</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <header className="relative flex items-center flex-shrink-0 h-16 bg-gray-100 dark:bg-dark">
@@ -354,7 +360,7 @@ const Chart = observer(() => {
                   ))}
                 </div>
                 <div className="pt-4 pb-3 border-t border-gray-200">
-                  <div className="flex items-center px-4 mx-auto max-w-8xl sm:px-6">
+                  {/* <div className="flex items-center px-4 mx-auto max-w-8xl sm:px-6">
                     <div className="flex-shrink-0">
                       <img
                         className="w-10 h-10 rounded-full"
@@ -377,7 +383,7 @@ const Chart = observer(() => {
                       <span className="sr-only">View notifications</span>
                       <BellIcon className="w-6 h-6" aria-hidden="true" />
                     </a>
-                  </div>
+                  </div> */}
                   <div className="px-2 mx-auto mt-3 space-y-1 max-w-8xl sm:px-4">
                     {userNavigation.map((item) => (
                       <a
@@ -425,11 +431,11 @@ const Chart = observer(() => {
         {/* Main area */}
         <Main>
           {/* Page header */}
-          <div className="mx-auto mt-2 flex items-center justify-between flex-col md:flex-row max-w-7xl">
+          <div className="flex flex-col items-center justify-between mx-auto mt-2 md:flex-row max-w-7xl">
             <div className="flex-1 min-w-0">
               <nav className="flex" aria-label="Breadcrumb"></nav>
               <input
-                className="px-4 py-2 flex-grow text-sm font-medium text-gray-700 transition duration-200 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="flex-grow px-4 py-2 text-sm font-medium text-gray-700 transition duration-200 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                 placeholder="Board 01"
               />
             </div>
@@ -479,16 +485,130 @@ const Chart = observer(() => {
               {/* Dropdown */}
             </div>
           </div>
-          <div className="h-auto mx-auto mt-8 bg-white rounded-lg shadow-lg max-w-7xl">
-            <div className="w-[1200px] h-96">
+          <div className="flex flex-row h-auto mx-auto mt-8 bg-white rounded-lg shadow-lg max-w-7xl">
+            <div className="w-2/3 h-[600px]">
               <ReactFlow
                 elements={elements}
                 onNodeDragStop={onUpdateGraph}
                 onElementsRemove={onElementsRemove}
-              />
+                onElementClick={onElementClick}
+              >
+                <MiniMap
+                  nodeStrokeColor={(n) => {
+                    if (n.style?.background) return n.style.background;
+                    if (n.type === "input") return "#0041d0";
+                    if (n.type === "output") return "#ff0072";
+                    if (n.type === "default") return "#1a192b";
+
+                    return "#eee";
+                  }}
+                  nodeColor={(n) => {
+                    if (n.style?.background) return n.style.background;
+
+                    return "#fff";
+                  }}
+                  nodeBorderRadius={2}
+                />
+                <Controls />
+                <Background color="#aaa" gap={16} />
+              </ReactFlow>
             </div>
-            <span>The WebSocket is currently {connectionStatus}</span>
+            <div className="w-1/3 flex flex-col py-20 px-12 space-y-4 bg-gray-800 rounded-r-lg h-[600px]">
+              <div className="flex flex-col">
+                <div className="block mb-4 text-sm font-medium text-gray-200">
+                  Node Content
+                </div>
+                <input
+                  className="p-2 text-sm border border-gray-100 shadow-xl"
+                  placeholder="Type your node text"
+                />
+              </div>
+
+              <Listbox value={selected} onChange={setSelected}>
+                {({ open }) => (
+                  <>
+                    <Listbox.Label className="block text-sm font-medium text-gray-200">
+                      Type
+                    </Listbox.Label>
+                    <div className="relative mt-1">
+                      <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <span className="block truncate">{selected}</span>
+                        <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                          <SelectorIcon
+                            className="w-5 h-5 text-gray-400"
+                            aria-hidden="true"
+                          />
+                        </span>
+                      </Listbox.Button>
+
+                      <Transition
+                        show={open}
+                        as={Fragment}
+                        leave="transition ease-in duration-100"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                      >
+                        <Listbox.Options
+                          static
+                          className="absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                        >
+                          {people.map((person) => (
+                            <Listbox.Option
+                              key={person.id}
+                              className={({ active }) =>
+                                classNames(
+                                  active
+                                    ? "text-white bg-indigo-600"
+                                    : "text-gray-900",
+                                  "cursor-default select-none relative py-2 pl-3 pr-9"
+                                )
+                              }
+                              value={person}
+                            >
+                              {({ selected, active }) => (
+                                <>
+                                  <span
+                                    className={classNames(
+                                      selected
+                                        ? "font-semibold"
+                                        : "font-normal",
+                                      "block truncate"
+                                    )}
+                                  >
+                                    {person}
+                                  </span>
+
+                                  {selected ? (
+                                    <span
+                                      className={classNames(
+                                        active
+                                          ? "text-white"
+                                          : "text-indigo-600",
+                                        "absolute inset-y-0 right-0 flex items-center pr-4"
+                                      )}
+                                    >
+                                      <CheckIcon
+                                        className="w-5 h-5"
+                                        aria-hidden="true"
+                                      />
+                                    </span>
+                                  ) : null}
+                                </>
+                              )}
+                            </Listbox.Option>
+                          ))}
+                        </Listbox.Options>
+                      </Transition>
+                    </div>
+                  </>
+                )}
+              </Listbox>
+              <div className="flex flex-col items-center pt-12">
+                <HexColorPicker color={color} onChange={setColor} />
+              </div>
+            </div>
           </div>
+          <span>The WebSocket is currently {connectionStatus}</span>
           <button onClick={addNode}>Add node</button>
         </Main>
       </div>
