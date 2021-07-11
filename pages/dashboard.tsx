@@ -607,7 +607,7 @@ const Dasboard = observer(() => {
                 {List && (
                   <ul
                     role="list"
-                    className="grid grid-cols-1 bg-gradient-to-r from-gray-700 to-gray-800 border border-gray-700 divide-y divide-gray-200 rounded-lg shadow-lg border-1 gap-x-4 gap-y-0"
+                    className="grid grid-cols-1 bg-gray-800 border border-gray-700 divide-y divide-gray-200 rounded-lg shadow-lg border-1 gap-x-4 gap-y-0"
                   >
                     {boards.map((board) => (
                       <li key={board.id}>
@@ -623,7 +623,7 @@ const Dasboard = observer(() => {
                               </p>
                               <div className="flex flex-shrink-0 ml-2">
                                 <p className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                  asdf
+                                  Manual
                                 </p>
                               </div>
                             </div>
@@ -634,14 +634,7 @@ const Dasboard = observer(() => {
                                     className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                                     aria-hidden="true"
                                   />
-                                  asssf
-                                </p>
-                                <p className="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                                  <LocationMarkerIcon
-                                    className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                                    aria-hidden="true"
-                                  />
-                                  asdfs
+                                  Private
                                 </p>
                               </div>
                               <div className="flex items-center mt-2 text-sm text-gray-500 sm:mt-0">

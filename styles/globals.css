@@ -51,6 +51,16 @@
   box-shadow: inset 7px 10px 12px #f0f0f0;
 }
 
+textarea {
+  border: none;
+  overflow: auto;
+  outline: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  resize: none; /*remove the resize handle on the bottom right*/
+}
+
 /* Seperators */
 .container {
   position: relative;

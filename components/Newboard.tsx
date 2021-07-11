@@ -105,7 +105,7 @@ const NewBoard = observer(() => {
                     <div className="flex items-center ml-3 h-7">
                       <button
                         type="button"
-                        className="text-indigo-200 bg-indigo-700 rounded-md hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
+                        className="text-indigo-200 bg-indigo-700 rounded-md hover:text-white focus:outline-none "
                         onClick={() => handleClose()}
                       >
                         <span className="sr-only">Close panel</span>
@@ -120,7 +120,7 @@ const NewBoard = observer(() => {
                     </p>
                   </div>
                 </div>
-                <div className="h-full p-8 overflow-y-auto bg-white font-monst">
+                <div className="h-full p-8 overflow-y-auto bg-gray-800 font-monst">
                   <form
                     onSubmit={handleSubmit(onSubmit)}
                     className="pb-16 space-y-6"
@@ -130,7 +130,7 @@ const NewBoard = observer(() => {
                         <div className="w-full">
                           <label
                             htmlFor="project_name"
-                            className="block text-sm font-medium text-gray-900"
+                            className="block text-sm font-medium text-gray-300"
                           >
                             Project name
                           </label>
@@ -166,7 +166,7 @@ const NewBoard = observer(() => {
                         <div className="w-full">
                           <label
                             htmlFor="description"
-                            className="block text-sm font-medium text-gray-900"
+                            className="block text-sm font-medium text-gray-300"
                           >
                             Description
                           </label>
@@ -178,7 +178,7 @@ const NewBoard = observer(() => {
                               maxLength={100}
                               rows={4}
                               placeholder="Optional"
-                              className="block w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500"
+                              className="block px-4 py-2 w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500"
                               defaultValue={""}
                             />
                           </div>
@@ -187,7 +187,7 @@ const NewBoard = observer(() => {
                     </div>
                     <div>
                       <fieldset>
-                        <legend className="text-sm font-medium text-gray-900">
+                        <legend className="text-sm font-medium text-gray-300">
                           Privacy
                         </legend>
                         <div className="mt-2 space-y-5">
@@ -205,7 +205,7 @@ const NewBoard = observer(() => {
                             <div className="text-sm pl-7">
                               <label
                                 htmlFor="privacy_public"
-                                className="font-medium text-gray-900"
+                                className="font-medium text-gray-300"
                               >
                                 Public access
                               </label>
@@ -232,7 +232,7 @@ const NewBoard = observer(() => {
                               <div className="text-sm pl-7">
                                 <label
                                   htmlFor="privacy_private"
-                                  className="font-medium text-gray-900"
+                                  className="font-medium text-gray-300"
                                 >
                                   Private to you
                                 </label>
@@ -277,6 +277,7 @@ const NewBoard = observer(() => {
                       </button>
                       <button
                         type="button"
+                        onClick={() => handleClose()}
                         className="flex-1 px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       >
                         Cancel
