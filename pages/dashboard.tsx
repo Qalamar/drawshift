@@ -51,6 +51,7 @@ import { canvas, ui } from "lib/store";
 import Head from "next/head";
 import { decomp } from "lib/calls";
 import DeleteForm from "components/Settings";
+import dayjs from "dayjs";
 
 const tabs = [{ name: "Boards", href: "#", current: true }];
 
@@ -85,19 +86,7 @@ const navigation = [
   { name: "Reporting", href: "/dashboard", children: [] },
   { name: "Settings", href: "/dashboard", children: [] },
 ];
-const sidebarNavigation = [
-  { name: "Open", href: "/dashboard", icon: InboxIcon, current: true },
-  { name: "Archive", href: "/dashboard", icon: ArchiveIcon, current: false },
-  {
-    name: "Customers",
-    href: "/dashboard",
-    icon: UserCircleIcon,
-    current: false,
-  },
-  { name: "Flagged", href: "/dashboard", icon: FlagIcon, current: false },
-  { name: "Spam", href: "/dashboard", icon: BanIcon, current: false },
-  { name: "Drafts", href: "/dashboard", icon: PencilAltIcon, current: false },
-];
+
 const userNavigation = [
   { name: "Your Profile", href: "#" },
   { name: "Sign out", href: "#" },
@@ -152,7 +141,6 @@ const Dasboard = observer(() => {
     canvas.setTitle(boards[id].title);
     canvas.setDescription(boards[id].description);
     console.log("title", boards[id].title);
-
     router.push("/board");
   };
   useEffect(() => {
@@ -170,9 +158,10 @@ const Dasboard = observer(() => {
   if (isLoading) return <Spinner />;
 
   if (error) return "An error has occurred: " + error.message;
+  if (!boards) return "An error has occurred: ";
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark font-monst">
+    <div className="flex flex-col h-screen overflow-hidden bg-dark font-monst">
       <Head>
         <title>Drawshift | Dashboard</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -180,9 +169,9 @@ const Dasboard = observer(() => {
       <DeleteForm />
       <NewBoard />
       {/* Top nav*/}
-      <header className="relative flex items-center flex-shrink-0 h-16 bg-white dark:bg-dark">
+      <header className="relative flex items-center flex-shrink-0 h-16 bg-dark">
         {/* Logo area */}
-        <div className="absolute inset-y-0 left-0 md:static md:flex-shrink-0">
+        {/* <div className="absolute inset-y-0 left-0 md:static md:flex-shrink-0">
           <a
             href="#"
             className="flex items-center justify-center w-16 h-16 bg-none md:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 md:w-20"
@@ -193,7 +182,7 @@ const Dasboard = observer(() => {
               alt="Workflow"
             />
           </a>
-        </div>
+        </div> */}
 
         {/* Menu button area */}
         <div className="absolute inset-y-0 right-0 flex items-center pr-4 sm:pr-6 md:hidden">
@@ -330,7 +319,7 @@ const Dasboard = observer(() => {
       {/* Bottom section */}
       <div className="flex flex-1 min-h-0 overflow-hidden">
         {/* Narrow sidebar*/}
-        <nav
+        {/* <nav
           aria-label="Sidebar"
           className="hidden shadow-xl md:block md:flex-shrink-0 md:bg-gray-800 md:overflow-y-auto"
         >
@@ -351,7 +340,7 @@ const Dasboard = observer(() => {
               </a>
             ))}
           </div>
-        </nav>
+        </nav> */}
 
         {/* Main area */}
         <Main>
@@ -374,7 +363,7 @@ const Dasboard = observer(() => {
                           src={user.user_metadata.avatar_url}
                           alt=""
                         />
-                        <h1 className="ml-3 text-3xl font-bold text-gray-900 dark:text-gray-100 sm:truncate">
+                        <h1 className="ml-3 text-3xl font-bold text-gray-200 sm:truncate">
                           Good morning, {user.user_metadata.full_name}
                         </h1>
                       </div>
@@ -394,7 +383,7 @@ const Dasboard = observer(() => {
                 <HeaderButtons>
                   <button
                     type="button"
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-800 transition duration-200 bg-white border-2 border-gray-300 rounded-md shadow-lg hover:bg-gray-800 hover:text-white hover:border-transparent focus:outline-none"
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-400 transition duration-200 bg-gray-800 rounded-md shadow-lg  hover:text-gray-100 focus:outline-none"
                   >
                     Settings
                     <MailIcon
@@ -405,7 +394,7 @@ const Dasboard = observer(() => {
                   <button
                     type="button"
                     onClick={() => Logout()}
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-200 bg-gray-800 rounded-md shadow-lg hover:bg-gray-700 hover:text-white focus:outline-none"
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-400 transition duration-200 bg-gray-800 rounded-md shadow-lg  hover:text-gray-100 focus:outline-none"
                   >
                     Logout
                     <LogoutIcon
@@ -423,7 +412,7 @@ const Dasboard = observer(() => {
               <SearchbarContainer>
                 <Search>
                   <input
-                    className="w-full px-4 py-2 text-sm font-medium text-gray-700 transition duration-200 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                    className="w-full px-4 py-2 text-sm font-medium text-gray-300 transition duration-200 bg-gray-800 border border-gray-600 rounded-md shadow-sm hover:bg-gray-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                     placeholder="Search..."
                   />
                   <SearchIcon
@@ -434,7 +423,7 @@ const Dasboard = observer(() => {
                 <button
                   type="button"
                   onClick={() => ui.setDeleteForm(true)}
-                  className="items-center w-10 h-10 p-1 text-gray-400 transition duration-200 bg-white border border-gray-300 rounded-md shadow-sm font-monst dark:text-gray-200 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-800 focus:ring-indigo-500"
+                  className="items-center w-10 h-10 p-2 text-gray-400 transition duration-200 bg-gray-800   rounded-md shadow-sm font-monst dark:text-gray-200 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-100 focus:ring-indigo-500"
                 >
                   <FilterIcon
                     className="w-full h-full fill-current "
@@ -444,7 +433,7 @@ const Dasboard = observer(() => {
                 <button
                   onClick={() => ui.setNewBoard(true)}
                   type="button"
-                  className="relative inline-flex items-center w-10 h-10 p-1 ml-2 text-gray-400 transition duration-200 bg-white border border-gray-300 rounded-md shadow font-monst dark:text-gray-200 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-800 focus:ring-indigo-500"
+                  className="relative inline-flex items-center w-10 h-10 p-2 ml-2 text-gray-400 transition duration-200 bg-gray-800   rounded-md shadow font-monst dark:text-gray-200 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-100 focus:ring-indigo-500"
                 >
                   <ViewGridAddIcon
                     className="w-full h-full fill-current"
@@ -456,9 +445,6 @@ const Dasboard = observer(() => {
 
             <Utils>
               <div className="flex">
-                <h1 className="flex-1 text-2xl font-bold text-gray-900">
-                  Private
-                </h1>
                 <div className="ml-6 bg-gray-100 p-0.5 rounded-lg flex items-center sm:hidden">
                   <button
                     type="button"
@@ -565,7 +551,7 @@ const Dasboard = observer(() => {
                 </div>
                 {/* Desktop View Selector */}
                 <div className="hidden sm:block">
-                  <div className="flex items-center border-b border-gray-200">
+                  <div className="flex items-center border-b border-gray-500">
                     <nav
                       className="flex flex-1 -mb-px space-x-6 xl:space-x-8"
                       aria-label="Tabs"
@@ -577,7 +563,7 @@ const Dasboard = observer(() => {
                           aria-current={tab.current ? "page" : undefined}
                           className={classNames(
                             tab.current
-                              ? "border-indigo-500 text-indigo-600"
+                              ? "border-gray-200 text-gray-200"
                               : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300",
                             "whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
                           )}
@@ -586,12 +572,12 @@ const Dasboard = observer(() => {
                         </a>
                       ))}
                     </nav>
-                    <div className="hidden ml-6 bg-gray-100 p-0.5 rounded-lg items-center sm:flex">
+                    <div className="hidden ml-6 bg-gray-300 p-0.5 rounded-lg items-center sm:flex">
                       <button
                         type="button"
                         onClick={() => setList(true)}
-                        className={`p-1.5 rounded-md text-gray-400  hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 ${
-                          List ? "bg-white" : "hover:bg-white"
+                        className={`p-1.5 rounded-md text-gray-400  hover:shadow-sm focus:outline-none ${
+                          List ? "bg-white" : ""
                         }`}
                       >
                         <ViewListIcon className="w-5 h-5" aria-hidden="true" />
@@ -600,8 +586,8 @@ const Dasboard = observer(() => {
                       <button
                         type="button"
                         onClick={() => setList(false)}
-                        className={`p-1.5 rounded-md text-gray-400  hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 ${
-                          List ? "hover:bg-white" : "bg-white"
+                        className={`p-1.5 rounded-md text-gray-400  hover:shadow-sm focus:outline-none ${
+                          List ? "" : "bg-white"
                         }`}
                       >
                         <ViewGridIcon className="w-5 h-5" aria-hidden="true" />
@@ -621,23 +607,23 @@ const Dasboard = observer(() => {
                 {List && (
                   <ul
                     role="list"
-                    className="grid grid-cols-1 bg-white border border-gray-300 divide-y divide-gray-200 rounded-lg shadow-lg border-1 gap-x-4 gap-y-0"
+                    className="grid grid-cols-1 bg-gradient-to-r from-gray-700 to-gray-800 border border-gray-700 divide-y divide-gray-200 rounded-lg shadow-lg border-1 gap-x-4 gap-y-0"
                   >
-                    {positions.map((position) => (
-                      <li key={position.id}>
+                    {boards.map((board) => (
+                      <li key={board.id}>
                         <a
                           onClick={() => ui.setNewBoard(true)}
                           href="#"
-                          className="block hover:bg-gray-50"
+                          className="block hover:bg-gray-800 transition duration-200"
                         >
                           <div className="px-4 py-4 sm:px-6">
                             <div className="flex items-center justify-between">
-                              <p className="text-sm font-medium text-indigo-600 truncate">
-                                {position.title}
+                              <p className="text-sm font-medium text-gray-300 truncate">
+                                {board.title}
                               </p>
                               <div className="flex flex-shrink-0 ml-2">
                                 <p className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                  {position.type}
+                                  asdf
                                 </p>
                               </div>
                             </div>
@@ -648,14 +634,14 @@ const Dasboard = observer(() => {
                                     className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                                     aria-hidden="true"
                                   />
-                                  {position.department}
+                                  asssf
                                 </p>
                                 <p className="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
                                   <LocationMarkerIcon
                                     className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                                     aria-hidden="true"
                                   />
-                                  {position.location}
+                                  asdfs
                                 </p>
                               </div>
                               <div className="flex items-center mt-2 text-sm text-gray-500 sm:mt-0">
@@ -665,8 +651,10 @@ const Dasboard = observer(() => {
                                 />
                                 <p>
                                   Created at{" "}
-                                  <time dateTime={position.closeDate}>
-                                    {position.closeDateFull}
+                                  <time dateTime={board.closeDate}>
+                                    {dayjs(board.inserted_at).format(
+                                      "MMMM D, YYYY"
+                                    )}
                                   </time>
                                 </p>
                               </div>

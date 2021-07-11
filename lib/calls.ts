@@ -29,7 +29,8 @@ export const saveBoard = async (userData: userData) => {
         board: comp(userData.board),
       },
     ])
-    .eq("user_id", userData.user_id);
+    .eq("user_id", userData.user_id)
+    .match({ title: userData.title });
   console.log(data);
   console.log("error", error);
 };
