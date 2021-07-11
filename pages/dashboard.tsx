@@ -155,10 +155,9 @@ const Dasboard = observer(() => {
     fetchUser.then((res) => setUser(res))
   );
 
-  if (isLoading) return <Spinner />;
+  if (isLoading || !boards) return <Spinner />;
 
   if (error) return "An error has occurred: " + error.message;
-  if (!boards) return "An error has occurred: ";
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-dark font-monst">
@@ -609,10 +608,10 @@ const Dasboard = observer(() => {
                     role="list"
                     className="grid grid-cols-1 bg-gray-800 border border-gray-700 divide-y divide-gray-200 rounded-lg shadow-lg border-1 gap-x-4 gap-y-0"
                   >
-                    {boards.map((board) => (
+                    {boards.map((board, index) => (
                       <li key={board.id}>
                         <a
-                          onClick={() => ui.setNewBoard(true)}
+                          onClick={() => loadBoard(index)}
                           href="#"
                           className="block hover:bg-gray-800 transition duration-200"
                         >

@@ -16,6 +16,7 @@ import {
   CalendarIcon,
   ChevronDownIcon,
   CurrencyDollarIcon,
+  HomeIcon,
   LocationMarkerIcon,
   ReplyIcon,
   SaveAsIcon,
@@ -132,6 +133,9 @@ const Board = observer(() => {
     saveBoard(canvasCopy);
   };
 
+  const goHome = () => {
+    router.push("/dashboard");
+  };
   useEffect(() => {
     console.log(user);
     supabase.auth.refreshSession();
@@ -165,26 +169,14 @@ const Board = observer(() => {
   if (error) return "An error has occurred: " + error.message;
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark font-monst">
+    <div className="flex flex-col h-screen overflow-hidden bg-dark dark:bg-dark font-monst">
       {/* Top nav*/}
       <Head>
         <title>Drawshift | Boards</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <header className="relative flex items-center flex-shrink-0 h-16 bg-gray-100 dark:bg-dark">
+      <header className="relative flex items-center flex-shrink-0 h-16 bg-dark dark:bg-dark">
         {/* Logo area */}
-        <div className="absolute inset-y-0 left-0 md:static md:flex-shrink-0">
-          <a
-            href="#"
-            className="flex items-center justify-center w-16 h-16 bg-none md:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 md:w-20"
-          >
-            <img
-              className="w-auto h-8"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-              alt="Workflow"
-            />
-          </a>
-        </div>
 
         {/* Menu button area */}
         <div className="absolute inset-y-0 right-0 flex items-center pr-4 sm:pr-6 md:hidden">
@@ -321,28 +313,6 @@ const Board = observer(() => {
       {/* Bottom section */}
       <div className="flex flex-1 min-h-0 overflow-hidden">
         {/* Narrow sidebar*/}
-        <nav
-          aria-label="Sidebar"
-          className="hidden shadow-xl md:block md:flex-shrink-0 md:bg-gray-800 md:overflow-y-auto"
-        >
-          <div className="relative flex flex-col w-20 p-3 space-y-3">
-            {sidebarNavigation.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className={classNames(
-                  item.current
-                    ? "bg-gray-900 text-white"
-                    : "text-gray-400 hover:bg-gray-700",
-                  "flex-shrink-0 inline-flex items-center justify-center h-14 w-14 rounded-lg"
-                )}
-              >
-                <span className="sr-only">{item.name}</span>
-                <item.icon className="w-6 h-6" aria-hidden="true" />
-              </a>
-            ))}
-          </div>
-        </nav>
 
         {/* Main area */}
         <Main>
@@ -357,6 +327,20 @@ const Board = observer(() => {
             </div>
             <div className="flex mt-5 lg:mt-0 lg:ml-4">
               <span className="">
+                <button
+                  onClick={() => goHome()}
+                  type="button"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  <HomeIcon
+                    className="w-5 h-5 mr-2 -ml-1 text-gray-500"
+                    aria-hidden="true"
+                  />
+                  Home
+                </button>
+              </span>
+
+              <span className="ml-3">
                 <button
                   onClick={() => saveableCanvas.undo()}
                   type="button"
