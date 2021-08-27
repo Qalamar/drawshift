@@ -11,7 +11,7 @@
     "@headlessui/react": "^1.2.0",
     "@heroicons/react": "^1.0.1",
     "@supabase/supabase-js": "^1.15.1",
-    "@supabase/ui": "^0.33.1",
+    "@supabase/ui": "^0.34.0",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/forms": "^0.3.3",
     "dayjs": "^1.10.6",
