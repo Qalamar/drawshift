@@ -20,7 +20,13 @@ import {
 import { supabase } from "lib/initSupabase";
 import { observer } from "mobx-react-lite";
 import Head from "next/head";
-import React, { Fragment, useCallback, useEffect, useState } from "react";
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useState,
+  useRef,
+} from "react";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import ReactFlow, {
   removeElements,
@@ -32,6 +38,8 @@ import ReactFlow, {
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import { Main } from "../components/styled/board.styled";
 import { HexColorPicker } from "react-colorful";
+// Drawing
+import { ReactSketchCanvas } from "react-sketch-canvas";
 
 let saveableCanvas: {
   clear: () => void;
@@ -79,7 +87,9 @@ const fetchUser = new Promise(function (resolve, reject) {
 
 const getNodeId = () => `randomnode_${+new Date()}`;
 
-const Chart = observer(() => {
+// Drawing
+
+const Drawing = observer(() => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [input, setInput] = useState("initialState");
   const [selected, setSelected] = useState("Input");
@@ -90,39 +100,11 @@ const Chart = observer(() => {
       full_name: "",
     },
   });
-  const [elements, setElements] = useState([
-    {
-      id: "1",
-      type: "input", // input node
-      data: { label: "Input Node" },
-      position: { x: 250, y: 25 },
-      style: {
-        border: "1px solid #777",
-        padding: 10,
-        backgroundColor: "#f2a2c2",
-      },
-    },
-    // default node
-    {
-      id: "2",
-      // you can also pass a React component as a label
-      data: { label: "default node" },
-      position: { x: 100, y: 125 },
-    },
-    {
-      id: "3",
-      type: "output", // output node
-      data: { label: "Output Node" },
-      position: { x: 250, y: 250 },
-    },
-    // animated edge
-    { id: "e1-2", source: "1", target: "2", animated: true },
-    { id: "e2-3", source: "2", target: "3", animated: true },
-  ]);
   const [userData, setuserData] = useState();
   const [socketUrl, setSocketUrl] = useState(
     "ws://localhost:3003/ws/chat/someroom/"
   );
+
   const {
     sendMessage,
     sendJsonMessage,
@@ -138,99 +120,6 @@ const Chart = observer(() => {
     [ReadyState.UNINSTANTIATED]: "Uninstantiated",
   }[readyState];
 
-  // Updating the position
-  // useEffect(() => {
-  //   if (lastMessage != null) {
-  //     setElements((els) =>
-  //       els.map((el) => {
-  //         let v = lastMessage.data.split(",");
-  //         if (el.id === v[1]) {
-  //           el.position = {
-  //             x: parseInt(v[3]),
-  //             y: parseInt(v[5]),
-  //           };
-  //           v = [0, 0, 0, 0, 0, 0];
-  //         }
-  //         return el;
-  //       })
-  //     );
-  //   }
-  // }, [lastMessage]);
-
-  const onUpdateGraph = (e, n) => {
-    setElements((els) =>
-      els.map((el) => {
-        if (el.id === n.id) {
-          el.position = {
-            x: n.position.x,
-            y: n.position.y,
-          };
-        }
-        return el;
-      })
-    );
-    let a = [];
-    a.push(n);
-    a.push({ typeofoperation: "move" });
-    sendJsonMessage(a);
-  };
-
-  // Removing node/edge
-  const onElementsRemove = (elementsToRemove) => {
-    setElements((els) => removeElements(elementsToRemove, els));
-    elementsToRemove.push({ typeofoperation: "remove" });
-    sendJsonMessage(elementsToRemove);
-  };
-
-  const onElementClick = (event, element) => {
-    console.log(event);
-    console.log(element);
-  };
-  // Adding a node
-  const addNode = useCallback(() => {
-    const newNode = {
-      id: getNodeId(),
-      data: { label: "Added node" },
-      position: {
-        x: Math.random() * window.innerWidth - 100,
-        y: Math.random() * window.innerHeight,
-      },
-    };
-    setElements((els) => els.concat(newNode));
-    let a = [];
-    a.push(newNode);
-    a.push({ typeofoperation: "add" });
-    sendJsonMessage(a);
-  }, [setElements]);
-
-  // Handling different updates
-  useEffect(() => {
-    // avoiding issues on startup
-    if (lastJsonMessage != null) {
-      let typeofoperation = lastJsonMessage["message"].pop()["typeofoperation"];
-      if (typeofoperation == "remove") {
-        setElements((els) => removeElements(lastJsonMessage["message"], els));
-      } else if (typeofoperation == "move") {
-        let n = lastJsonMessage["message"][0];
-        setElements((els) =>
-          els.map((el) => {
-            if (el.id === n.id) {
-              el.position = {
-                x: n.position.x,
-                y: n.position.y,
-              };
-            }
-            return el;
-          })
-        );
-      } else if (typeofoperation == "add") {
-        let newNode = lastJsonMessage["message"][0];
-        console.log(newNode);
-        setElements((els) => els.concat(newNode));
-      }
-    }
-  }, [lastJsonMessage]);
-
   useEffect(() => {
     console.log(user);
     // supabase.auth.refreshSession();
@@ -239,14 +128,11 @@ const Chart = observer(() => {
     setuserData(userData);
   }, []);
 
-  // @ts-ignore
-  // const { isLoading, error, data } = useQuery("userData", () =>
-  //   fetchUser.then((res) => setUser(res))
-  // );
-
-  // if (isLoading) return <Spinner />;
-
-  // if (error) return "An error has occurred: " + error.message;
+  const styles = {
+    border: "0.0625rem solid #9c9c9c",
+    borderRadius: "0.25rem",
+  };
+  const canvasRef = useRef<ReactSketchCanvas>(null);
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark font-monst">
@@ -485,135 +371,23 @@ const Chart = observer(() => {
               {/* Dropdown */}
             </div>
           </div>
-          <div className="flex flex-row h-auto mx-auto mt-8 bg-white rounded-lg shadow-lg max-w-7xl">
-            <div className="w-2/3 h-[600px]">
-              <ReactFlow
-                elements={elements}
-                onNodeDragStop={onUpdateGraph}
-                onElementsRemove={onElementsRemove}
-                onElementClick={onElementClick}
-              >
-                <MiniMap
-                  nodeStrokeColor={(n) => {
-                    if (n.style?.background) return n.style.background;
-                    if (n.type === "input") return "#0041d0";
-                    if (n.type === "output") return "#ff0072";
-                    if (n.type === "default") return "#1a192b";
-
-                    return "#eee";
-                  }}
-                  nodeColor={(n) => {
-                    if (n.style?.background) return n.style.background;
-
-                    return "#fff";
-                  }}
-                  nodeBorderRadius={2}
-                />
-                <Controls />
-                <Background color="#aaa" gap={16} />
-              </ReactFlow>
-            </div>
-            <div className="w-1/3 flex flex-col py-20 px-12 space-y-4 bg-gray-800 rounded-r-lg h-[600px]">
-              <div className="flex flex-col">
-                <div className="block mb-4 text-sm font-medium text-gray-200">
-                  Node Content
-                </div>
-                <input
-                  className="p-2 text-sm border border-gray-100 shadow-xl"
-                  placeholder="Type your node text"
-                />
-              </div>
-
-              <Listbox value={selected} onChange={setSelected}>
-                {({ open }) => (
-                  <>
-                    <Listbox.Label className="block text-sm font-medium text-gray-200">
-                      Type
-                    </Listbox.Label>
-                    <div className="relative mt-1">
-                      <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        <span className="block truncate">{selected}</span>
-                        <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                          <SelectorIcon
-                            className="w-5 h-5 text-gray-400"
-                            aria-hidden="true"
-                          />
-                        </span>
-                      </Listbox.Button>
-
-                      <Transition
-                        show={open}
-                        as={Fragment}
-                        leave="transition ease-in duration-100"
-                        leaveFrom="opacity-100"
-                        leaveTo="opacity-0"
-                      >
-                        <Listbox.Options
-                          static
-                          className="absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-                        >
-                          {people.map((person) => (
-                            <Listbox.Option
-                              key={person.id}
-                              className={({ active }) =>
-                                classNames(
-                                  active
-                                    ? "text-white bg-indigo-600"
-                                    : "text-gray-900",
-                                  "cursor-default select-none relative py-2 pl-3 pr-9"
-                                )
-                              }
-                              value={person}
-                            >
-                              {({ selected, active }) => (
-                                <>
-                                  <span
-                                    className={classNames(
-                                      selected
-                                        ? "font-semibold"
-                                        : "font-normal",
-                                      "block truncate"
-                                    )}
-                                  >
-                                    {person}
-                                  </span>
-
-                                  {selected ? (
-                                    <span
-                                      className={classNames(
-                                        active
-                                          ? "text-white"
-                                          : "text-indigo-600",
-                                        "absolute inset-y-0 right-0 flex items-center pr-4"
-                                      )}
-                                    >
-                                      <CheckIcon
-                                        className="w-5 h-5"
-                                        aria-hidden="true"
-                                      />
-                                    </span>
-                                  ) : null}
-                                </>
-                              )}
-                            </Listbox.Option>
-                          ))}
-                        </Listbox.Options>
-                      </Transition>
-                    </div>
-                  </>
-                )}
-              </Listbox>
-              <div className="flex flex-col items-center pt-12">
-                <HexColorPicker color={color} onChange={setColor} />
-              </div>
-            </div>
+          <div className="h-auto mx-auto mt-8 bg-white rounded-lg shadow-lg max-w-7xl">
+            <ReactSketchCanvas
+              className="rounded-xl"
+              ref={canvasRef}
+              style={styles}
+              width="auto"
+              height="450px"
+              strokeWidth={4}
+              strokeColor={color}
+            />
+            <HexColorPicker color={color} onChange={setColor} />
           </div>
           {/* <span>The WebSocket is currently {connectionStatus}</span> */}
-          <button onClick={addNode}>Add node</button>
         </Main>
       </div>
     </div>
   );
 });
 
-export default Chart;
+export default Drawing;
