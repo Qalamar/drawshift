@@ -128,11 +128,14 @@ const Drawing = observer(() => {
     setuserData(userData);
   }, []);
 
-  const styles = {
-    border: "0.0625rem solid #9c9c9c",
-    borderRadius: "0.25rem",
-  };
   const canvasRef = useRef<ReactSketchCanvas>(null);
+  // Handlers
+  const undoHandler = () => {
+    const undo = canvasRef.current?.undo;
+    if (undo) {
+      undo();
+    }
+  };
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark font-monst">
@@ -372,10 +375,10 @@ const Drawing = observer(() => {
             </div>
           </div>
           <div className="h-auto mx-auto mt-8 bg-white rounded-lg shadow-lg max-w-7xl">
+            <button onClick={undoHandler}> Undo </button>
             <ReactSketchCanvas
               className="rounded-xl"
               ref={canvasRef}
-              style={styles}
               width="auto"
               height="450px"
               strokeWidth={4}
