@@ -160,7 +160,7 @@ const Dasboard = observer(() => {
   if (error) return "An error has occurred: " + error.message;
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden bg-dark font-monst">
+    <div className="flex flex-col h-screen overflow-hidden bg-primary font-monst">
       <Head>
         <title>Drawshift | Dashboard</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -168,7 +168,7 @@ const Dasboard = observer(() => {
       <DeleteForm />
       <NewBoard />
       {/* Top nav*/}
-      <header className="relative flex items-center flex-shrink-0 h-16 bg-dark">
+      <header className="relative flex items-center flex-shrink-0 h-16 bg-primary">
         {/* Logo area */}
         {/* <div className="absolute inset-y-0 left-0 md:static md:flex-shrink-0">
           <a
@@ -362,15 +362,15 @@ const Dasboard = observer(() => {
                           src={user.user_metadata.avatar_url}
                           alt=""
                         />
-                        <h1 className="ml-3 text-3xl font-bold text-gray-200 sm:truncate">
+                        <h1 className="ml-3 text-3xl font-bold text-gray-800 sm:truncate">
                           Good morning, {user.user_metadata.full_name}
                         </h1>
                       </div>
                       <dl className="flex flex-col mt-6 sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
                         <dt className="sr-only">Account status</dt>
-                        <dd className="flex items-center mt-3 text-sm font-medium text-gray-500 capitalize sm:mr-6 sm:mt-0">
+                        <dd className="flex items-center mt-3 text-sm font-medium text-gray-600 capitalize sm:mr-6 sm:mt-0">
                           <CheckCircleIcon
-                            className="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400"
+                            className="flex-shrink-0 mr-1.5 h-5 w-5 text-green-800"
                             aria-hidden="true"
                           />
                           Verified account
@@ -382,7 +382,7 @@ const Dasboard = observer(() => {
                 <HeaderButtons>
                   <button
                     type="button"
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-400 transition duration-200 bg-gray-800 rounded-md shadow-lg  hover:text-gray-100 focus:outline-none"
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-200 bg-primary rounded-md shadow-lg hover:text-gray-100 focus:outline-none"
                   >
                     Settings
                     <MailIcon
@@ -393,7 +393,7 @@ const Dasboard = observer(() => {
                   <button
                     type="button"
                     onClick={() => Logout()}
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-400 transition duration-200 bg-gray-800 rounded-md shadow-lg  hover:text-gray-100 focus:outline-none"
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-200 bg-primary rounded-md shadow-lg hover:text-gray-100 focus:outline-none"
                   >
                     Logout
                     <LogoutIcon
@@ -411,7 +411,7 @@ const Dasboard = observer(() => {
               <SearchbarContainer>
                 <Search>
                   <input
-                    className="w-full px-4 py-2 text-sm font-medium text-gray-300 transition duration-200 bg-gray-800 border border-gray-600 rounded-md shadow-sm hover:bg-gray-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                    className="w-full px-4 py-3 text-sm font-medium text-gray-300 transition duration-200 bg-secondary rounded-md shadow-sm hover:bg-gray-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                     placeholder="Search..."
                   />
                   <SearchIcon
@@ -422,7 +422,7 @@ const Dasboard = observer(() => {
                 <button
                   type="button"
                   onClick={() => ui.setDeleteForm(true)}
-                  className="items-center w-10 h-10 p-2 text-gray-400 transition duration-200 bg-gray-800   rounded-md shadow-sm font-monst dark:text-gray-200 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-100 focus:ring-indigo-500"
+                  className="items-center w-11 h-11 p-2 text-gray-400 transition duration-200 bg-secondary rounded-md shadow-sm font-monst dark:text-gray-200 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-100 focus:ring-indigo-500"
                 >
                   <FilterIcon
                     className="w-full h-full fill-current "
@@ -432,7 +432,7 @@ const Dasboard = observer(() => {
                 <button
                   onClick={() => ui.setNewBoard(true)}
                   type="button"
-                  className="relative inline-flex items-center w-10 h-10 p-2 ml-2 text-gray-400 transition duration-200 bg-gray-800   rounded-md shadow font-monst dark:text-gray-200 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-100 focus:ring-indigo-500"
+                  className="relative inline-flex items-center w-11 h-11 p-2 ml-2 text-gray-400 transition duration-200 bg-secondary rounded-md shadow font-monst dark:text-gray-200 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-100 focus:ring-indigo-500"
                 >
                   <ViewGridAddIcon
                     className="w-full h-full fill-current"
@@ -550,7 +550,7 @@ const Dasboard = observer(() => {
                 </div>
                 {/* Desktop View Selector */}
                 <div className="hidden sm:block">
-                  <div className="flex items-center border-b border-gray-500">
+                  <div className="flex items-center border-b border-gray-700">
                     <nav
                       className="flex flex-1 -mb-px space-x-6 xl:space-x-8"
                       aria-label="Tabs"
@@ -606,7 +606,7 @@ const Dasboard = observer(() => {
                 {List && (
                   <ul
                     role="list"
-                    className="grid grid-cols-1 bg-gray-800 border border-gray-700 divide-y divide-gray-200 rounded-lg shadow-lg border-1 gap-x-4 gap-y-0"
+                    className="grid grid-cols-1 bg-secondary divide-y divide-gray-700 rounded-lg shadow-lg border-1 gap-x-4 gap-y-0"
                   >
                     {boards.map((board, index) => (
                       <li key={board.id}>

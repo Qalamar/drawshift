@@ -37,6 +37,7 @@ import Head from "next/head";
 import { observer } from "mobx-react-lite";
 import { canvas } from "lib/store";
 import { decomp, saveBoard } from "lib/calls";
+import toast, { Toaster } from "react-hot-toast";
 const views = [
   { id: 1, name: "Wade Cooper" },
   { id: 2, name: "Arlene Mccoy" },
@@ -130,7 +131,11 @@ const Board = observer(() => {
       title: canvas.title,
       board: saveableCanvas.getSaveData(),
     };
-    saveBoard(canvasCopy);
+    toast.promise(saveBoard(canvasCopy), {
+      loading: "Loading",
+      success: "Saved!",
+      error: "There was an error during saving, please try again.",
+    });
   };
 
   const goHome = () => {
@@ -175,6 +180,7 @@ const Board = observer(() => {
         <title>Drawshift | Boards</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
+      <Toaster position="bottom-center" reverseOrder={false} />
       <header className="relative flex items-center flex-shrink-0 h-16 bg-dark dark:bg-dark">
         {/* Logo area */}
 

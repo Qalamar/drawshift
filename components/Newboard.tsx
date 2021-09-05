@@ -96,16 +96,15 @@ const NewBoard = observer(() => {
                     <div onClick={() => handleClose()}></div>
                   </div>
                 </Transition.Child>
-                <div className="px-4 py-6 bg-indigo-700 sm:px-6 font-monst">
+                <div className="px-4 py-4 bg-tertiary border-b border-gray-700 sm:px-8 font-monst">
                   <div className="flex items-center justify-between">
                     <Dialog.Title className="text-lg font-medium text-white">
-                      New Project
+                      New Board
                     </Dialog.Title>
-                    <div></div>
                     <div className="flex items-center ml-3 h-7">
                       <button
                         type="button"
-                        className="text-indigo-200 bg-indigo-700 rounded-md hover:text-white focus:outline-none "
+                        className="text-indigo-200 rounded-md hover:text-white focus:outline-none "
                         onClick={() => handleClose()}
                       >
                         <span className="sr-only">Close panel</span>
@@ -113,14 +112,8 @@ const NewBoard = observer(() => {
                       </button>
                     </div>
                   </div>
-                  <div className="mt-1">
-                    <p className="text-sm text-indigo-300">
-                      Get started by filling in the information below to create
-                      your new project.
-                    </p>
-                  </div>
                 </div>
-                <div className="h-full p-8 overflow-y-auto bg-gray-800 font-monst">
+                <div className="h-full px-8 py-5 overflow-y-auto bg-secondary font-monst">
                   <form
                     onSubmit={handleSubmit(onSubmit)}
                     className="pb-16 space-y-6"
@@ -234,37 +227,20 @@ const NewBoard = observer(() => {
                                   htmlFor="privacy_private"
                                   className="font-medium text-gray-300"
                                 >
-                                  Private to you
+                                  Private
                                 </label>
                                 <p
                                   id="privacy_private_description"
                                   className="text-gray-500"
                                 >
                                   You are the only one able to access this
-                                  project.
+                                  board.
                                 </p>
                               </div>
                             </div>
                           </div>
                         </div>
                       </fieldset>
-                    </div>
-                    <div>
-                      <hr className="border-gray-200" />
-                      <div className="flex flex-col mt-4 space-space-y-4 space-between sm:flex-row sm:items-center sm:space-between sm:space-y-0">
-                        <div className="flex-1">
-                          <a
-                            href="#"
-                            className="group flex items-center text-sm text-indigo-600 hover:text-indigo-900 font-medium space-x-2.5"
-                          >
-                            <LinkIcon
-                              className="w-5 h-5 text-indigo-500 group-hover:text-indigo-900"
-                              aria-hidden="true"
-                            />
-                            <span>Copy link</span>
-                          </a>
-                        </div>
-                      </div>
                     </div>
 
                     <div className="flex">

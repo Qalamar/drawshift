@@ -17,8 +17,10 @@ module.exports = {
     extend: {
       colors: {
         orange: colors.orange,
-        dark: "#171721",
-        grey: "#30303C",
+        primary: "#16202A",
+        secondary: "#292C42",
+        tertiary: "#5D7DED",
+        accent: "#71C3A8",
       },
     },
   },

@@ -6,6 +6,7 @@ import { supabase } from "lib/initSupabase";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Card from "components/landing/Card";
+import { Toaster } from "react-hot-toast";
 
 export default function Home() {
   const router = useRouter();
@@ -22,7 +23,7 @@ export default function Home() {
         <title>Drawshift</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-
+      <Toaster />
       <AuthPopup />
       <div className="fixed mt-28">
         <img className="w-screen" src="./wave.svg" />

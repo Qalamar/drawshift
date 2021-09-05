@@ -13,7 +13,7 @@ export const Main = styled.main`
 `;
 
 export const Header = styled.div`
-  ${tw`bg-white shadow dark:bg-dark dark:border-b dark:border-gray-300`}
+  ${tw`bg-white shadow dark:bg-primary dark:border-b dark:border-gray-300`}
 `;
 
 export const HeaderContainer = styled.div`
