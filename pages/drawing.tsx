@@ -40,6 +40,7 @@ import { Main } from "../components/styled/board.styled";
 import { HexColorPicker } from "react-colorful";
 // Drawing
 import { ReactSketchCanvas } from "react-sketch-canvas";
+import useInterval from "utils/useInterval";
 
 let saveableCanvas: {
   clear: () => void;
@@ -100,11 +101,12 @@ const Drawing = observer(() => {
       full_name: "",
     },
   });
+  const [isDrawing, setIsDrawing] = useState(false);
   const [userData, setuserData] = useState();
   const [socketUrl, setSocketUrl] = useState(
     "ws://localhost:3003/ws/chat/someroom/"
   );
-
+  const [paths, setPaths] = React.useState<CanvasPath[]>([]);
   const {
     sendMessage,
     sendJsonMessage,
@@ -127,7 +129,10 @@ const Drawing = observer(() => {
     console.log(userData);
     setuserData(userData);
   }, []);
-
+  // Is Drawing
+  const DrawingHandler = () => {
+    setIsDrawing(!isDrawing);
+  };
   const canvasRef = useRef<ReactSketchCanvas>(null);
   // Handlers
   const undoHandler = () => {
@@ -136,7 +141,32 @@ const Drawing = observer(() => {
       undo();
     }
   };
+  // Load
+  const loadPath = (canvasPath: CanvasPath[]) => {
+    const load = canvasRef.current?.loadPaths;
+    if (load) {
+      load(canvasPath);
+      console.log("loaded");
+    }
+  };
+  const updateHandler = (updatedPaths: CanvasPath[]): void => {
+    setPaths(updatedPaths);
+    // sendJsonMessage(updatedPaths);
+  };
 
+  // Handling updates
+  useEffect(() => {
+    if (lastJsonMessage != null) {
+      console.log(lastJsonMessage["message"]);
+      updateHandler(lastJsonMessage["message"]);
+      loadPath(lastJsonMessage["message"]);
+    }
+  }, [lastJsonMessage]);
+
+  // Polling
+  useInterval(() => {
+    sendJsonMessage(paths);
+  }, 5000);
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark font-monst">
       {/* Top nav*/}
@@ -383,6 +413,8 @@ const Drawing = observer(() => {
               height="450px"
               strokeWidth={4}
               strokeColor={color}
+              allowOnlyPointerType="all"
+              onUpdate={updateHandler}
             />
             <HexColorPicker color={color} onChange={setColor} />
           </div>
