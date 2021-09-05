@@ -550,7 +550,7 @@ const Dasboard = observer(() => {
                 </div>
                 {/* Desktop View Selector */}
                 <div className="hidden sm:block">
-                  <div className="flex items-center border-b border-gray-700">
+                  <div className="flex items-center border-b border-gray-800">
                     <nav
                       className="flex flex-1 -mb-px space-x-6 xl:space-x-8"
                       aria-label="Tabs"
@@ -606,7 +606,7 @@ const Dasboard = observer(() => {
                 {List && (
                   <ul
                     role="list"
-                    className="grid grid-cols-1 divide-y divide-gray-700 rounded-lg shadow-lg bg-secondary border-1 gap-x-4 gap-y-0"
+                    className="grid grid-cols-1 divide-y divide-gray-800 rounded-lg shadow-lg bg-secondary border-1 gap-x-4 gap-y-0"
                   >
                     {boards.map((board, index) => (
                       <li key={board.id}>

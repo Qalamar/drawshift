@@ -96,7 +96,7 @@ const NewBoard = observer(() => {
                     <div onClick={() => handleClose()}></div>
                   </div>
                 </Transition.Child>
-                <div className="px-4 py-4 bg-tertiary border-b border-gray-700 sm:px-8 font-monst">
+                <div className="px-4 py-4 bg-tertiary border-b border-gray-800 sm:px-8 font-monst">
                   <div className="flex items-center justify-between">
                     <Dialog.Title className="text-lg font-medium text-white">
                       New Board
