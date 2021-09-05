@@ -17,7 +17,7 @@ export const Header = styled.div`
 `;
 
 export const HeaderContainer = styled.div`
-  ${tw`px-4 sm:px-6 bg-accent rounded-md lg:max-w-6xl lg:mx-auto lg:px-8`}
+  ${tw`px-4 sm:px-6 bg-tertiary rounded-md lg:max-w-6xl lg:mx-auto lg:px-8`}
 `;
 
 export const HeaderContent = styled.div`

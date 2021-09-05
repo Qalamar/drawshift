@@ -362,15 +362,15 @@ const Dasboard = observer(() => {
                           src={user.user_metadata.avatar_url}
                           alt=""
                         />
-                        <h1 className="ml-3 text-3xl font-bold text-gray-800 sm:truncate">
+                        <h1 className="ml-3 text-3xl font-bold text-white sm:truncate">
                           Good morning, {user.user_metadata.full_name}
                         </h1>
                       </div>
                       <dl className="flex flex-col mt-6 sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
                         <dt className="sr-only">Account status</dt>
-                        <dd className="flex items-center mt-3 text-sm font-medium text-gray-600 capitalize sm:mr-6 sm:mt-0">
+                        <dd className="flex items-center mt-3 text-sm font-medium text-gray-200 capitalize sm:mr-6 sm:mt-0">
                           <CheckCircleIcon
-                            className="flex-shrink-0 mr-1.5 h-5 w-5 text-green-800"
+                            className="flex-shrink-0 mr-1.5 h-5 w-5 text-green-200"
                             aria-hidden="true"
                           />
                           Verified account
@@ -382,7 +382,7 @@ const Dasboard = observer(() => {
                 <HeaderButtons>
                   <button
                     type="button"
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-200 bg-primary rounded-md shadow-lg hover:text-gray-100 focus:outline-none"
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-200 rounded-md shadow-lg bg-secondary hover:bg-primary hover:text-gray-100 focus:outline-none"
                   >
                     Settings
                     <MailIcon
@@ -393,7 +393,7 @@ const Dasboard = observer(() => {
                   <button
                     type="button"
                     onClick={() => Logout()}
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-200 bg-primary rounded-md shadow-lg hover:text-gray-100 focus:outline-none"
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-200 rounded-md shadow-lg bg-secondary hover:bg-primary hover:text-gray-100 focus:outline-none"
                   >
                     Logout
                     <LogoutIcon
@@ -411,7 +411,7 @@ const Dasboard = observer(() => {
               <SearchbarContainer>
                 <Search>
                   <input
-                    className="w-full px-4 py-3 text-sm font-medium text-gray-300 transition duration-200 bg-secondary rounded-md shadow-sm hover:bg-gray-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                    className="w-full px-4 py-3 text-sm font-medium text-gray-300 transition duration-200 rounded-md shadow-sm bg-secondary hover:bg-gray-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                     placeholder="Search..."
                   />
                   <SearchIcon
@@ -422,7 +422,7 @@ const Dasboard = observer(() => {
                 <button
                   type="button"
                   onClick={() => ui.setDeleteForm(true)}
-                  className="items-center w-11 h-11 p-2 text-gray-400 transition duration-200 bg-secondary rounded-md shadow-sm font-monst dark:text-gray-200 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-100 focus:ring-indigo-500"
+                  className="items-center p-2 text-gray-400 transition duration-200 rounded-md shadow-sm w-11 h-11 bg-secondary font-monst dark:text-gray-200 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-100 focus:ring-indigo-500"
                 >
                   <FilterIcon
                     className="w-full h-full fill-current "
@@ -432,7 +432,7 @@ const Dasboard = observer(() => {
                 <button
                   onClick={() => ui.setNewBoard(true)}
                   type="button"
-                  className="relative inline-flex items-center w-11 h-11 p-2 ml-2 text-gray-400 transition duration-200 bg-secondary rounded-md shadow font-monst dark:text-gray-200 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-100 focus:ring-indigo-500"
+                  className="relative inline-flex items-center p-2 ml-2 text-gray-400 transition duration-200 rounded-md shadow w-11 h-11 bg-secondary font-monst dark:text-gray-200 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-100 focus:ring-indigo-500"
                 >
                   <ViewGridAddIcon
                     className="w-full h-full fill-current"
@@ -571,12 +571,12 @@ const Dasboard = observer(() => {
                         </a>
                       ))}
                     </nav>
-                    <div className="hidden ml-6 bg-gray-300 p-0.5 rounded-lg items-center sm:flex">
+                    <div className="hidden ml-6 bg-secondary p-0.5 rounded-lg items-center sm:flex">
                       <button
                         type="button"
                         onClick={() => setList(true)}
-                        className={`p-1.5 rounded-md text-gray-400  hover:shadow-sm focus:outline-none ${
-                          List ? "bg-white" : ""
+                        className={`p-1.5 rounded-md hover:shadow-sm focus:outline-none ${
+                          List ? "bg-tertiary text-white" : "text-gray-400"
                         }`}
                       >
                         <ViewListIcon className="w-5 h-5" aria-hidden="true" />
@@ -585,8 +585,8 @@ const Dasboard = observer(() => {
                       <button
                         type="button"
                         onClick={() => setList(false)}
-                        className={`p-1.5 rounded-md text-gray-400  hover:shadow-sm focus:outline-none ${
-                          List ? "" : "bg-white"
+                        className={`p-1.5 rounded-md hover:shadow-sm focus:outline-none ${
+                          List ? "text-gray-400" : "bg-tertiary text-white"
                         }`}
                       >
                         <ViewGridIcon className="w-5 h-5" aria-hidden="true" />
@@ -606,14 +606,14 @@ const Dasboard = observer(() => {
                 {List && (
                   <ul
                     role="list"
-                    className="grid grid-cols-1 bg-secondary divide-y divide-gray-700 rounded-lg shadow-lg border-1 gap-x-4 gap-y-0"
+                    className="grid grid-cols-1 divide-y divide-gray-700 rounded-lg shadow-lg bg-secondary border-1 gap-x-4 gap-y-0"
                   >
                     {boards.map((board, index) => (
                       <li key={board.id}>
                         <a
                           onClick={() => loadBoard(index)}
                           href="#"
-                          className="block hover:bg-gray-800 transition duration-200"
+                          className="block transition duration-200 hover:bg-gray-800"
                         >
                           <div className="px-4 py-4 sm:px-6">
                             <div className="flex items-center justify-between">
