@@ -107,6 +107,7 @@ const Drawing = observer(() => {
     "ws://localhost:3003/ws/chat/someroom/"
   );
   const [paths, setPaths] = React.useState<CanvasPath[]>([]);
+  const [svg, setSVG] = React.useState<string>("");
   const {
     sendMessage,
     sendJsonMessage,
@@ -180,6 +181,17 @@ const Drawing = observer(() => {
     }
   };
 
+  // Saving in form of a SVG
+  const svgExportHandler = async () => {
+    const exportSvg = canvasRef.current?.exportSvg;
+
+    if (exportSvg) {
+      const exportedDataURI = await exportSvg();
+      setSVG(exportedDataURI);
+      // SVG will be sent in a request to the backend to save it
+    }
+  };
+
   // Update canvas
   const updateHandler = (updatedPaths: CanvasPath[]): void => {
     setPaths(updatedPaths);
@@ -195,9 +207,9 @@ const Drawing = observer(() => {
   }, [lastJsonMessage]);
 
   // Polling
-  useInterval(() => {
-    sendJsonMessage(paths);
-  }, 5000);
+  // useInterval(() => {
+  //   sendJsonMessage(paths);
+  // }, 5000);
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark font-monst">
@@ -438,10 +450,17 @@ const Drawing = observer(() => {
           </div>
           <div className="h-auto mx-auto mt-8 bg-white rounded-lg shadow-lg max-w-7xl">
             <button onClick={undoHandler}> Undo </button>
+
             <button onClick={redoHandler}> Redo </button>
+
             <button onClick={resetCanvasHandler}> Reset </button>
+
             <button onClick={eraserHandler}> Eraser </button>
+
             <button onClick={penHandler}> Pen </button>
+
+            <button onClick={svgExportHandler}> Export SVG </button>
+
             <ReactSketchCanvas
               className="rounded-xl"
               ref={canvasRef}
