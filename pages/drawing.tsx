@@ -134,6 +134,7 @@ const Drawing = observer(() => {
     setIsDrawing(!isDrawing);
   };
   const canvasRef = useRef<ReactSketchCanvas>(null);
+
   // Handlers
   const undoHandler = () => {
     const undo = canvasRef.current?.undo;
@@ -141,7 +142,36 @@ const Drawing = observer(() => {
       undo();
     }
   };
-  // Load
+
+  const redoHandler = () => {
+    const redo = canvasRef.current?.redo;
+    if (redo) {
+      redo();
+    }
+  };
+
+  const resetCanvasHandler = () => {
+    const reset = canvasRef.current?.resetCanvas;
+    if (reset) {
+      reset();
+    }
+  };
+
+  const penHandler = () => {
+    const eraseMode = canvasRef.current?.eraseMode;
+    if (eraseMode) {
+      eraseMode(false);
+    }
+  };
+
+  const eraserHandler = () => {
+    const eraseMode = canvasRef.current?.eraseMode;
+    if (eraseMode) {
+      eraseMode(true);
+    }
+  };
+
+  // Load unto the canvas
   const loadPath = (canvasPath: CanvasPath[]) => {
     const load = canvasRef.current?.loadPaths;
     if (load) {
@@ -149,9 +179,10 @@ const Drawing = observer(() => {
       console.log("loaded");
     }
   };
+
+  // Update canvas
   const updateHandler = (updatedPaths: CanvasPath[]): void => {
     setPaths(updatedPaths);
-    // sendJsonMessage(updatedPaths);
   };
 
   // Handling updates
@@ -167,6 +198,7 @@ const Drawing = observer(() => {
   useInterval(() => {
     sendJsonMessage(paths);
   }, 5000);
+
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-gray-100 dark:bg-dark font-monst">
       {/* Top nav*/}
@@ -406,6 +438,10 @@ const Drawing = observer(() => {
           </div>
           <div className="h-auto mx-auto mt-8 bg-white rounded-lg shadow-lg max-w-7xl">
             <button onClick={undoHandler}> Undo </button>
+            <button onClick={redoHandler}> Redo </button>
+            <button onClick={resetCanvasHandler}> Reset </button>
+            <button onClick={eraserHandler}> Eraser </button>
+            <button onClick={penHandler}> Pen </button>
             <ReactSketchCanvas
               className="rounded-xl"
               ref={canvasRef}
