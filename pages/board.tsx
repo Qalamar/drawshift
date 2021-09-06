@@ -38,6 +38,8 @@ import { observer } from "mobx-react-lite";
 import { canvas } from "lib/store";
 import { decomp, saveBoard } from "lib/calls";
 import toast, { Toaster } from "react-hot-toast";
+import { ReactSketchCanvas } from "react-sketch-canvas";
+
 const views = [
   { id: 1, name: "Wade Cooper" },
   { id: 2, name: "Arlene Mccoy" },
@@ -89,6 +91,11 @@ const userNavigation = [
   { name: "Your Profile", href: "#" },
   { name: "Sign out", href: "#" },
 ];
+
+const styles = {
+  border: "0",
+  borderRadius: "25px",
+};
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -148,9 +155,9 @@ const Board = observer(() => {
     console.log(userData);
     setuserData(userData);
     fetchPath(userData);
-    setTimeout(() => {
-      console.log(saveableCanvas.getSaveData());
-    }, 1000);
+    // setTimeout(() => {
+    //   console.log(saveableCanvas.getSaveData());
+    // }, 1000);
   }, []);
   // @ts-ignore
   const { isLoading, error, data } = useQuery("userData", () =>
@@ -174,7 +181,7 @@ const Board = observer(() => {
   if (error) return "An error has occurred: " + error.message;
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden bg-dark dark:bg-dark font-monst">
+    <div className="flex flex-col h-screen overflow-hidden bg-primary font-monst">
       {/* Top nav*/}
       <Head>
         <title>Drawshift | Boards</title>
@@ -323,11 +330,11 @@ const Board = observer(() => {
         {/* Main area */}
         <Main>
           {/* Page header */}
-          <div className="mx-auto mt-2 flex items-center justify-between flex-col md:flex-row max-w-7xl">
+          <div className="flex flex-col items-center justify-between w-10/12 mx-auto mt-2 md:flex-row">
             <div className="flex-1 min-w-0">
               <nav className="flex" aria-label="Breadcrumb"></nav>
               <input
-                className="px-4 py-2 flex-grow text-sm font-medium text-gray-700 transition duration-200 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="flex-grow px-4 py-2.5 text-sm font-medium text-gray-300 transition duration-200 rounded-md shadow-sm bg-secondary hover:bg-gray-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                 placeholder={canvas.title}
               />
             </div>
@@ -336,10 +343,10 @@ const Board = observer(() => {
                 <button
                   onClick={() => goHome()}
                   type="button"
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="inline-flex items-center px-4 py-2.5 text-sm font-medium text-white rounded-md shadow-sm bg-secondary hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   <HomeIcon
-                    className="w-5 h-5 mr-2 -ml-1 text-gray-500"
+                    className="w-5 h-5 mr-2 -ml-1 text-white"
                     aria-hidden="true"
                   />
                   Home
@@ -350,10 +357,10 @@ const Board = observer(() => {
                 <button
                   onClick={() => saveableCanvas.undo()}
                   type="button"
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="inline-flex items-center px-4 py-2.5 text-sm font-medium text-white rounded-md shadow-sm bg-secondary hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   <ReplyIcon
-                    className="w-5 h-5 mr-2 -ml-1 text-gray-500"
+                    className="w-5 h-5 mr-2 -ml-1 text-white"
                     aria-hidden="true"
                   />
                   Undo
@@ -364,10 +371,10 @@ const Board = observer(() => {
                 <button
                   onClick={() => saveableCanvas.clear()}
                   type="button"
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="inline-flex items-center px-4 py-2.5 text-sm font-medium text-white rounded-md shadow-sm bg-secondary hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   <TrashIcon
-                    className="w-5 h-5 mr-2 -ml-1 text-gray-500"
+                    className="w-5 h-5 mr-2 -ml-1 text-white"
                     aria-hidden="true"
                   />
                   Clear
@@ -391,8 +398,14 @@ const Board = observer(() => {
               {/* Dropdown */}
             </div>
           </div>
-          <div className="h-auto mx-auto mt-8 bg-white rounded-lg shadow-lg max-w-7xl">
-            <CanvasDraw
+          <div className="w-10/12 h-auto px-24 mx-auto mt-8 bg-white rounded-lg shadow-lg">
+            <ReactSketchCanvas
+              height="500px"
+              style={styles}
+              strokeWidth={brushRadius}
+              strokeColor={brushColor}
+            />
+            {/* <CanvasDraw
               brushColor={brushColor}
               brushRadius={brushRadius}
               hideInterface={true}
@@ -403,10 +416,10 @@ const Board = observer(() => {
               lazyRadius="0"
               className="rounded-xl"
               ref={(canvasDraw: any) => (saveableCanvas = canvasDraw)}
-            />
+            /> */}
           </div>
-          <div className="flex justify-between flex-col md:flex-row mx-auto mt-8 max-w-7xl">
-            <div className="flex flex-row items-center justify-center px-5 space-x-6 bg-white shadow-lg h-14 rounded-xl">
+          <div className="flex flex-col justify-between w-10/12 mx-auto mt-8 md:flex-row">
+            <div className="flex flex-row items-center justify-center px-5 space-x-6 shadow-lg bg-secondary h-14 rounded-xl">
               <svg
                 width="33"
                 height="33"
@@ -429,14 +442,16 @@ const Board = observer(() => {
                 }
               />
             </div>
-            <div className="flex flex-row items-center justify-center mt-2 md:mt-0 px-5 space-x-6 bg-white shadow-lg h-14 rounded-xl">
+            <div className="flex flex-row items-center justify-center px-5 mt-2 space-x-6 rounded-md shadow-lg bg-secondary md:mt-0 h-14">
               {colors.map((color) => (
                 <div
                   onClick={() => updateColors(color)}
-                  className="border border-gray-300 rounded-full shadow-lg w-7 h-7"
+                  className="border border-gray-700 rounded-full shadow-lg w-7 h-7"
                   style={{ backgroundColor: color }}
                 />
               ))}
+              <div className="w-1 h-full bg-gray-700" />
+              <div className="border border-gray-700 rounded-full shadow-lg bg-gradient-to-r from-indigo-500 to-red-500 w-7 h-7" />
             </div>
           </div>
         </Main>

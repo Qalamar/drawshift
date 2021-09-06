@@ -1,7 +1,7 @@
 import tw, { styled } from "twin.macro";
 
 export const Search = styled.div`
-  ${tw`flex flex-row w-full px-4 py-1 mr-4 transition duration-200 border-2 border-gray-300 rounded-lg shadow-md bg-white dark:bg-none`}
+  ${tw`flex flex-row w-full px-4 py-1 mr-4 transition duration-200 bg-white border-2 border-gray-300 rounded-lg shadow-md dark:bg-none`}
 `;
 
 export const SearchButton = styled.div`
@@ -9,7 +9,7 @@ export const SearchButton = styled.div`
 `;
 
 export const Main = styled.main`
-  ${tw`relative z-0 flex-1 pb-8 md:px-24 px-2 overflow-y-auto`}
+  ${tw`relative z-0 flex-1 px-2 pb-8 overflow-y-auto md:px-24`}
 `;
 
 export const Header = styled.div`
