@@ -39,6 +39,7 @@ import { canvas } from "lib/store";
 import { decomp, saveBoard } from "lib/calls";
 import toast, { Toaster } from "react-hot-toast";
 import { ReactSketchCanvas } from "react-sketch-canvas";
+import { useRef } from "react";
 
 const views = [
   { id: 1, name: "Wade Cooper" },
@@ -108,6 +109,7 @@ const fetchUser = new Promise(function (resolve, reject) {
 });
 
 const Board = observer(() => {
+  const canvasRef = useRef(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selected, setSelected] = useState(views[1]);
   const [List, setList] = useState(true);
@@ -133,16 +135,25 @@ const Board = observer(() => {
   };
 
   const updateBoard = async () => {
-    const canvasCopy = {
-      user_id: canvas.user_id,
-      title: canvas.title,
-      board: saveableCanvas.getSaveData(),
-    };
-    toast.promise(saveBoard(canvasCopy), {
-      loading: "Loading",
-      success: "Saved!",
-      error: "There was an error during saving, please try again.",
-    });
+    canvasRef.current
+      .exportSvg()
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    // const canvasCopy = {
+    //   user_id: canvas.user_id,
+    //   title: canvas.title,
+    //   board: saveableCanvas.getSaveData(),
+    // };
+    // toast.promise(saveBoard(canvasCopy), {
+    //   loading: "Loading",
+    //   success: "Saved!",
+    //   error: "There was an error during saving, please try again.",
+    // });
   };
 
   const goHome = () => {
@@ -401,6 +412,7 @@ const Board = observer(() => {
           <div className="w-10/12 h-auto px-24 mx-auto mt-8 bg-white rounded-lg shadow-lg">
             <ReactSketchCanvas
               height="500px"
+              ref={canvasRef}
               style={styles}
               strokeWidth={brushRadius}
               strokeColor={brushColor}
