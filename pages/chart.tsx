@@ -178,8 +178,17 @@ const Chart = observer(() => {
   // Removing node/edge
   const onElementsRemove = (elementsToRemove) => {
     setElements((els) => removeElements(elementsToRemove, els));
+    console.log(elementsToRemove);
     elementsToRemove.push({ typeofoperation: "remove" });
     sendJsonMessage(elementsToRemove);
+  };
+  // Adding edge
+  const onConnect = (params) => {
+    setElements((els) => addEdge(params, els));
+    let a = [];
+    a.push(params);
+    a.push({ typeofoperation: "addEdge" });
+    sendJsonMessage(a);
   };
 
   const onElementClick = (event, element) => {
@@ -227,6 +236,9 @@ const Chart = observer(() => {
         let newNode = lastJsonMessage["message"][0];
         console.log(newNode);
         setElements((els) => els.concat(newNode));
+      } else if (typeofoperation == "addEdge") {
+        let newEdge = lastJsonMessage["message"][0];
+        setElements((els) => addEdge(newEdge, els));
       }
     }
   }, [lastJsonMessage]);
@@ -492,6 +504,7 @@ const Chart = observer(() => {
                 onNodeDragStop={onUpdateGraph}
                 onElementsRemove={onElementsRemove}
                 onElementClick={onElementClick}
+                onConnect={onConnect}
               >
                 <MiniMap
                   nodeStrokeColor={(n) => {
