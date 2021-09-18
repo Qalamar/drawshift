@@ -135,25 +135,25 @@ const Board = observer(() => {
   };
 
   const updateBoard = async () => {
-    canvasRef.current
-      .exportSvg()
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    // canvasRef.current
+    //   .exportSvg()
+    //   .then((data) => {
+    //     console.log(data);
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
 
-    // const canvasCopy = {
-    //   user_id: canvas.user_id,
-    //   title: canvas.title,
-    //   board: saveableCanvas.getSaveData(),
-    // };
-    // toast.promise(saveBoard(canvasCopy), {
-    //   loading: "Loading",
-    //   success: "Saved!",
-    //   error: "There was an error during saving, please try again.",
-    // });
+    const canvasCopy = {
+      user_id: canvas.user_id,
+      title: canvas.title,
+      board: saveableCanvas.getSaveData(),
+    };
+    toast.promise(saveBoard(canvasCopy), {
+      loading: "Loading",
+      success: "Saved!",
+      error: "There was an error during saving, please try again.",
+    });
   };
 
   const goHome = () => {
@@ -410,14 +410,14 @@ const Board = observer(() => {
             </div>
           </div>
           <div className="w-10/12 h-auto px-24 mx-auto mt-8 bg-white rounded-lg shadow-lg">
-            <ReactSketchCanvas
+            {/* <ReactSketchCanvas
               height="500px"
               ref={canvasRef}
               style={styles}
               strokeWidth={brushRadius}
               strokeColor={brushColor}
-            />
-            {/* <CanvasDraw
+            /> */}
+            <CanvasDraw
               brushColor={brushColor}
               brushRadius={brushRadius}
               hideInterface={true}
@@ -428,7 +428,7 @@ const Board = observer(() => {
               lazyRadius="0"
               className="rounded-xl"
               ref={(canvasDraw: any) => (saveableCanvas = canvasDraw)}
-            /> */}
+            />
           </div>
           <div className="flex flex-col justify-between w-10/12 mx-auto mt-8 md:flex-row">
             <div className="flex flex-row items-center justify-center px-5 space-x-6 shadow-lg bg-secondary h-14 rounded-xl">
