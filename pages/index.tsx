@@ -30,7 +30,7 @@ export default function Home() {
       </div>
       <div className="relative pb-20 bg-gray-800">
         <Navbar />
-        <Header name="Start" />
+        <Header />
       </div>
 
       <Card />
