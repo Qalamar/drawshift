@@ -1,15 +1,9 @@
 // @ts-nocheck
 import { Dialog, Listbox, Transition } from "@headlessui/react";
 import {
-  ArchiveIcon,
-  BanIcon,
   BellIcon,
-  FlagIcon,
-  InboxIcon,
   MenuIcon,
-  PencilAltIcon,
   SearchIcon,
-  UserCircleIcon,
   XIcon,
 } from "@heroicons/react/outline";
 import {
@@ -17,7 +11,6 @@ import {
   CheckCircleIcon,
   CheckIcon,
   FilterIcon,
-  LocationMarkerIcon,
   LogoutIcon,
   MailIcon,
   SelectorIcon,
@@ -26,10 +19,18 @@ import {
   ViewGridIcon,
   ViewListIcon,
 } from "@heroicons/react/solid";
-import { observer } from "mobx-react-lite";
+import DeleteForm from "components/Settings";
 import Spinner from "components/Spinner";
+import dayjs from "dayjs";
+import { decomp } from "lib/calls";
 import { supabase } from "lib/initSupabase";
+import { canvas, ui } from "lib/store";
+import { observer } from "mobx-react-lite";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import React, { Fragment, useEffect, useState } from "react";
+import CanvasDraw from "react-canvas-draw";
+import toast, { Toaster } from "react-hot-toast";
 import { useQuery } from "react-query";
 import NewBoard from "../components/Newboard";
 import {
@@ -44,14 +45,6 @@ import {
   SearchbarContainer,
   Utils,
 } from "../components/styled/dashboard.styled";
-import { compress, decompress } from "lzutf8";
-import CanvasDraw from "react-canvas-draw";
-import { useRouter } from "next/router";
-import { canvas, ui } from "lib/store";
-import Head from "next/head";
-import { decomp } from "lib/calls";
-import DeleteForm from "components/Settings";
-import dayjs from "dayjs";
 
 const tabs = [{ name: "Boards", href: "#", current: true }];
 
@@ -166,6 +159,8 @@ const Dasboard = observer(() => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <DeleteForm />
+      <Toaster position="bottom-center" reverseOrder={false} />
+
       <NewBoard />
       {/* Top nav*/}
       <header className="relative flex items-center flex-shrink-0 h-16 bg-primary">
@@ -382,6 +377,12 @@ const Dasboard = observer(() => {
                 <HeaderButtons>
                   <button
                     type="button"
+                    onClick={() => {
+                      const toastId = toast.loading("Coming Soon!");
+                      setTimeout(() => {
+                        toast.dismiss(toastId);
+                      }, 4000);
+                    }}
                     className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-200 rounded-md shadow-lg bg-secondary hover:bg-primary hover:text-gray-100 focus:outline-none"
                   >
                     Settings
@@ -392,7 +393,7 @@ const Dasboard = observer(() => {
                   </button>
                   <button
                     type="button"
-                    onClick={() => Logout()}
+                    onClick={() => ui.setDeleteForm(true)}
                     className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition duration-200 rounded-md shadow-lg bg-secondary hover:bg-primary hover:text-gray-100 focus:outline-none"
                   >
                     Logout
@@ -421,7 +422,12 @@ const Dasboard = observer(() => {
                 </Search>
                 <button
                   type="button"
-                  onClick={() => ui.setDeleteForm(true)}
+                  onClick={() => {
+                    const toastId = toast.loading("Coming Soon!");
+                    setTimeout(() => {
+                      toast.dismiss(toastId);
+                    }, 4000);
+                  }}
                   className="items-center p-2 text-gray-400 transition duration-200 rounded-md shadow-sm w-11 h-11 bg-secondary font-monst dark:text-gray-200 hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-500 focus:text-gray-100 focus:ring-indigo-500"
                 >
                   <FilterIcon
