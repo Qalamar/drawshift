@@ -30,7 +30,7 @@
     "react-query": "^3.27.0",
     "react-sketch-canvas": "^6.0.3",
     "react-text-loop": "^2.3.0",
-    "recoil": "^0.4.1",
+    "recoil": "^0.5.0",
     "styled-components": "^5.3.3",
     "swr": "^1.0.1",
     "yarn": "^1.22.17"
