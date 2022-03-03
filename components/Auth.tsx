@@ -36,7 +36,7 @@ const AuthPopup = observer(() => {
       >
         <Dialog.Overlay className="fixed inset-0 bg-black opacity-50" />
 
-        <div className="z-20 flex flex-col bg-white rounded-lg opacity-100 2xl:w-3/12">
+        <div className="z-20 flex flex-col bg-white rounded-lg opacity-100 lg:w-[26rem]">
           <div className="flex justify-end pt-3 pr-3">
             <button className="focus:outline-none" onClick={() => closeModal()}>
               <XIcon className="w-5 h-5 text-green-400" aria-hidden="true" />
