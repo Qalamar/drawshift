@@ -35,8 +35,8 @@ export default function Dashboard() {
         <title>Drawshift</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <main className="bg-[#111827] font-monst h-screen !overflow-hidden">
-        <div className="relative pt-32 pb-96 lg:pt-40">
+      <main className=" font-monst h-screen !overflow-hidden">
+        <div className="relative bg-[#111827] pt-32 pb-96 lg:pt-40">
           <div>
             <img
               className="absolute bottom-0 left-1/2 w-[1440px] max-w-none -translate-x-1/2"
