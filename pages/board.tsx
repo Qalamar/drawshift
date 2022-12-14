@@ -1,7 +1,6 @@
 import { HomeIcon, ReplyIcon, TrashIcon } from '@heroicons/react/solid'
 import CanvasDraw from '@win11react/react-canvas-draw'
 import { Main } from 'components/styled/board.styled'
-import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'

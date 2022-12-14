@@ -1,14 +1,12 @@
-# Intro
+# Description
 
-Drawshift is a collaboration platform for sharing and organizing boards, charts and flows
+Drawshift is a tool for creating doodles and notes on the go
 
-- Create, store doodles and notes.
-- Connect with Github or email.
-
-**Technologies:** Next.js | TypeScript | MobX-State-Tree 
+**Technologies:** Next.js | TypeScript | React-canvas
 
 **Preview Link:** [https://drawshift.com/](https://drawshift.com/)
 
 # Screenshots
 
-![drawshift](https://user-images.githubusercontent.com/17028936/201597519-94569f22-b9e7-4a93-8e2c-0961e4e68e0e.gif)
+![image](https://user-images.githubusercontent.com/17028936/206145977-f319504e-3210-45d0-a5bb-ab3c1c5ca825.png)
+![image](https://user-images.githubusercontent.com/17028936/206146054-dd7719a6-b4a4-4c30-b40d-c0257652a212.png)
