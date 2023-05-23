@@ -11,7 +11,7 @@
     "format": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc"
   },
   "dependencies": {
-    "@fontsource/montserrat": "^4.5.13",
+    "@fontsource/montserrat": "^5.0.1",
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "v1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
